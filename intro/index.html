@@ -78,7 +78,7 @@
 
     <!-- Chosen Palette: Warm Neutrals with Teal and Amber Accents -->
     <!-- Application Structure Plan: Dashboard layout optimized for information consumption. 
-         - Concepts: Visual breakdown of LLM and Memory.
+         - Concepts: Visual breakdown of LLM, Memory, Tokens, and Context Engineering.
          - CARE Lab: Practical prompt building.
          - Tools: Data-driven comparison. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
@@ -86,7 +86,7 @@
     <!-- Sidebar Navigation -->
     <nav class="w-full md:w-72 bg-stone-100 border-r border-stone-200 flex-shrink-0 flex flex-col md:h-full z-10 shadow-sm">
         <div class="p-6 pb-4">
-            <h1 class="text-2xl font-bold text-teal-800 leading-tight">GenAI 實戰筆記<br><span class="text-sm font-normal text-slate-500">林 SIR 購想及設計</span></h1>
+            <h1 class="text-2xl font-bold text-teal-800 leading-tight">GenAI 實戰筆記<br><span class="text-sm font-normal text-slate-500"> &copy; 林 SIR , 2026</span></h1>
         </div>
         <div class="flex-grow overflow-y-auto px-4 pb-6 flex md:flex-col gap-2 overflow-x-auto md:overflow-x-hidden">
             <button onclick="navigate('intro')" id="nav-intro" class="nav-active text-left px-4 py-3 rounded-xl transition-colors flex-shrink-0 text-base">
@@ -143,12 +143,16 @@
             <section id="section-concepts" class="fade-in hidden">
                 <div class="mb-8">
                     <h2 class="text-4xl font-bold text-slate-800 mb-4">GenAI 核心概念解密</h2>
-                    <p class="text-lg text-slate-600 leading-relaxed">深入理解大語言模型 (LLM) 的「機率預測」與「記憶窗口」機制。</p>
+                    <p class="text-lg text-slate-600 leading-relaxed">深入理解大語言模型 (LLM) 的運作機制、記憶限制與優化技巧。</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Text Completion -->
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
                         <h3 class="text-xl font-bold text-teal-700 mb-4 flex items-center"><span class="text-2xl mr-2">🎲</span> 機率性的「文字接龍」</h3>
+                        <p class="text-slate-600 mb-4 text-sm leading-relaxed">
+                            大語言模型並非真的「讀懂」知識。它是一個巨大的<b>統計預測引擎</b>。當您輸入一段文字時，它會計算下一個詞彙出現的機率。
+                        </p>
                         <div class="bg-stone-50 p-4 rounded-lg border border-stone-200">
                             <p class="text-base font-semibold text-slate-700 mb-2">輸入提示：<span class="font-normal text-amber-600">「今天天氣很...」</span></p>
                             <ul class="space-y-3 text-base">
@@ -157,10 +161,38 @@
                                 <li class="flex justify-between items-center"><span class="text-slate-700">詭異</span> <div class="w-2/3 bg-stone-200 rounded-full h-2.5 ml-2"><div class="bg-slate-400 h-2.5 rounded-full" style="width: 5%"></div></div> <span class="text-xs text-slate-500 ml-2">5%</span></li>
                             </ul>
                         </div>
+                        <div class="mt-4 p-3 bg-teal-50 text-teal-800 rounded-lg text-sm">
+                            <strong>💡 深度啟示：</strong> 這種機率機制導致了 AI 的「幻覺現象」，但也同時賦予了它發散性的「創造力」。
+                        </div>
                     </div>
 
+                    <!-- Token Explanation -->
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
-                        <h3 class="text-xl font-bold text-amber-600 mb-4 flex items-center"><span class="text-2xl mr-2">🪧</span> 上下文窗口：滾動白板</h3>
+                        <h3 class="text-xl font-bold text-teal-700 mb-4 flex items-center"><span class="text-2xl mr-2">🪙</span> Token (詞元)：處理單位</h3>
+                        <p class="text-slate-600 mb-4 text-sm leading-relaxed">
+                            AI 不直接讀取單字，而是將文字拆解為 <b>Token</b>。這是 AI 處理資訊的最小單位。
+                        </p>
+                        <div class="space-y-4">
+                            <div class="p-3 bg-stone-50 rounded-lg border border-stone-200 text-sm">
+                                <div class="flex justify-between mb-1"><span>"Apple"</span> <span class="text-teal-600">≈ 1 Token</span></div>
+                                <div class="flex justify-between mb-1"><span>"繁體中文"</span> <span class="text-teal-600">≈ 4-8 Tokens</span></div>
+                                <div class="text-xs text-slate-400 mt-2">註：中文 Token 消耗通常比英文高。</div>
+                            </div>
+                            <p class="text-sm text-slate-600">
+                                <b>為什麼要關心 Token？</b><br>
+                                1. 它決定了 AI 的運算成本。<br>
+                                2. 它影響了 AI 回答的速度。<br>
+                                3. 它與「上下文窗口」的極限息息相關。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Context Window Simulator -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                        <h3 class="text-xl font-bold text-amber-600 mb-4 flex items-center"><span class="text-2xl mr-2">🪧</span> 上下文窗口：記憶限制</h3>
+                        <p class="text-slate-600 mb-4 text-sm leading-relaxed">
+                            AI 的記憶是有限的。想像一塊空間有限的「滾動白板」，當新對話不斷寫入底部，頂端的舊資訊就會被推出去並擦除。
+                        </p>
                         <div class="whiteboard-container mb-4" id="whiteboard">
                             <div class="whiteboard-items" id="whiteboard-items">
                                 <div class="whiteboard-item text-sm">初始設定：我是具備 10 年經驗的導師。</div>
@@ -172,6 +204,23 @@
                             <button onclick="addWhiteboardItem()" class="flex-1 bg-amber-500 hover:bg-amber-600 text-white py-2 px-4 rounded-xl transition-all text-base font-bold">➕ 模擬連續對話</button>
                             <button onclick="resetWhiteboard()" class="bg-stone-200 hover:bg-stone-300 text-slate-700 py-2 px-4 rounded-xl transition-all text-base">重設</button>
                         </div>
+                    </div>
+
+                    <!-- Context Engineering -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                        <h3 class="text-xl font-bold text-amber-600 mb-4 flex items-center"><span class="text-2xl mr-2">🏗️</span> 上下文工程：精準度優化</h3>
+                        <p class="text-slate-600 mb-4 text-sm leading-relaxed">
+                            除了提問，提供「參考樣本」能顯著提升 AI 表現。這被稱為 <b>Few-shot Prompting</b>。
+                        </p>
+                        <div class="bg-amber-50 p-4 rounded-lg border border-amber-100 text-sm italic text-amber-900 mb-4">
+                            「與其只說：『幫我寫活動文案』，不如提供 2 個去年的成功範本讓 AI 模仿風格。」
+                        </div>
+                        <p class="text-sm text-slate-600">
+                            <b>核心價值：</b><br>
+                            1. **提昇精確度 200%**：減少 AI 亂猜的機率。<br>
+                            2. **風格一致性**：確保產出符合機構的語氣。<br>
+                            3. **結構標準化**：讓 AI 學習複雜的表格或格式。
+                        </p>
                     </div>
                 </div>
             </section>
@@ -189,8 +238,8 @@
                             <div>
                                 <label class="block text-base font-bold text-teal-700 mb-1">C (Context 背景)</label>
                                 <select id="care-c" class="w-full p-2 border border-stone-300 rounded-lg bg-stone-50 text-sm">
+                                   <option value="我是一位 erb 培訓機構的課程主任，正籌備針對在職人士的人工智能素養課程。">ERB 培訓機構 AI 課程 (在職人士)</option>
                                     <option value="我是一位青少年中心的程序幹事，正籌備針對基層小學生的暑期編程班。學員多為零基礎，且預算有限。">青少年中心編程班 (預算有限, 零基礎)</option>
-                                    <option value="我是一位 erb 培訓機構的課程主任，正籌備針對在職人士的人工智能素養課程。">ERB 培訓機構 AI 課程 (在職人士)</option>
                                     <option value="我是一位長者服務中心的社交幹事，正籌備『數碼代溝』工作坊。學員多為 65 歲以上長者。">長者數碼工作坊 (高齡學員)</option>
                                     <option value="我是一位行政助理，負責處理活動報名數據整合，目前面臨大量分類的繁瑣工作。">行政自動化 (數據處理提效)</option>
                                 </select>
@@ -216,10 +265,10 @@
                             <div>
                                 <label class="block text-base font-bold text-teal-700 mb-1">E (Example 例子)</label>
                                 <select id="care-e" class="w-full p-2 border border-stone-300 rounded-lg bg-stone-50 text-sm">
-                                    <option value="書寫風格請參考邀請函：『合作伙伴邀請函』。">溫馨感性風格</option>
-                                    <option value="風格請參考附件，並加入 Emoji。">活潑風格 + Emoji</option>
-                                    <option value="行文可參考金庸武俠小說的風格。">專業職場風格</option>
-                                    <option value="參考以下兩個FB Post的寫法，加入合適的 Hash Tags">極簡風格 (粗體重點)</option>
+                                    <option value="書寫風格請參考邀請函：『合作伙伴邀請函』。">參考附件</option>
+                                    <option value="風格請參考附件，並加入 Emoji。">附件 + Emoji</option>
+                                    <option value="行文可參考金庸武俠小說的風格。">金庸武俠小說</option>
+                                    <option value="參考以下兩個FB Post的寫法，加入合適的 Hash Tags">參考 FB Post</option>
                                 </select>
                             </div>
                             <button onclick="generatePrompt()" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-4 rounded-xl transition-all text-lg mt-2">✨ 組合提示詞 (Generate)</button>
@@ -271,8 +320,21 @@
                         <div class="space-y-4 text-base">
                             <div class="p-3 bg-red-50 rounded-lg text-red-800 font-bold">嚴禁輸入：財務細目、個案敏感個資、未公開機密。</div>
                             <p class="text-slate-600 leading-relaxed"><strong>去識別化：</strong> 始終使用代號代替真實姓名，保護學員隱私。</p>
+
+                            <div>
+                                <h4 class="font-bold text-slate-700 flex items-center mb-1"><span class="mr-2">🔍</span> 保持批判性思考</h4>
+                                <p class="text-slate-600">對於 AI 提供的法規解讀或數據分析，<strong>務必進行二次查證</strong>。善用 Perplexity 檢查來源，或對照政府官方網頁。</p>
+                            </div>
                         </div>
                     </div>
+                </div>
+
+
+                <div class="mt-8 bg-stone-800 text-stone-100 p-6 rounded-xl text-center">
+                    <h3 class="text-xl font-bold mb-2">💡 建立機構數位資產</h3>
+                    <p class="text-sm text-stone-300 max-w-2xl mx-auto">
+                        強烈建議同工建立一個內部共用文件，蒐集並優化那些「最好用」的 CARE 指令與 Context 範本（Prompt 共享庫）。這將使行政效率的提升成為整個團隊的共同資產。
+                    </p>
                 </div>
             </section>
         </div>
@@ -285,9 +347,9 @@
         const toolsData = [
             { name: "Google Gemini", icon: "🌐", scores: [10, 6, 6, 7, 5], desc: "生態系整合之冠。直接讀取 Drive 與 Email。", scenario: "分析問卷結果或修改舊計畫書。" },
             { name: "Perplexity", icon: "🔍", scores: [4, 10, 6, 6, 3], desc: "搜尋大師。精確標註引用來源。", scenario: "計畫背景調查，查證數據真實性。" },
-            { name: "港話通", icon: "🇭🇰", scores: [5, 5, 10, 5, 4], desc: "粵語與香港語境優化。", scenario: "撰寫家長 WhatsApp 通知，查找本地資訊。" },
+            { name: "港話通", icon: "🇭🇰", scores: [5, 5, 10, 5, 4], desc: "粵語與香港語境優化。", scenario: "撰寫學員 WhatsApp 通知，查找本地資訊。" },
             { name: "KIMI AI", icon: "📄", scores: [4, 6, 5, 10, 5], desc: "長文本與 Agent 生成專家。", scenario: "處理厚重報告摘要，生成溫習題網頁。" },
-            { name: "豆包 AI", icon: "🎨", scores: [3, 4, 4, 4, 10], desc: "多媒體創意。配音與繪圖能力佳。", scenario: "製作活動宣傳插畫，自動配音旁白。" }
+            { name: "豆包 AI", icon: "🎨", scores: [3, 4, 4, 4, 10], desc: "多媒體創意。繪圖能力佳。", scenario: "製作活動宣傳插畫，自動生成短片。" }
         ];
 
         const contextDialogue = [
