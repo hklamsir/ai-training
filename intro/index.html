@@ -176,7 +176,6 @@
                             <div class="p-3 bg-stone-50 rounded-lg border border-stone-200 text-sm">
                                 <div class="flex justify-between mb-1"><span>"Apple"</span> <span class="text-teal-600">≈ 1 Token</span></div>
                                 <div class="flex justify-between mb-1"><span>"繁體中文"</span> <span class="text-teal-600">≈ 4-8 Tokens</span></div>
-                                <div class="text-xs text-slate-400 mt-2">註：中文 Token 消耗通常比英文高。</div>
                             </div>
                             <p class="text-sm text-slate-600">
                                 <b>為什麼要關心 Token？</b><br>
@@ -189,7 +188,7 @@
 
                     <!-- Context Window Simulator -->
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
-                        <h3 class="text-xl font-bold text-amber-600 mb-4 flex items-center"><span class="text-2xl mr-2">🪧</span> 上下文窗口：記憶限制</h3>
+                        <h3 class="text-xl font-bold text-amber-600 mb-4 flex items-center"><span class="text-2xl mr-2">🪧</span> 上下文窗口 (Context Window)：記憶限制</h3>
                         <p class="text-slate-600 mb-4 text-sm leading-relaxed">
                             AI 的記憶是有限的。想像一塊空間有限的「滾動白板」，當新對話不斷寫入底部，頂端的舊資訊就會被推出去並擦除。
                         </p>
@@ -210,7 +209,7 @@
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
                         <h3 class="text-xl font-bold text-amber-600 mb-4 flex items-center"><span class="text-2xl mr-2">🏗️</span> 上下文工程：精準度優化</h3>
                         <p class="text-slate-600 mb-4 text-sm leading-relaxed">
-                            除了提問，提供「參考樣本」能顯著提升 AI 表現。這被稱為 <b>Few-shot Prompting</b>。
+                            除了提問，提供「參考樣本」及「規格書」能顯著提升 AI 表現。這被稱為 <b>Few-shot Prompting</b>。
                         </p>
                         <div class="bg-amber-50 p-4 rounded-lg border border-amber-100 text-sm italic text-amber-900 mb-4">
                             「與其只說：『幫我寫活動文案』，不如提供 2 個去年的成功範本讓 AI 模仿風格。」
@@ -219,7 +218,8 @@
                             <b>核心價值：</b><br>
                             1. **提昇精確度 200%**：減少 AI 亂猜的機率。<br>
                             2. **風格一致性**：確保產出符合機構的語氣。<br>
-                            3. **結構標準化**：讓 AI 學習複雜的表格或格式。
+                            3. **結構標準化**：讓 AI 學習複雜的表格或格式。<br>
+                            4. **約束AI行為**：讓 AI 根據規格書續步執行。
                         </p>
                     </div>
                 </div>
@@ -345,11 +345,11 @@
         let chartInstance = null;
 
         const toolsData = [
-            { name: "Google Gemini", icon: "🌐", scores: [10, 6, 6, 7, 5], desc: "生態系整合之冠。直接讀取 Drive 與 Email。", scenario: "分析問卷結果或修改舊計畫書。" },
-            { name: "Perplexity", icon: "🔍", scores: [4, 10, 6, 6, 3], desc: "搜尋大師。精確標註引用來源。", scenario: "計畫背景調查，查證數據真實性。" },
-            { name: "港話通", icon: "🇭🇰", scores: [5, 5, 10, 5, 4], desc: "粵語與香港語境優化。", scenario: "撰寫學員 WhatsApp 通知，查找本地資訊。" },
-            { name: "KIMI AI", icon: "📄", scores: [4, 6, 5, 10, 5], desc: "長文本與 Agent 生成專家。", scenario: "處理厚重報告摘要，生成溫習題網頁。" },
-            { name: "豆包 AI", icon: "🎨", scores: [3, 4, 4, 4, 10], desc: "多媒體創意。繪圖能力佳。", scenario: "製作活動宣傳插畫，自動生成短片。" }
+            { name: "Google Gemini", icon: "🌐", scores: [10, 8, 6, 7, 9], desc: "生態系整合之冠。直接讀取 Drive 與 Email。", scenario: "分析問卷結果或修改舊計畫書。" },
+            { name: "Perplexity", icon: "🔍", scores: [7, 10, 6, 6, 6], desc: "搜尋大師。精確標註引用來源。", scenario: "計畫背景調查，查證數據真實性。" },
+            { name: "港話通", icon: "🇭🇰", scores: [3, 5, 10, 5, 3], desc: "粵語與香港語境優化。", scenario: "撰寫學員 WhatsApp 通知，查找本地資訊。" },
+            { name: "KIMI AI", icon: "📄", scores: [5, 6, 5, 10, 7], desc: "長文本與 Agent 生成專家。", scenario: "處理厚重報告摘要，生成溫習題網頁。" },
+            { name: "豆包 AI", icon: "🎨", scores: [6, 5, 6, 5, 10], desc: "多媒體創意。繪圖能力佳。", scenario: "製作活動宣傳插畫，自動生成短片。" }
         ];
 
         const contextDialogue = [
