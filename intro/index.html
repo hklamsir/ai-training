@@ -13,7 +13,7 @@
             font-family: 'Noto Sans TC', sans-serif;
             background-color: #fcfbf9; 
             color: #334155;
-            font-size: 1.0625rem; /* Font size reduced by 1 level from previous version */
+            font-size: 1.0625rem;
         }
 
         .chart-container {
@@ -29,7 +29,7 @@
         .whiteboard-container {
             overflow: hidden;
             position: relative;
-            height: 230px;
+            height: 250px;
             background: #ffffff;
             border: 4px solid #cbd5e1;
             border-radius: 8px;
@@ -72,23 +72,30 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
 </head>
 <body class="antialiased h-screen flex flex-col md:flex-row overflow-hidden">
 
-    <!-- Chosen Palette: Warm Neutrals with Teal and Amber Accents -->
-    <!-- Application Structure Plan: Dashboard layout optimized for information consumption. 
-         - Concepts: Visual breakdown of LLM, Memory, Tokens, and Context Engineering.
-         - CARE Lab: Practical prompt building.
-         - Tools: Data-driven comparison. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-
     <!-- Sidebar Navigation -->
-    <nav class="w-full md:w-72 bg-stone-100 border-r border-stone-200 flex-shrink-0 flex flex-col md:h-full z-10 shadow-sm">
-        <div class="p-6 pb-4">
-            <h1 class="text-2xl font-bold text-teal-800 leading-tight">GenAI 實戰筆記<br><span class="text-sm font-normal text-slate-500"> &copy; 林 SIR , 2026</span></h1>
+    <nav class="w-full md:w-72 bg-stone-100 border-r border-stone-200 flex-shrink-0 flex flex-col md:h-full z-20 shadow-sm relative">
+        <div class="p-6 pb-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-teal-800 leading-tight">GenAI 實戰筆記<br>
+                <span class="text-sm font-normal text-slate-500">&copy; 林 SIR, 2026 </span>
+            </h1>
+            <!-- 漢堡按鈕 (Mobile Only) -->
+            <button onclick="toggleMobileMenu()" class="md:hidden text-slate-600 hover:text-teal-800 focus:outline-none p-2 rounded-lg bg-stone-200">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
         </div>
-        <div class="flex-grow overflow-y-auto px-4 pb-6 flex md:flex-col gap-2 overflow-x-auto md:overflow-x-hidden">
+        
+        <!-- 選單內容容器 -->
+        <div id="mobile-menu" class="hidden md:flex flex-grow overflow-y-auto px-4 pb-6 flex-col gap-2">
             <button onclick="navigate('intro')" id="nav-intro" class="nav-active text-left px-4 py-3 rounded-xl transition-colors flex-shrink-0 text-base">
                 <span class="mr-2">🏠</span> 課程導覽
             </button>
@@ -96,45 +103,68 @@
                 <span class="mr-2">🧠</span> GenAI 核心概念
             </button>
             <button onclick="navigate('care-lab')" id="nav-care-lab" class="text-left px-4 py-3 rounded-xl hover:bg-stone-200 text-slate-700 transition-colors flex-shrink-0 text-base">
-                <span class="mr-2">🧪</span> CARE 提示實驗室
+                <span class="mr-2">🧪</span> CARE 提示詞實驗室
             </button>
             <button onclick="navigate('tools')" id="nav-tools" class="text-left px-4 py-3 rounded-xl hover:bg-stone-200 text-slate-700 transition-colors flex-shrink-0 text-base">
-                <span class="mr-2">🧭</span> 工具全景指南
+                <span class="mr-2">🧭</span> 工具大比併
             </button>
-            <button onclick="navigate('action')" id="nav-action" class="text-left px-4 py-3 rounded-xl hover:bg-stone-200 text-slate-700 transition-colors flex-shrink-0 text-base">
-                <span class="mr-2">🛡️</span> 行動與安全守則
+            <button onclick="toggleGeminiMenu()" class="w-full text-left px-4 py-3 mt-2 rounded-xl hover:bg-stone-200 text-slate-800 font-bold text-base flex justify-between items-center transition-colors">
+                <div class="flex items-center"><span class="mr-2">🚀</span> Gemini 實戰演練</div>
+                <span id="gemini-menu-icon" class="text-xs transition-transform duration-300 transform -rotate-90">▼</span>
+            </button>
+            <!-- 預設隱藏子選單 -->
+            <div id="gemini-sub-menu" class="hidden flex flex-col overflow-hidden transition-all duration-300">
+                <button onclick="navigate('gemini-basics')" id="nav-gemini-basics" class="text-left pl-11 pr-4 py-2.5 rounded-xl hover:bg-stone-200 text-slate-700 transition-colors flex-shrink-0 text-sm">
+                    • 基本操作介紹
+                </button>
+                <button onclick="navigate('gemini-gems')" id="nav-gemini-gems" class="text-left pl-11 pr-4 py-2.5 rounded-xl hover:bg-stone-200 text-slate-700 transition-colors flex-shrink-0 text-sm">
+                    • Gems 實踐
+                </button>
+                <button onclick="navigate('gemini-image')" id="nav-gemini-image" class="text-left pl-11 pr-4 py-2.5 rounded-xl hover:bg-stone-200 text-slate-700 transition-colors flex-shrink-0 text-sm">
+                    • 影像生成
+                </button>
+            </div>
+            <button onclick="navigate('action')" id="nav-action" class="text-left px-4 py-3 mt-2 rounded-xl hover:bg-stone-200 text-slate-700 transition-colors flex-shrink-0 text-base">
+                <span class="mr-2">🛡️</span> 倫理與安全守則
             </button>
         </div>
     </nav>
 
     <!-- Main Content Area -->
     <main class="flex-grow overflow-y-auto bg-[#fcfbf9] relative">
-        <div class="max-w-4xl mx-auto p-6 md:p-10 pb-20">
+        <div class="max-w-5xl mx-auto p-6 md:p-10 pb-20">
 
             <!-- Section 1: Intro -->
             <section id="section-intro" class="fade-in block">
                 <p class="text-base font-semibold text-teal-600 uppercase tracking-wide mb-2">Google Gemini 專修班</p>
-                <h2 class="text-4xl md:text-5xl font-bold text-slate-800 mb-6 leading-tight">優化行政流程<br>自動化教材研發</h2>
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-800 mb-6 leading-normal">優化文書及行政工作<br>提升教材研發的效率</h2>
                 
-                <p class="text-xl text-slate-600 mb-8 leading-relaxed">
-                    歡迎來到 GenAI 核心概念與工具全景 的互動體驗網頁。在數位轉型的浪潮下，AI 不再僅是技術名詞，而是能切實減輕工作負荷的助手。
+                <p class="text-xl text-slate-600 mb-8 leading-normal">
+                    在數位轉型的浪潮下，AI 不再僅是技術名詞，而是能切實減輕工作負荷的助手。
                 </p>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                <!-- 加入課堂內容標題 -->
+                <h3 class="text-3xl font-bold text-teal-800 mt-12 mb-4" leading-normal>&nbsp; 📚 課堂內容</h3><br>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md transition-all cursor-pointer" onclick="navigate('concepts')">
                         <div class="text-4xl mb-4">🧩</div>
                         <h3 class="text-xl font-bold text-slate-800 mb-2">拆解底層邏輯</h3>
-                        <p class="text-slate-600 text-base">從文字接龍到記憶窗口，掌握 GenAI 的思考邊界。</p>
+                        <p class="text-slate-600 text-base">從文字接龍到記憶窗口，掌握 AI 的思考邊界。</p>
                     </div>
                     <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md transition-all cursor-pointer" onclick="navigate('care-lab')">
                         <div class="text-4xl mb-4">⌨️</div>
-                        <h3 class="text-xl font-bold text-slate-800 mb-2">精通提示工程</h3>
-                        <p class="text-slate-600 text-base">透過 C-A-R-E 框架，讓對話輸出更精確、更符合實務。</p>
+                        <h3 class="text-xl font-bold text-slate-800 mb-2">提示詞工程</h3>
+                        <p class="text-slate-600 text-base">透過 C-A-R-E 框架，讓對話輸出更精確。</p>
                     </div>
-                    <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md transition-all cursor-pointer" onclick="navigate('tools')">
-                        <div class="text-4xl mb-4">🧰</div>
-                        <h3 class="text-xl font-bold text-slate-800 mb-2">選擇最適工具</h3>
-                        <p class="text-slate-600 text-base">橫向對比 5 大主流工具，挑選您的數位隊友。</p>
+                    <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md transition-all cursor-pointer" onclick="navigate('gemini-basics')">
+                        <div class="text-4xl mb-4">🚀</div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-2">Gemini 實戰</h3>
+                        <p class="text-slate-600 text-base">Canvas 協作、Deep Research、建立 Gems與生成圖片。</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md transition-all cursor-pointer" onclick="navigate('action')">
+                        <div class="text-4xl mb-4">🛡️</div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-2">AI 倫理與邊界</h3>
+                        <p class="text-slate-600 text-base">隱私脫敏、防範幻覺與確保同理心實踐。</p>
                     </div>
                 </div>
             </section>
@@ -142,42 +172,50 @@
             <!-- Section 2: Concepts -->
             <section id="section-concepts" class="fade-in hidden">
                 <div class="mb-8">
-                    <h2 class="text-4xl font-bold text-slate-800 mb-4">GenAI 核心概念解密</h2>
-                    <p class="text-lg text-slate-600 leading-relaxed">深入理解大語言模型 (LLM) 的運作機制、記憶限制與優化技巧。</p>
+                    <h2 class="text-4xl font-bold text-slate-800 mb-4">生成式人工智能 (Generative AI) 核心概念解密</h2>
+                    <p class="text-lg text-slate-600 leading-relaxed mb-6">深入理解大語言模型 (Large Language Model) 的運作機制、記憶限制與優化技巧。</p>
+                    
+                    <!-- 新增：科普介紹區塊 -->
+                    <div class="bg-teal-50 border-l-4 border-teal-500 p-6 rounded-r-xl shadow-sm border border-teal-100/50">
+                        <ul class="space-y-4 text-base text-slate-700 leading-relaxed">
+                            <li><strong>🧠 大語言模型 (LLM)：</strong> 想像一位讀過人類所有藏書的「超級學霸」。它並沒有真正的人類意識，但因為預訓練 (Pre-trained) 時看過的書籍與文章太多，所以能根據我們輸入的文字，精準「猜」出下一個最合理的字詞。這就是 ChatGPT 或 Gemini 等 AI 工具的基礎大腦。</li>
+                            <li><strong>⚡ Transformer 架構：</strong> 這是讓 AI 產生跨時代突破的「閱讀超能力」。傳統 AI 只能逐字閱讀，讀到後面就忘了前面；而 Transformer 擁有「注意力機制 (Attention)」，能一眼看穿整段對話，瞬間理解詞彙之間的前後文關聯。就像讀推理小說時，能立刻將第一頁的線索與最後一頁的結局完美連結。</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <!-- Text Completion -->
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
-                        <h3 class="text-xl font-bold text-teal-700 mb-4 flex items-center"><span class="text-2xl mr-2">🎲</span> 機率性的「文字接龍」</h3>
-                        <p class="text-slate-600 mb-4 text-sm leading-relaxed">
+                        <h3 class="text-2xl font-bold text-teal-700 mb-4 flex items-center"><span class="text-3xl mr-2">🎲</span> 機率性的「文字接龍」</h3>
+                        <p class="text-slate-600 mb-4 text-base leading-relaxed">
                             大語言模型並非真的「讀懂」知識。它是一個巨大的<b>統計預測引擎</b>。當您輸入一段文字時，它會計算下一個詞彙出現的機率。
                         </p>
                         <div class="bg-stone-50 p-4 rounded-lg border border-stone-200">
-                            <p class="text-base font-semibold text-slate-700 mb-2">輸入提示：<span class="font-normal text-amber-600">「今天天氣很...」</span></p>
-                            <ul class="space-y-3 text-base">
-                                <li class="flex justify-between items-center"><span class="text-slate-700">好</span> <div class="w-2/3 bg-stone-200 rounded-full h-2.5 ml-2"><div class="bg-teal-500 h-2.5 rounded-full" style="width: 70%"></div></div> <span class="text-xs text-slate-500 ml-2">70%</span></li>
-                                <li class="flex justify-between items-center"><span class="text-slate-700">悶熱</span> <div class="w-2/3 bg-stone-200 rounded-full h-2.5 ml-2"><div class="bg-amber-500 h-2.5 rounded-full" style="width: 15%"></div></div> <span class="text-xs text-slate-500 ml-2">15%</span></li>
-                                <li class="flex justify-between items-center"><span class="text-slate-700">詭異</span> <div class="w-2/3 bg-stone-200 rounded-full h-2.5 ml-2"><div class="bg-slate-400 h-2.5 rounded-full" style="width: 5%"></div></div> <span class="text-xs text-slate-500 ml-2">5%</span></li>
+                            <p class="text-lg font-semibold text-slate-700 mb-2">輸入提示：<span class="font-normal text-amber-600">「今天天氣很...」</span></p>
+                            <ul class="space-y-3 text-lg">
+                                <li class="flex justify-between items-center"><span class="text-slate-700">好</span> <div class="w-2/3 bg-stone-200 rounded-full h-2.5 ml-2"><div class="bg-teal-500 h-2.5 rounded-full" style="width: 70%"></div></div> <span class="text-sm text-slate-500 ml-2">70%</span></li>
+                                <li class="flex justify-between items-center"><span class="text-slate-700">悶熱</span> <div class="w-2/3 bg-stone-200 rounded-full h-2.5 ml-2"><div class="bg-amber-500 h-2.5 rounded-full" style="width: 15%"></div></div> <span class="text-sm text-slate-500 ml-2">15%</span></li>
+                                <li class="flex justify-between items-center"><span class="text-slate-700">詭異</span> <div class="w-2/3 bg-stone-200 rounded-full h-2.5 ml-2"><div class="bg-slate-400 h-2.5 rounded-full" style="width: 5%"></div></div> <span class="text-sm text-slate-500 ml-2">5%</span></li>
                             </ul>
                         </div>
-                        <div class="mt-4 p-3 bg-teal-50 text-teal-800 rounded-lg text-sm">
+                        <div class="mt-4 p-3 bg-teal-50 text-teal-800 rounded-lg text-base">
                             <strong>💡 深度啟示：</strong> 這種機率機制導致了 AI 的「幻覺現象」，但也同時賦予了它發散性的「創造力」。
                         </div>
                     </div>
 
                     <!-- Token Explanation -->
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
-                        <h3 class="text-xl font-bold text-teal-700 mb-4 flex items-center"><span class="text-2xl mr-2">🪙</span> Token (詞元)：處理單位</h3>
-                        <p class="text-slate-600 mb-4 text-sm leading-relaxed">
+                        <h3 class="text-2xl font-bold text-teal-700 mb-4 flex items-center"><span class="text-3xl mr-2">🪙</span> Token (詞元)：處理單位</h3>
+                        <p class="text-slate-600 mb-4 text-base leading-relaxed">
                             AI 不直接讀取單字，而是將文字拆解為 <b>Token</b>。這是 AI 處理資訊的最小單位。
                         </p>
                         <div class="space-y-4">
-                            <div class="p-3 bg-stone-50 rounded-lg border border-stone-200 text-sm">
+                            <div class="p-3 bg-stone-50 rounded-lg border border-stone-200 text-base">
                                 <div class="flex justify-between mb-1"><span>"Apple"</span> <span class="text-teal-600">≈ 1 Token</span></div>
                                 <div class="flex justify-between mb-1"><span>"繁體中文"</span> <span class="text-teal-600">≈ 4-8 Tokens</span></div>
                             </div>
-                            <p class="text-sm text-slate-600">
+                            <p class="text-base text-slate-600">
                                 <b>為什麼要關心 Token？</b><br>
                                 1. 它決定了 AI 的運算成本。<br>
                                 2. 它影響了 AI 回答的速度。<br>
@@ -188,38 +226,38 @@
 
                     <!-- Context Window Simulator -->
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
-                        <h3 class="text-xl font-bold text-amber-600 mb-4 flex items-center"><span class="text-2xl mr-2">🪧</span> 上下文窗口 (Context Window)：記憶限制</h3>
-                        <p class="text-slate-600 mb-4 text-sm leading-relaxed">
+                        <h3 class="text-2xl font-bold text-amber-600 mb-4 flex items-center"><span class="text-3xl mr-2">🪧</span> Context Window (上下文窗口)：記憶限制</h3>
+                        <p class="text-slate-600 mb-4 text-base leading-relaxed">
                             AI 的記憶是有限的。想像一塊空間有限的「滾動白板」，當新對話不斷寫入底部，頂端的舊資訊就會被推出去並擦除。
                         </p>
                         <div class="whiteboard-container mb-4" id="whiteboard">
                             <div class="whiteboard-items" id="whiteboard-items">
-                                <div class="whiteboard-item text-sm">初始設定：我是具備 10 年經驗的導師。</div>
-                                <div class="whiteboard-item text-sm">任務：為暑期編程班設計三天的課程大綱。</div>
-                                <div class="whiteboard-item text-sm">對話 1：第一天請加入互動破冰遊戲。</div>
+                                <div class="whiteboard-item text-base">初始設定：我是具備 10 年經驗的導師。</div>
+                                <div class="whiteboard-item text-base">任務：為暑期編程班設計三天的課程大綱。</div>
+                                <div class="whiteboard-item text-base">對話 1：第一天請加入互動破冰遊戲。</div>
                             </div>
                         </div>
                         <div class="flex gap-2">
-                            <button onclick="addWhiteboardItem()" class="flex-1 bg-amber-500 hover:bg-amber-600 text-white py-2 px-4 rounded-xl transition-all text-base font-bold">➕ 模擬連續對話</button>
-                            <button onclick="resetWhiteboard()" class="bg-stone-200 hover:bg-stone-300 text-slate-700 py-2 px-4 rounded-xl transition-all text-base">重設</button>
+                            <button onclick="addWhiteboardItem()" class="flex-1 bg-amber-500 hover:bg-amber-600 text-white py-2 px-4 rounded-xl transition-all text-lg font-bold">➕ 模擬連續對話</button>
+                            <button onclick="resetWhiteboard()" class="bg-stone-200 hover:bg-stone-300 text-slate-700 py-2 px-4 rounded-xl transition-all text-lg">重設</button>
                         </div>
                     </div>
 
                     <!-- Context Engineering -->
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
-                        <h3 class="text-xl font-bold text-amber-600 mb-4 flex items-center"><span class="text-2xl mr-2">🏗️</span> 上下文工程：精準度優化</h3>
-                        <p class="text-slate-600 mb-4 text-sm leading-relaxed">
-                            除了提問，提供「參考樣本」及「規格書」能顯著提升 AI 表現。這被稱為 <b>Few-shot Prompting</b>。
+                        <h3 class="text-2xl font-bold text-amber-600 mb-4 flex items-center"><span class="text-3xl mr-2">🏗️</span> Context Engineering (上下文工程)：精準度優化</h3>
+                        <p class="text-slate-600 mb-4 text-base leading-relaxed">
+                            除了提問，提供「參考樣本」及「規格書」等能顯著提升 AI 表現。這被稱為 <b>Few-shot Prompting</b>。
                         </p>
-                        <div class="bg-amber-50 p-4 rounded-lg border border-amber-100 text-sm italic text-amber-900 mb-4">
+                        <div class="bg-amber-50 p-4 rounded-lg border border-amber-100 text-base italic text-amber-900 mb-4">
                             「與其只說：『幫我寫活動文案』，不如提供 2 個去年的成功範本讓 AI 模仿風格。」
                         </div>
-                        <p class="text-sm text-slate-600">
+                        <p class="text-base text-slate-600">
                             <b>核心價值：</b><br>
-                            1. **提昇精確度 200%**：減少 AI 亂猜的機率。<br>
-                            2. **風格一致性**：確保產出符合機構的語氣。<br>
-                            3. **結構標準化**：讓 AI 學習複雜的表格或格式。<br>
-                            4. **約束AI行為**：讓 AI 根據規格書續步執行。
+                            1. <b>提昇精確度</b>：減少 AI 亂猜的機率。<br>
+                            2. <b>風格一致性</b>：確保產出符合機構的語氣。<br>
+                            3. <b>結構標準化</b>：讓 AI 學習複雜的表格或格式。<br>
+                            4. <b>約束AI行為</b>：讓 AI 根據規格書續步執行。
                         </p>
                     </div>
                 </div>
@@ -228,7 +266,7 @@
             <!-- Section 3: CARE Prompt Lab -->
             <section id="section-care-lab" class="fade-in hidden">
                 <div class="mb-8">
-                    <h2 class="text-4xl font-bold text-slate-800 mb-4">CARE 提示實驗室</h2>
+                    <h2 class="text-4xl font-bold text-slate-800 mb-4">CARE 提示詞實驗室</h2>
                     <p class="text-lg text-slate-600 leading-relaxed">透過 C-A-R-E 組合出符合 GenAI 實務的專業指令。</p>
                 </div>
 
@@ -236,8 +274,8 @@
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                         <div class="space-y-4">
                             <div>
-                                <label class="block text-base font-bold text-teal-700 mb-1">C (Context 背景)</label>
-                                <select id="care-c" class="w-full p-2 border border-stone-300 rounded-lg bg-stone-50 text-sm">
+                                <label class="block text-lg font-bold text-teal-700 mb-1">C (Context 背景)</label>
+                                <select id="care-c" class="w-full p-2 border border-stone-300 rounded-lg bg-stone-50 text-base focus:outline-none focus:ring-2 focus:ring-teal-500">
                                    <option value="我是一位 erb 培訓機構的課程主任，正籌備針對在職人士的人工智能素養課程。">ERB 培訓機構 AI 課程 (在職人士)</option>
                                     <option value="我是一位青少年中心的程序幹事，正籌備針對基層小學生的暑期編程班。學員多為零基礎，且預算有限。">青少年中心編程班 (預算有限, 零基礎)</option>
                                     <option value="我是一位長者服務中心的社交幹事，正籌備『數碼代溝』工作坊。學員多為 65 歲以上長者。">長者數碼工作坊 (高齡學員)</option>
@@ -245,8 +283,8 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-base font-bold text-teal-700 mb-1">A (Action 任務)</label>
-                                <select id="care-a" class="w-full p-2 border border-stone-300 rounded-lg bg-stone-50 text-sm">
+                                <label class="block text-lg font-bold text-teal-700 mb-1">A (Action 任務)</label>
+                                <select id="care-a" class="w-full p-2 border border-stone-300 rounded-lg bg-stone-50 text-base focus:outline-none focus:ring-2 focus:ring-teal-500">
                                     <option value="請根據上述背景，設計一份為期 12 小時的課程大綱，重點在於利用免費資源達成寓教於樂。">設計課程大綱 (免費資源)</option>
                                     <option value="請根據上述背景，撰寫一篇用於 Facebook 的宣傳文案，重點在於吸引報名。">撰寫 FB 宣傳文案</option>
                                     <option value="請根據上述背景，撰寫一份活動成效評估報告摘要，包含數據與感言分析。">撰寫成效評估報告</option>
@@ -254,8 +292,8 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-base font-bold text-teal-700 mb-1">R (Result 格式)</label>
-                                <select id="care-r" class="w-full p-2 border border-stone-300 rounded-lg bg-stone-50 text-sm">
+                                <label class="block text-lg font-bold text-teal-700 mb-1">R (Result 格式)</label>
+                                <select id="care-r" class="w-full p-2 border border-stone-300 rounded-lg bg-stone-50 text-base focus:outline-none focus:ring-2 focus:ring-teal-500">
                                     <option value="請以『具備 10 年經驗的 STEAM 導師』身份。輸出需包含表格（時間、目標）。">STEAM 導師 + 表格輸出</option>
                                     <option value="請以『專業的課程主任』身份。使用列點清晰呈現課程亮點。">專業主任 + 列點輸出</option>
                                     <option value="請以『具備豐富同理心的資深社工』身份。輸出需為溫暖的長段落。">資深社工 + 同理心長文</option>
@@ -263,23 +301,23 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-base font-bold text-teal-700 mb-1">E (Example 例子)</label>
-                                <select id="care-e" class="w-full p-2 border border-stone-300 rounded-lg bg-stone-50 text-sm">
+                                <label class="block text-lg font-bold text-teal-700 mb-1">E (Example 例子)</label>
+                                <select id="care-e" class="w-full p-2 border border-stone-300 rounded-lg bg-stone-50 text-base focus:outline-none focus:ring-2 focus:ring-teal-500">
                                     <option value="書寫風格請參考邀請函：『合作伙伴邀請函』。">參考附件</option>
                                     <option value="風格請參考附件，並加入 Emoji。">附件 + Emoji</option>
                                     <option value="行文可參考金庸武俠小說的風格。">金庸武俠小說</option>
                                     <option value="參考以下兩個FB Post的寫法，加入合適的 Hash Tags">參考 FB Post</option>
                                 </select>
                             </div>
-                            <button onclick="generatePrompt()" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-4 rounded-xl transition-all text-lg mt-2">✨ 組合提示詞 (Generate)</button>
+                            <button onclick="generatePrompt()" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-4 rounded-xl transition-all text-xl mt-2">✨ 組合提示詞 (Generate)</button>
                         </div>
 
                         <div class="bg-stone-800 rounded-xl p-5 relative text-stone-100 flex flex-col h-full min-h-[350px]">
-                            <h3 class="text-xs font-bold text-stone-400 uppercase tracking-wider mb-4">最終輸出 (Final Prompt)</h3>
-                            <div class="flex-grow font-mono text-base leading-relaxed whitespace-pre-wrap overflow-y-auto" id="prompt-output">請選擇條件後點擊組合提示詞。</div>
-                            <div class="mt-4 pt-3 border-t border-stone-600 flex justify-between items-center text-xs">
-                                <span class="text-amber-400 font-bold" id="accuracy-indicator">精確度預估：待計算</span>
-                                <button onclick="copyPrompt()" class="bg-stone-700 hover:bg-stone-600 px-4 py-1.5 rounded-lg transition-all text-sm">📋 複製</button>
+                            <h3 class="text-sm font-bold text-stone-400 uppercase tracking-wider mb-4">最終輸出 (Final Prompt)</h3>
+                            <div class="flex-grow font-mono text-lg leading-relaxed whitespace-pre-wrap overflow-y-auto" id="prompt-output">請選擇條件後點擊組合提示詞。</div>
+                            <div class="mt-4 pt-3 border-t border-stone-600 flex justify-between items-center text-sm">
+                                <span class="text-amber-400 font-bold text-base" id="accuracy-indicator">精確度預估：待計算</span>
+                                <button onclick="copyPrompt()" class="bg-stone-700 hover:bg-stone-600 px-4 py-2 rounded-lg transition-all text-base">📋 複製</button>
                             </div>
                         </div>
                     </div>
@@ -300,40 +338,209 @@
                 </div>
             </section>
 
-            <!-- Section 5: Action Plan -->
-            <section id="section-action" class="fade-in hidden">
+            <!-- Section 5.1: Gemini Action - Basics -->
+            <section id="section-gemini-basics" class="fade-in hidden">
                 <div class="mb-8">
-                    <h2 class="text-4xl font-bold text-slate-800 mb-4">行動與安全守則</h2>
-                    <p class="text-lg text-slate-600 leading-relaxed">建立高效且安全的 GenAI 協作流程。</p>
+                    <h2 class="text-4xl font-bold text-slate-800 mb-4">Gemini 基本操作介紹</h2>
+                    <p class="text-lg text-slate-600 leading-relaxed">本章節的核心目標是引導學員跨越「搜尋框」的思維，將 Gemini 視為一名具備專業知識、能共同創作且擁有強大分析能力的「數位同工」。</p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bg-white p-6 rounded-xl border border-stone-200 border-l-8 border-l-teal-600 shadow-sm">
-                        <h3 class="text-xl font-bold text-slate-800 mb-4">🤝 人機協作三段式</h3>
-                        <ul class="space-y-3 text-base text-slate-700">
-                            <li class="flex items-start"><span class="bg-teal-100 text-teal-800 rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 font-bold">1</span> <div><strong>發想階段：</strong> 利用 GenAI 生成大量創意與主題。</div></li>
-                            <li class="flex items-start"><span class="bg-teal-100 text-teal-800 rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 font-bold">2</span> <div><strong>細化階段：</strong> 針對選定項目要求 GenAI 填充執行細節。</div></li>
-                            <li class="flex items-start"><span class="bg-amber-100 text-amber-800 rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 font-bold">3</span> <div><strong>審核階段：</strong> 同工親自把關事實準確性與情感聯繫。</div></li>
+
+                <!-- 0. Basic Ops -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200 mb-8">
+                    <h3 class="text-3xl font-bold text-teal-800 mb-4 border-b pb-2"> 介面與多模態輸入</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-bold text-slate-700 text-lg mb-2 flex items-center"><span class="text-2xl mr-2">⚙️</span> 介面與設定</h4>
+                            <ul class="list-disc pl-5 text-base text-slate-600 space-y-1">
+                                <li><b>左側側欄：</b> 管理對話紀錄（Rename、Pin、Delete）。將常用的專案對話「固定 (Pin)」，方便追蹤。</li>
+                                <li><b>互連應用程式：</b> 開啟 Google Workspace、YouTube 及 Maps 擴展，直接讀取雲端硬碟檔案。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-700 text-lg mb-2 flex items-center"><span class="text-2xl mr-2">🗂️</span> 多模態輸入</h4>
+                            <ul class="list-disc pl-5 text-base text-slate-600 space-y-1">
+                                <li><b>圖片理解：</b> 上傳「行政流程圖」要求 Gemini 總結核心流程。</li>
+                                <li><b>檔案處理：</b> 上傳 PDF 格式的「學員守則」要求針對特定法條進行摘要。</li>
+                                <li><b>語音輸入：</b> 利用 Mobile App 語音描述複雜活動構思。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Advanced Features -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                    <!-- Canvas -->
+                    <div class="bg-gradient-to-br from-stone-50 to-teal-50 p-6 rounded-xl border border-teal-200 shadow-sm relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-teal-600 text-white text-sm font-bold px-3 py-1 rounded-bl-lg">進階協作</div>
+                        <h3 class="text-2xl font-bold text-teal-800 mb-3 flex items-center"><span class="text-3xl mr-2">📝</span> Canvas (協作視窗)</h3>
+                        <p class="text-base text-slate-600 mb-4">重新定義文案創作。透過分割視窗讓「溝通」與「編輯」同步進行，從單向「提問-回答」轉變為循環的「修改-精煉」。</p>
+                        
+                        <div class="bg-white p-4 rounded-lg border border-teal-100 text-base mb-4 shadow-sm">
+                            <span class="font-bold text-slate-700 block mb-2">💡 精準觸發指令範例：</span>
+                            <div class="font-mono text-slate-600 text-sm">
+                                「你是一位教學設計專家。請根據附件，為我設計一份針對 <strong>求職青年</strong> 的詳細教案。包含教學目標與時間分配。 <br>**特別要求**：<br>1. 設計 5 條 Kahoot! 互動問題。 <br>2. 擬定 <br>3 條關鍵回饋問卷。」
+                            </div>
+                        </div>
+                        
+                        <h4 class="font-bold text-slate-700 text-base mb-2">🪄 魔法棒工具箱 (Magic Wand)：</h4>
+                        <ol class="text-base text-slate-600 space-y-1">
+                            <li>1. <b>段落級別互動：</b> 反白特定文字要求修改（如：更貼近失業人士需求）。</li>
+                            <li>2. <b>潤色 (Polish) / 調整長度 (Adjust Length)</b></li>
+                            <li>3. <b>語氣切換 (Change Tone)：</b> 嚴肅行政風 ↔ 社交媒體風</li>
+                        </ol>
+                    </div>
+
+                    <!-- Deep Research -->
+                    <div class="bg-gradient-to-br from-stone-50 to-amber-50 p-6 rounded-xl border border-amber-200 shadow-sm relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-amber-500 text-white text-sm font-bold px-3 py-1 rounded-bl-lg">深度分析</div>
+                        <h3 class="text-2xl font-bold text-amber-800 mb-3 flex items-center"><span class="text-3xl mr-2">🕵️</span> Deep Research (深度搜索)</h3>
+                        <p class="text-base text-slate-600 mb-4">自動化研究員的體現。自問自答、自動篩選、並在多次循環中挖掘深層資訊 (Agentic 工作流)。</p>
+                        
+                        <div class="bg-white p-4 rounded-lg border border-amber-100 text-base mb-4 shadow-sm">
+                            <span class="font-bold text-slate-700 block mb-2">💡 演示案例深度拆解：</span>
+                            <div class="font-mono text-slate-600 text-sm">
+                                「你是一位職涯規劃專家。請針對 2025 年香港勞動市場結構執行深度研究。基於研究，規劃 10 個能提升競爭力的培訓課程。」
+                            </div>
+                        </div>
+                        
+                        <h4 class="font-bold text-slate-700 text-base mb-2">🔍 觀察看點：</h4>
+                        <ul class="text-base text-slate-600 space-y-1">
+                            <li>1. <b>推理路徑：</b> 檢索政府數據 ➔ 尋找 NGO 報告 ➔ 對比國際案例。</li>
+                            <li>2. <b>動態追問：</b> AI 反向提問，體現「協作式研究」。</li>
+                            <li>3. <b>可信度建設：</b> 報告末尾的參考文獻連結，對撰寫 Funding Proposal 至關重要。</li>
                         </ul>
                     </div>
-                    <div class="bg-white p-6 rounded-xl border border-stone-200 border-l-8 border-l-red-500 shadow-sm">
-                        <h3 class="text-xl font-bold text-slate-800 mb-4">🚨 隱私安全與紅線</h3>
-                        <div class="space-y-4 text-base">
-                            <div class="p-3 bg-red-50 rounded-lg text-red-800 font-bold">嚴禁輸入：財務細目、個案敏感個資、未公開機密。</div>
-                            <p class="text-slate-600 leading-relaxed"><strong>去識別化：</strong> 始終使用代號代替真實姓名，保護學員隱私。</p>
+                </div>
+            </section>
 
+            <!-- Section 5.2: Gemini Action - Gems -->
+            <section id="section-gemini-gems" class="fade-in hidden">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold text-slate-800 mb-4">Gems 實踐</h2>
+                    <p class="text-lg text-slate-600 leading-relaxed">Gems 讓學員能夠將「成功經驗」模板化。這不僅是為了個人省力，更是為了團隊的標準化建立數位資產。</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Gem A -->
+                    <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm">
+                        <div class="text-4xl mb-3">🧑‍💼</div>
+                        <h4 class="font-bold text-xl text-slate-800 mb-2">場景 A: 課程面試小顧問</h4>
+                        <p class="text-sm text-slate-500 mb-3 font-mono bg-stone-100 p-3 rounded">
+                            **角色設定：** ERB 資深課程主任。根據附件精準回答。若無資訊則引導聯繫職員。<br><br>
+                            **特定知識庫：** 課程手冊、面試指引。<br><br>
+                            **輸出規範：** 指定的 Markdown 表格格式 (編號/時數/入讀要求等)。
+                        </p>
+                        <p class="text-base text-slate-600">讓 Gem 了解機構的「口味」，產出的內容就無需大幅修改。</p>
+                    </div>
+                    <!-- Gem B -->
+                    <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm">
+                        <div class="text-4xl mb-3">📋</div>
+                        <h4 class="font-bold text-xl text-slate-800 mb-2">場景 B: 會議摘要助手</h4>
+                        <p class="text-sm text-slate-500 mb-3 font-mono bg-stone-100 p-3 rounded">
+                            **輸入多樣性：** 匯入 Zoom/Teams 轉錄文本。<br><br>
+                            **智慧提取：** 「請特別留意會議中提到的『課程報名進度』、『行政漏項』與『學員特殊需求』，並將其列入跟進事項。」
+                        </p>
+                        <p class="text-base text-slate-600">行政自動化流程。亦可用於整理個案研討會議 (Case Conference)。</p>
+                    </div>
+                    <!-- Gem C -->
+                    <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm">
+                        <div class="text-4xl mb-3">▶️</div>
+                        <h4 class="font-bold text-xl text-slate-800 mb-2">場景 C: YouTube 摘要專家</h4>
+                        <p class="text-sm text-slate-500 mb-3 font-mono bg-stone-100 p-3 rounded">
+                            **指令架構：** 利用擴展功能讀取影片。<br>
+                            整理出：1. 核心主題; 2. 內容精華(最小5個); 3. 受眾建議; 4. 亮點與金句及操作步驟清單。
+                        </p>
+                        <p class="text-base text-slate-600">高效學習與資訊過濾。將 1 小時影片在 30 秒內轉化為可供分發的閱讀摘要。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5.3: Gemini Action - Image -->
+            <section id="section-gemini-image" class="fade-in hidden">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold text-slate-800 mb-4">影像生成</h2>
+                    <p class="text-lg text-slate-600 leading-relaxed">模型根據「語義」轉化為「像素」，並非拼貼，而是全新創作。</p>
+                </div>
+                <div class="bg-slate-800 text-white p-6 rounded-xl shadow-sm border border-stone-700">
+                    <h3 class="text-2xl font-bold mb-3 flex items-center"><span class="text-3xl mr-2">🎨</span> 影像創意實作：文字到影像邏輯</h3>
+                    <p class="text-base text-slate-300 mb-3">
+                        <strong>進階 Prompt：</strong> 嘗試加入「負向提示 (Negative Prompt)」或「俯瞰視角」、「電影感光效」。
+                    </p>
+                    <div class="p-3 bg-red-900/40 border border-red-500/50 rounded-lg text-base text-red-200">
+                        <strong>⚠️ 倫理提醒：</strong> 生成的圖片可能帶有「刻板印象」（如：搜尋「醫生」預設出現男性），需引導學員批判性地觀察生成結果。
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: Action Plan & Ethics -->
+            <section id="section-action" class="fade-in hidden">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold text-slate-800 mb-4">AI 倫理與社會責任守則</h2>
+                    <p class="text-lg text-slate-600 leading-relaxed">在社福與教育領域，倫理不只是理論，更是保護服務對象的紅線。建立高效且安全的 GenAI 協作流程。</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <!-- Workflow -->
+                    <div class="bg-white p-6 rounded-xl border border-stone-200 border-t-4 border-t-teal-600 shadow-sm flex flex-col h-full">
+                        <h3 class="text-2xl font-bold text-slate-800 mb-4">🤝 人機協作三段式 (Human-in-the-loop)</h3>
+                        <ul class="space-y-4 text-lg text-slate-700 flex-grow">
+                            <li class="flex items-start"><span class="bg-teal-100 text-teal-800 rounded-full w-8 h-8 flex items-center justify-center mr-3 flex-shrink-0 font-bold text-base">1</span> <div><strong>發想階段：</strong> 利用 GenAI 生成大量創意與主題。</div></li>
+                            <li class="flex items-start"><span class="bg-teal-100 text-teal-800 rounded-full w-8 h-8 flex items-center justify-center mr-3 flex-shrink-0 font-bold text-base">2</span> <div><strong>細化階段：</strong> 針對選定項目要求 GenAI 填充執行細節。</div></li>
+                            <li class="flex items-start"><span class="bg-amber-100 text-amber-800 rounded-full w-8 h-8 flex items-center justify-center mr-3 flex-shrink-0 font-bold text-base">3</span> <div><strong>審核階段：</strong> <span class="text-red-600 font-bold">權利歸屬在人。</span>AI 的建議僅供參考，最終的個案處置計畫、法律與道德責任始終由同工承擔。</div></li>
+                        </ul>
+                    </div>
+
+                    <!-- Privacy & Bias -->
+                    <div class="bg-white p-6 rounded-xl border border-stone-200 border-t-4 border-t-red-500 shadow-sm flex flex-col h-full">
+                        <h3 class="text-2xl font-bold text-slate-800 mb-4">🚨 隱私保護與脫敏處理</h3>
+                        <div class="space-y-4 text-base text-slate-700 flex-grow">
+                            <div class="p-3 bg-red-50 border border-red-200 rounded-lg text-red-800 font-bold text-lg">嚴禁輸入：財務細目、個案真實姓名、身份證號碼、未公開機密。</div>
+                            
                             <div>
-                                <h4 class="font-bold text-slate-700 flex items-center mb-1"><span class="mr-2">🔍</span> 保持批判性思考</h4>
-                                <p class="text-slate-600">對於 AI 提供的法規解讀或數據分析，<strong>務必進行二次查證</strong>。善用 Perplexity 檢查來源，或對照政府官方網頁。</p>
+                                <strong>實作規程 (De-identification)：</strong><br>
+                                「屏蔽法」：利用 <strong class="text-teal-700">Word 的「尋找及取代」功能</strong>，將個案姓名批量替換為「XXX」或「某學員」。<br>
+                                「泛化法」：將具體年齡 72 歲改為「70 歲以上長者」。
+                            </div>
+                            <div class="text-sm text-slate-500 mt-2 border-t pt-2">
+                                註：個人帳戶與機構 Workspace 帳戶在數據處理政策上是有差異的。
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <!-- Hallucination & Bias -->
+                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm">
+                        <h3 class="text-2xl font-bold text-slate-800 mb-3 flex items-center"><span class="mr-2">👻</span> 幻覺與算法偏誤</h3>
+                        <div class="space-y-3 text-base text-slate-600">
+                            <p><strong>幻覺 (Hallucination) 本質：</strong><br>AI 追求「機率上的正確」而非「事實上的真理」。當找不到答案時，會傾向創造「聽起來很像真的」的內容。<br>
+                            <em class="text-amber-700">案例：「根據香港勞工處 2025 年最新報告，AI 對就業市場的影響是什麼？請提供報告名稱和關鍵數據。」，請進行二次查證。</em></p>
+                            
+                            <hr class="border-stone-100">
+                            
+                            <p><strong>算法偏誤 (Algorithmic Bias)：</strong><br>
+                            如果我們依賴 AI 篩選失業學員簡歷，AI 會否因為訓練數據偏好「穩定就業歷史」，而<strong>系統性歧視</strong>有多年空白期或頻繁轉職的弱勢學員？這值得我們深思修正。</p>
+                        </div>
+                    </div>
 
-                <div class="mt-8 bg-stone-800 text-stone-100 p-6 rounded-xl text-center">
-                    <h3 class="text-xl font-bold mb-2">💡 建立機構數位資產</h3>
-                    <p class="text-sm text-stone-300 max-w-2xl mx-auto">
-                        強烈建議同工建立一個內部共用文件，蒐集並優化那些「最好用」的 CARE 指令與 Context 範本（Prompt 共享庫）。這將使行政效率的提升成為整個團隊的共同資產。
+                    <!-- Empathy & Digital Divide -->
+                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm">
+                        <h3 class="text-2xl font-bold text-slate-800 mb-3 flex items-center"><span class="mr-2">❤️</span> 同理心與應用邊界</h3>
+                        <div class="space-y-3 text-base text-slate-600">
+                            <p><strong>同理心的不可替代性：</strong><br>當失業學員面臨重大面試失敗處於低潮時，使用 AI 快速產出標準化安慰信，是否能傳遞真實的同理心？這對建立師生信任有何影響？有些溫度，AI 無法代勞。</p>
+                            
+                            <hr class="border-stone-100">
+                            
+                            <p><strong>數位鴻溝 (Digital Divide)：</strong><br>
+                            作為教育者與社福同工，我們在掌握 AI 的同時，也要思考如何幫助那些無法接觸 AI 的基層人士，避免技術進步造成更大的社會不公。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-stone-800 text-stone-100 p-6 rounded-xl text-center shadow-lg">
+                    <h3 class="text-3xl font-bold mb-3 text-amber-400">💡 說在最後</h3>
+                    <p class="text-lg text-stone-200 max-w-3xl mx-auto leading-relaxed">
+                        AI 的發展不是要取代我們，而是將我們從繁瑣的文書行政工作中解放出來。<br><br>
+                        <strong class="text-2xl">工具在手，更要心中有「人」</strong>
                     </p>
                 </div>
             </section>
@@ -345,11 +552,11 @@
         let chartInstance = null;
 
         const toolsData = [
-            { name: "Google Gemini", icon: "🌐", scores: [10, 8, 6, 7, 9], desc: "生態系整合之冠。直接讀取 Drive 與 Email。", scenario: "分析問卷結果或修改舊計畫書。" },
-            { name: "Perplexity", icon: "🔍", scores: [7, 10, 6, 6, 6], desc: "搜尋大師。精確標註引用來源。", scenario: "計畫背景調查，查證數據真實性。" },
-            { name: "港話通", icon: "🇭🇰", scores: [3, 5, 10, 5, 3], desc: "粵語與香港語境優化。", scenario: "撰寫學員 WhatsApp 通知，查找本地資訊。" },
-            { name: "KIMI AI", icon: "📄", scores: [5, 6, 5, 10, 7], desc: "長文本與 Agent 生成專家。", scenario: "處理厚重報告摘要，生成溫習題網頁。" },
-            { name: "豆包 AI", icon: "🎨", scores: [6, 5, 6, 5, 10], desc: "多媒體創意。繪圖能力佳。", scenario: "製作活動宣傳插畫，自動生成短片。" }
+            { name: "Google Gemini", icon: "🌐", scores: [8, 9, 7, 9, 9], desc: "生態系整合之冠。直接讀取 Drive 與 Email。", scenario: "分析問卷結果或修改舊計畫書。", url: "https://gemini.google.com/" },
+            { name: "Perplexity", icon: "🔍", scores: [9, 10, 6, 6, 6], desc: "搜尋大師。精確標註引用來源。", scenario: "計畫背景調查，查證數據真實性。", url: "https://www.perplexity.ai/" },
+            { name: "港話通", icon: "🇭🇰", scores: [3, 5, 10, 5, 3], desc: "粵語與香港語境優化。", scenario: "撰寫學員 WhatsApp 通知，查找本地資訊。", url: "https://chat.hkchat.app/" },
+            { name: "KIMI AI", icon: "📄", scores: [5, 6, 5, 10, 7], desc: "長文本與 Agent 生成專家。", scenario: "處理厚重報告摘要，生成溫習題網頁。", url: "https://kimi.moonshot.cn/" },
+            { name: "豆包 AI", icon: "🎨", scores: [6, 5, 6, 5, 10], desc: "多媒體創意。繪圖能力佳。", scenario: "製作活動宣傳插畫，自動生成短片。", url: "https://www.doubao.com/" }
         ];
 
         const contextDialogue = [
@@ -362,6 +569,12 @@
             "對話 8：為最後一天的專案展示提供一個簡單模板。"
         ];
 
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        }
+
         function navigate(sectionId) {
             document.querySelectorAll('nav button').forEach(btn => {
                 btn.classList.remove('nav-active');
@@ -369,6 +582,24 @@
             const activeBtn = document.getElementById(`nav-${sectionId}`);
             if (activeBtn) activeBtn.classList.add('nav-active');
             
+            if (sectionId.startsWith('gemini-')) {
+                const menu = document.getElementById('gemini-sub-menu');
+                const icon = document.getElementById('gemini-menu-icon');
+                if (menu && menu.classList.contains('hidden')) {
+                    menu.classList.remove('hidden');
+                    if(icon) icon.style.transform = 'rotate(0deg)';
+                }
+            }
+
+            // 在手機版時，點擊選單後自動關閉選單
+            if (window.innerWidth < 768) {
+                const menu = document.getElementById('mobile-menu');
+                if (!menu.classList.contains('hidden')) {
+                    menu.classList.add('hidden');
+                    menu.classList.remove('flex');
+                }
+            }
+
             document.querySelectorAll('main section').forEach(sec => sec.classList.add('hidden'));
             const targetSec = document.getElementById(`section-${sectionId}`);
             if (targetSec) {
@@ -386,7 +617,7 @@
             const container = document.getElementById('whiteboard-items');
             const newMsg = document.createElement('div');
             msgCount++;
-            newMsg.className = 'whiteboard-item text-sm';
+            newMsg.className = 'whiteboard-item text-base';
             
             // Get content from predefined array or generic if exceeded
             const content = contextDialogue[msgCount - 2] || `對話 ${msgCount}：追加更多課程細節與需求...`;
@@ -409,9 +640,9 @@
             const container = document.getElementById('whiteboard-items');
             container.style.transform = `translateY(0)`;
             container.innerHTML = `
-                <div class="whiteboard-item text-sm">初始設定：我是具備 10 年經驗的導師。</div>
-                <div class="whiteboard-item text-sm">任務：為暑期編程班設計三天的課程大綱。</div>
-                <div class="whiteboard-item text-sm">對話 1：第一天請加入互動破冰遊戲。</div>
+                <div class="whiteboard-item text-base">初始設定：我是具備 10 年經驗的導師。</div>
+                <div class="whiteboard-item text-base">任務：為暑期編程班設計三天的課程大綱。</div>
+                <div class="whiteboard-item text-base">對話 1：第一天請加入互動破冰遊戲。</div>
             `;
         }
 
@@ -456,8 +687,8 @@
                 data: data,
                 options: { 
                     maintainAspectRatio: false, 
-                    scales: { r: { ticks: { display: false }, min: 0, max: 10, pointLabels: { font: { size: 12 } } } },
-                    plugins: { legend: { labels: { font: { size: 12 } } } }
+                    scales: { r: { ticks: { display: false }, min: 0, max: 10, pointLabels: { font: { size: 14 } } } },
+                    plugins: { legend: { labels: { font: { size: 14 } } } }
                 }
             });
         }
@@ -469,11 +700,14 @@
                 item.className = 'border-l-8 border-l-stone-400 bg-stone-50 border rounded-xl overflow-hidden';
                 item.innerHTML = `
                     <div class="p-4 cursor-pointer hover:bg-stone-100" onclick="toggleAccordion(${index})">
-                        <div class="flex justify-between items-center"><h4 class="font-bold text-lg">${tool.icon} ${tool.name}</h4><span id="acc-icon-${index}">▼</span></div>
+                        <div class="flex justify-between items-center"><h4 class="font-bold text-xl">${tool.icon} ${tool.name}</h4><span id="acc-icon-${index}">▼</span></div>
                     </div>
-                    <div class="hidden p-4 pt-0 text-base border-t" id="acc-content-${index}">
+                    <div class="hidden p-4 pt-0 text-lg border-t" id="acc-content-${index}">
                         <p class="mb-2"><strong>優勢：</strong> ${tool.desc}</p>
-                        <p class="bg-white p-3 rounded-xl border"><strong>🎯 情境：</strong> ${tool.scenario}</p>
+                        <p class="bg-white p-3 rounded-xl border mb-3"><strong>🎯 情境：</strong> ${tool.scenario}</p>
+                        <a href="${tool.url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-base font-semibold text-teal-600 hover:text-teal-800 transition-colors">
+                            🔗 前往官方網站
+                        </a>
                     </div>
                 `;
                 container.appendChild(item);
@@ -483,6 +717,19 @@
         function toggleAccordion(index) {
             const content = document.getElementById(`acc-content-${index}`);
             content.classList.toggle('hidden');
+        }
+
+        function toggleGeminiMenu() {
+            const menu = document.getElementById('gemini-sub-menu');
+            const icon = document.getElementById('gemini-menu-icon');
+            
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                menu.classList.add('hidden');
+                icon.style.transform = 'rotate(-90deg)';
+            }
         }
     </script>
 </body>
