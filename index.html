@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenAI 核心概念與工具全景：教育工作者實戰手冊</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #fcfbf9; 
+            color: #334155;
+            font-size: 1.0625rem; /* Font size reduced by 1 level from previous version */
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 450px;
+        }
+
+        .whiteboard-container {
+            overflow: hidden;
+            position: relative;
+            height: 230px;
+            background: #ffffff;
+            border: 4px solid #cbd5e1;
+            border-radius: 8px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .whiteboard-items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 14px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .whiteboard-item {
+            background: #f1f5f9;
+            padding: 10px 14px;
+            border-radius: 6px;
+            border-left: 6px solid #0f766e;
+            opacity: 1;
+            transition: opacity 0.3s, background-color 0.3s;
+        }
+
+        .whiteboard-item.forgotten {
+            opacity: 0.2;
+            background: #fee2e2;
+            border-left-color: #ef4444;
+        }
+
+        .nav-active {
+            background-color: #0f766e;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="antialiased h-screen flex flex-col md:flex-row overflow-hidden">
+
+    <!-- Chosen Palette: Warm Neutrals with Teal and Amber Accents -->
+    <!-- Application Structure Plan: Dashboard layout optimized for information consumption. 
+         - Concepts: Visual breakdown of LLM, Memory, Tokens, and Context Engineering.
+         - CARE Lab: Practical prompt building.
+         - Tools: Data-driven comparison. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <!-- Sidebar Navigation -->
+    <nav class="w-full md:w-72 bg-stone-100 border-r border-stone-200 flex-shrink-0 flex flex-col md:h-full z-10 shadow-sm">
+        <div class="p-6 pb-4">
+            <h1 class="text-2xl font-bold text-teal-800 leading-tight">GenAI 實戰筆記<br><span class="text-sm font-normal text-slate-500"> &copy; 林 SIR , 2026</span></h1>
+        </div>
+        <div class="flex-grow overflow-y-auto px-4 pb-6 flex md:flex-col gap-2 overflow-x-auto md:overflow-x-hidden">
+            <button onclick="navigate('intro')" id="nav-intro" class="nav-active text-left px-4 py-3 rounded-xl transition-colors flex-shrink-0 text-base">
+                <span class="mr-2">🏠</span> 課程導覽
+            </button>
+            <button onclick="navigate('concepts')" id="nav-concepts" class="text-left px-4 py-3 rounded-xl hover:bg-stone-200 text-slate-700 transition-colors flex-shrink-0 text-base">
+                <span class="mr-2">🧠</span> GenAI 核心概念
+            </button>
+            <button onclick="navigate('care-lab')" id="nav-care-lab" class="text-left px-4 py-3 rounded-xl hover:bg-stone-200 text-slate-700 transition-colors flex-shrink-0 text-base">
+                <span class="mr-2">🧪</span> CARE 提示實驗室
+            </button>
+            <button onclick="navigate('tools')" id="nav-tools" class="text-left px-4 py-3 rounded-xl hover:bg-stone-200 text-slate-700 transition-colors flex-shrink-0 text-base">
+                <span class="mr-2">🧭</span> 工具全景指南
+            </button>
+            <button onclick="navigate('action')" id="nav-action" class="text-left px-4 py-3 rounded-xl hover:bg-stone-200 text-slate-700 transition-colors flex-shrink-0 text-base">
+                <span class="mr-2">🛡️</span> 行動與安全守則
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow overflow-y-auto bg-[#fcfbf9] relative">
+        <div class="max-w-4xl mx-auto p-6 md:p-10 pb-20">
+
+            <!-- Section 1: Intro -->
+            <section id="section-intro" class="fade-in block">
+                <p class="text-base font-semibold text-teal-600 uppercase tracking-wide mb-2">Google Gemini 專修班</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-800 mb-6 leading-tight">優化行政流程<br>自動化教材研發</h2>
+                
+                <p class="text-xl text-slate-600 mb-8 leading-relaxed">
+                    歡迎來到 GenAI 核心概念與工具全景 的互動體驗網頁。在數位轉型的浪潮下，AI 不再僅是技術名詞，而是能切實減輕工作負荷的助手。
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                    <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md transition-all cursor-pointer" onclick="navigate('concepts')">
+                        <div class="text-4xl mb-4">🧩</div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-2">拆解底層邏輯</h3>
+                        <p class="text-slate-600 text-base">從文字接龍到記憶窗口，掌握 GenAI 的思考邊界。</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md transition-all cursor-pointer" onclick="navigate('care-lab')">
+                        <div class="text-4xl mb-4">⌨️</div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-2">精通提示工程</h3>
+                        <p class="text-slate-600 text-base">透過 C-A-R-E 框架，讓對話輸出更精確、更符合實務。</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md transition-all cursor-pointer" onclick="navigate('tools')">
+                        <div class="text-4xl mb-4">🧰</div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-2">選擇最適工具</h3>
+                        <p class="text-slate-600 text-base">橫向對比 5 大主流工具，挑選您的數位隊友。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Concepts -->
+            <section id="section-concepts" class="fade-in hidden">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold text-slate-800 mb-4">GenAI 核心概念解密</h2>
+                    <p class="text-lg text-slate-600 leading-relaxed">深入理解大語言模型 (LLM) 的運作機制、記憶限制與優化技巧。</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Text Completion -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                        <h3 class="text-xl font-bold text-teal-700 mb-4 flex items-center"><span class="text-2xl mr-2">🎲</span> 機率性的「文字接龍」</h3>
+                        <p class="text-slate-600 mb-4 text-sm leading-relaxed">
+                            大語言模型並非真的「讀懂」知識。它是一個巨大的<b>統計預測引擎</b>。當您輸入一段文字時，它會計算下一個詞彙出現的機率。
+                        </p>
+                        <div class="bg-stone-50 p-4 rounded-lg border border-stone-200">
+                            <p class="text-base font-semibold text-slate-700 mb-2">輸入提示：<span class="font-normal text-amber-600">「今天天氣很...」</span></p>
+                            <ul class="space-y-3 text-base">
+                                <li class="flex justify-between items-center"><span class="text-slate-700">好</span> <div class="w-2/3 bg-stone-200 rounded-full h-2.5 ml-2"><div class="bg-teal-500 h-2.5 rounded-full" style="width: 70%"></div></div> <span class="text-xs text-slate-500 ml-2">70%</span></li>
+                                <li class="flex justify-between items-center"><span class="text-slate-700">悶熱</span> <div class="w-2/3 bg-stone-200 rounded-full h-2.5 ml-2"><div class="bg-amber-500 h-2.5 rounded-full" style="width: 15%"></div></div> <span class="text-xs text-slate-500 ml-2">15%</span></li>
+                                <li class="flex justify-between items-center"><span class="text-slate-700">詭異</span> <div class="w-2/3 bg-stone-200 rounded-full h-2.5 ml-2"><div class="bg-slate-400 h-2.5 rounded-full" style="width: 5%"></div></div> <span class="text-xs text-slate-500 ml-2">5%</span></li>
+                            </ul>
+                        </div>
+                        <div class="mt-4 p-3 bg-teal-50 text-teal-800 rounded-lg text-sm">
+                            <strong>💡 深度啟示：</strong> 這種機率機制導致了 AI 的「幻覺現象」，但也同時賦予了它發散性的「創造力」。
+                        </div>
+                    </div>
+
+                    <!-- Token Explanation -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                        <h3 class="text-xl font-bold text-teal-700 mb-4 flex items-center"><span class="text-2xl mr-2">🪙</span> Token (詞元)：處理單位</h3>
+                        <p class="text-slate-600 mb-4 text-sm leading-relaxed">
+                            AI 不直接讀取單字，而是將文字拆解為 <b>Token</b>。這是 AI 處理資訊的最小單位。
+                        </p>
+                        <div class="space-y-4">
+                            <div class="p-3 bg-stone-50 rounded-lg border border-stone-200 text-sm">
+                                <div class="flex justify-between mb-1"><span>"Apple"</span> <span class="text-teal-600">≈ 1 Token</span></div>
+                                <div class="flex justify-between mb-1"><span>"繁體中文"</span> <span class="text-teal-600">≈ 4-8 Tokens</span></div>
+                            </div>
+                            <p class="text-sm text-slate-600">
+                                <b>為什麼要關心 Token？</b><br>
+                                1. 它決定了 AI 的運算成本。<br>
+                                2. 它影響了 AI 回答的速度。<br>
+                                3. 它與「上下文窗口」的極限息息相關。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Context Window Simulator -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                        <h3 class="text-xl font-bold text-amber-600 mb-4 flex items-center"><span class="text-2xl mr-2">🪧</span> 上下文窗口 (Context Window)：記憶限制</h3>
+                        <p class="text-slate-600 mb-4 text-sm leading-relaxed">
+                            AI 的記憶是有限的。想像一塊空間有限的「滾動白板」，當新對話不斷寫入底部，頂端的舊資訊就會被推出去並擦除。
+                        </p>
+                        <div class="whiteboard-container mb-4" id="whiteboard">
+                            <div class="whiteboard-items" id="whiteboard-items">
+                                <div class="whiteboard-item text-sm">初始設定：我是具備 10 年經驗的導師。</div>
+                                <div class="whiteboard-item text-sm">任務：為暑期編程班設計三天的課程大綱。</div>
+                                <div class="whiteboard-item text-sm">對話 1：第一天請加入互動破冰遊戲。</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="addWhiteboardItem()" class="flex-1 bg-amber-500 hover:bg-amber-600 text-white py-2 px-4 rounded-xl transition-all text-base font-bold">➕ 模擬連續對話</button>
+                            <button onclick="resetWhiteboard()" class="bg-stone-200 hover:bg-stone-300 text-slate-700 py-2 px-4 rounded-xl transition-all text-base">重設</button>
+                        </div>
+                    </div>
+
+                    <!-- Context Engineering -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                        <h3 class="text-xl font-bold text-amber-600 mb-4 flex items-center"><span class="text-2xl mr-2">🏗️</span> 上下文工程：精準度優化</h3>
+                        <p class="text-slate-600 mb-4 text-sm leading-relaxed">
+                            除了提問，提供「參考樣本」及「規格書」能顯著提升 AI 表現。這被稱為 <b>Few-shot Prompting</b>。
+                        </p>
+                        <div class="bg-amber-50 p-4 rounded-lg border border-amber-100 text-sm italic text-amber-900 mb-4">
+                            「與其只說：『幫我寫活動文案』，不如提供 2 個去年的成功範本讓 AI 模仿風格。」
+                        </div>
+                        <p class="text-sm text-slate-600">
+                            <b>核心價值：</b><br>
+                            1. **提昇精確度 200%**：減少 AI 亂猜的機率。<br>
+                            2. **風格一致性**：確保產出符合機構的語氣。<br>
+                            3. **結構標準化**：讓 AI 學習複雜的表格或格式。<br>
+                            4. **約束AI行為**：讓 AI 根據規格書續步執行。
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: CARE Prompt Lab -->
+            <section id="section-care-lab" class="fade-in hidden">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold text-slate-800 mb-4">CARE 提示實驗室</h2>
+                    <p class="text-lg text-slate-600 leading-relaxed">透過 C-A-R-E 組合出符合 GenAI 實務的專業指令。</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-base font-bold text-teal-700 mb-1">C (Context 背景)</label>
+                                <select id="care-c" class="w-full p-2 border border-stone-300 rounded-lg bg-stone-50 text-sm">
+                                   <option value="我是一位 erb 培訓機構的課程主任，正籌備針對在職人士的人工智能素養課程。">ERB 培訓機構 AI 課程 (在職人士)</option>
+                                    <option value="我是一位青少年中心的程序幹事，正籌備針對基層小學生的暑期編程班。學員多為零基礎，且預算有限。">青少年中心編程班 (預算有限, 零基礎)</option>
+                                    <option value="我是一位長者服務中心的社交幹事，正籌備『數碼代溝』工作坊。學員多為 65 歲以上長者。">長者數碼工作坊 (高齡學員)</option>
+                                    <option value="我是一位行政助理，負責處理活動報名數據整合，目前面臨大量分類的繁瑣工作。">行政自動化 (數據處理提效)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-base font-bold text-teal-700 mb-1">A (Action 任務)</label>
+                                <select id="care-a" class="w-full p-2 border border-stone-300 rounded-lg bg-stone-50 text-sm">
+                                    <option value="請根據上述背景，設計一份為期 12 小時的課程大綱，重點在於利用免費資源達成寓教於樂。">設計課程大綱 (免費資源)</option>
+                                    <option value="請根據上述背景，撰寫一篇用於 Facebook 的宣傳文案，重點在於吸引報名。">撰寫 FB 宣傳文案</option>
+                                    <option value="請根據上述背景，撰寫一份活動成效評估報告摘要，包含數據與感言分析。">撰寫成效評估報告</option>
+                                    <option value="請根據上述背景，規劃一套『課程報名流程操作手冊』，提供標準回覆。">規劃溝通手冊 (Q&A)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-base font-bold text-teal-700 mb-1">R (Result 格式)</label>
+                                <select id="care-r" class="w-full p-2 border border-stone-300 rounded-lg bg-stone-50 text-sm">
+                                    <option value="請以『具備 10 年經驗的 STEAM 導師』身份。輸出需包含表格（時間、目標）。">STEAM 導師 + 表格輸出</option>
+                                    <option value="請以『專業的課程主任』身份。使用列點清晰呈現課程亮點。">專業主任 + 列點輸出</option>
+                                    <option value="請以『具備豐富同理心的資深社工』身份。輸出需為溫暖的長段落。">資深社工 + 同理心長文</option>
+                                    <option value="請以『精明的物資行政助理』身份。輸出需包含物資與預算清單。">行政助理 + 物資預算清單</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-base font-bold text-teal-700 mb-1">E (Example 例子)</label>
+                                <select id="care-e" class="w-full p-2 border border-stone-300 rounded-lg bg-stone-50 text-sm">
+                                    <option value="書寫風格請參考邀請函：『合作伙伴邀請函』。">參考附件</option>
+                                    <option value="風格請參考附件，並加入 Emoji。">附件 + Emoji</option>
+                                    <option value="行文可參考金庸武俠小說的風格。">金庸武俠小說</option>
+                                    <option value="參考以下兩個FB Post的寫法，加入合適的 Hash Tags">參考 FB Post</option>
+                                </select>
+                            </div>
+                            <button onclick="generatePrompt()" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-4 rounded-xl transition-all text-lg mt-2">✨ 組合提示詞 (Generate)</button>
+                        </div>
+
+                        <div class="bg-stone-800 rounded-xl p-5 relative text-stone-100 flex flex-col h-full min-h-[350px]">
+                            <h3 class="text-xs font-bold text-stone-400 uppercase tracking-wider mb-4">最終輸出 (Final Prompt)</h3>
+                            <div class="flex-grow font-mono text-base leading-relaxed whitespace-pre-wrap overflow-y-auto" id="prompt-output">請選擇條件後點擊組合提示詞。</div>
+                            <div class="mt-4 pt-3 border-t border-stone-600 flex justify-between items-center text-xs">
+                                <span class="text-amber-400 font-bold" id="accuracy-indicator">精確度預估：待計算</span>
+                                <button onclick="copyPrompt()" class="bg-stone-700 hover:bg-stone-600 px-4 py-1.5 rounded-lg transition-all text-sm">📋 複製</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Tools Compass -->
+            <section id="section-tools" class="fade-in hidden">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold text-slate-800 mb-4">香港流行 GenAI 工具大比併</h2>
+                    <p class="text-lg text-slate-600 leading-relaxed">量化比較 5 大主流 GenAI 工具在不同維度的表現。</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-stone-200">
+                        <div class="chart-container"><canvas id="toolsRadarChart"></canvas></div>
+                    </div>
+                    <div class="space-y-3" id="tools-accordion"></div>
+                </div>
+            </section>
+
+            <!-- Section 5: Action Plan -->
+            <section id="section-action" class="fade-in hidden">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold text-slate-800 mb-4">行動與安全守則</h2>
+                    <p class="text-lg text-slate-600 leading-relaxed">建立高效且安全的 GenAI 協作流程。</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-xl border border-stone-200 border-l-8 border-l-teal-600 shadow-sm">
+                        <h3 class="text-xl font-bold text-slate-800 mb-4">🤝 人機協作三段式</h3>
+                        <ul class="space-y-3 text-base text-slate-700">
+                            <li class="flex items-start"><span class="bg-teal-100 text-teal-800 rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 font-bold">1</span> <div><strong>發想階段：</strong> 利用 GenAI 生成大量創意與主題。</div></li>
+                            <li class="flex items-start"><span class="bg-teal-100 text-teal-800 rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 font-bold">2</span> <div><strong>細化階段：</strong> 針對選定項目要求 GenAI 填充執行細節。</div></li>
+                            <li class="flex items-start"><span class="bg-amber-100 text-amber-800 rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 font-bold">3</span> <div><strong>審核階段：</strong> 同工親自把關事實準確性與情感聯繫。</div></li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-stone-200 border-l-8 border-l-red-500 shadow-sm">
+                        <h3 class="text-xl font-bold text-slate-800 mb-4">🚨 隱私安全與紅線</h3>
+                        <div class="space-y-4 text-base">
+                            <div class="p-3 bg-red-50 rounded-lg text-red-800 font-bold">嚴禁輸入：財務細目、個案敏感個資、未公開機密。</div>
+                            <p class="text-slate-600 leading-relaxed"><strong>去識別化：</strong> 始終使用代號代替真實姓名，保護學員隱私。</p>
+
+                            <div>
+                                <h4 class="font-bold text-slate-700 flex items-center mb-1"><span class="mr-2">🔍</span> 保持批判性思考</h4>
+                                <p class="text-slate-600">對於 AI 提供的法規解讀或數據分析，<strong>務必進行二次查證</strong>。善用 Perplexity 檢查來源，或對照政府官方網頁。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="mt-8 bg-stone-800 text-stone-100 p-6 rounded-xl text-center">
+                    <h3 class="text-xl font-bold mb-2">💡 建立機構數位資產</h3>
+                    <p class="text-sm text-stone-300 max-w-2xl mx-auto">
+                        強烈建議同工建立一個內部共用文件，蒐集並優化那些「最好用」的 CARE 指令與 Context 範本（Prompt 共享庫）。這將使行政效率的提升成為整個團隊的共同資產。
+                    </p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        let currentSection = 'intro';
+        let chartInstance = null;
+
+        const toolsData = [
+            { name: "Google Gemini", icon: "🌐", scores: [10, 8, 6, 7, 9], desc: "生態系整合之冠。直接讀取 Drive 與 Email。", scenario: "分析問卷結果或修改舊計畫書。" },
+            { name: "Perplexity", icon: "🔍", scores: [7, 10, 6, 6, 6], desc: "搜尋大師。精確標註引用來源。", scenario: "計畫背景調查，查證數據真實性。" },
+            { name: "港話通", icon: "🇭🇰", scores: [3, 5, 10, 5, 3], desc: "粵語與香港語境優化。", scenario: "撰寫學員 WhatsApp 通知，查找本地資訊。" },
+            { name: "KIMI AI", icon: "📄", scores: [5, 6, 5, 10, 7], desc: "長文本與 Agent 生成專家。", scenario: "處理厚重報告摘要，生成溫習題網頁。" },
+            { name: "豆包 AI", icon: "🎨", scores: [6, 5, 6, 5, 10], desc: "多媒體創意。繪圖能力佳。", scenario: "製作活動宣傳插畫，自動生成短片。" }
+        ];
+
+        const contextDialogue = [
+            "對話 2：第二天請專注於使用 Scratch 製作小遊戲。",
+            "對話 3：加入一個關於 GenAI 安全使用的小節。",
+            "對話 4：能否在第三天加入簡單的硬體展示環節？",
+            "對話 5：請列出所有課程中會用到的免費工具網址。",
+            "對話 6：每小時請安排 10 分鐘的休息與茶點時間。",
+            "對話 7：重點放在邏輯思考，而非單純程式碼拼寫。",
+            "對話 8：為最後一天的專案展示提供一個簡單模板。"
+        ];
+
+        function navigate(sectionId) {
+            document.querySelectorAll('nav button').forEach(btn => {
+                btn.classList.remove('nav-active');
+            });
+            const activeBtn = document.getElementById(`nav-${sectionId}`);
+            if (activeBtn) activeBtn.classList.add('nav-active');
+            
+            document.querySelectorAll('main section').forEach(sec => sec.classList.add('hidden'));
+            const targetSec = document.getElementById(`section-${sectionId}`);
+            if (targetSec) {
+                targetSec.classList.remove('hidden');
+                targetSec.classList.add('fade-in');
+            }
+            if (sectionId === 'tools' && !chartInstance) {
+                initChart();
+                renderToolsAccordion();
+            }
+        }
+
+        let msgCount = 1;
+        function addWhiteboardItem() {
+            const container = document.getElementById('whiteboard-items');
+            const newMsg = document.createElement('div');
+            msgCount++;
+            newMsg.className = 'whiteboard-item text-sm';
+            
+            // Get content from predefined array or generic if exceeded
+            const content = contextDialogue[msgCount - 2] || `對話 ${msgCount}：追加更多課程細節與需求...`;
+            newMsg.innerText = content;
+            
+            container.appendChild(newMsg);
+            const items = container.querySelectorAll('.whiteboard-item');
+            if (items.length > 4) {
+                const diff = items.length - 4;
+                for (let i = 0; i < diff; i++) {
+                    items[i].classList.add('forgotten');
+                    if (i === 0) items[i].innerText = "初始設定 (已移出記憶窗口)";
+                }
+                container.style.transform = `translateY(-${diff * 55}px)`;
+            }
+        }
+
+        function resetWhiteboard() {
+            msgCount = 1;
+            const container = document.getElementById('whiteboard-items');
+            container.style.transform = `translateY(0)`;
+            container.innerHTML = `
+                <div class="whiteboard-item text-sm">初始設定：我是具備 10 年經驗的導師。</div>
+                <div class="whiteboard-item text-sm">任務：為暑期編程班設計三天的課程大綱。</div>
+                <div class="whiteboard-item text-sm">對話 1：第一天請加入互動破冰遊戲。</div>
+            `;
+        }
+
+        function generatePrompt() {
+            const c = document.getElementById('care-c').value;
+            const a = document.getElementById('care-a').value;
+            const r = document.getElementById('care-r').value;
+            const e = document.getElementById('care-e').value;
+            const finalPrompt = `【背景 Context】\n${c}\n\n【任務 Action】\n${a}\n\n【格式 Role/Result】\n${r}\n\n【參考 Example】\n${e}`;
+            const outputEl = document.getElementById('prompt-output');
+            outputEl.innerText = finalPrompt;
+            document.getElementById('accuracy-indicator').innerText = "精確度預估：提升 200%";
+        }
+
+        function copyPrompt() {
+            const text = document.getElementById('prompt-output').innerText;
+            if (text.includes("請選擇條件")) return;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.querySelector('button[onclick="copyPrompt()"]');
+                btn.innerText = "✅ 已複製";
+                setTimeout(() => btn.innerText = "📋 複製", 2000);
+            });
+        }
+
+        function initChart() {
+            const ctx = document.getElementById('toolsRadarChart').getContext('2d');
+            const data = {
+                labels: ['生態整合', '搜索查證', '在地語境', '長文處理', '多媒體創意'],
+                datasets: toolsData.map((tool, index) => {
+                    const colors = ['#0f766e', '#f59e0b', '#3b82f6', '#8b5cf6', '#ef4444'];
+                    return {
+                        label: tool.name,
+                        data: tool.scores,
+                        backgroundColor: colors[index] + '33',
+                        borderColor: colors[index],
+                        borderWidth: 2
+                    };
+                })
+            };
+            chartInstance = new Chart(ctx, {
+                type: 'radar',
+                data: data,
+                options: { 
+                    maintainAspectRatio: false, 
+                    scales: { r: { ticks: { display: false }, min: 0, max: 10, pointLabels: { font: { size: 12 } } } },
+                    plugins: { legend: { labels: { font: { size: 12 } } } }
+                }
+            });
+        }
+
+        function renderToolsAccordion() {
+            const container = document.getElementById('tools-accordion');
+            toolsData.forEach((tool, index) => {
+                const item = document.createElement('div');
+                item.className = 'border-l-8 border-l-stone-400 bg-stone-50 border rounded-xl overflow-hidden';
+                item.innerHTML = `
+                    <div class="p-4 cursor-pointer hover:bg-stone-100" onclick="toggleAccordion(${index})">
+                        <div class="flex justify-between items-center"><h4 class="font-bold text-lg">${tool.icon} ${tool.name}</h4><span id="acc-icon-${index}">▼</span></div>
+                    </div>
+                    <div class="hidden p-4 pt-0 text-base border-t" id="acc-content-${index}">
+                        <p class="mb-2"><strong>優勢：</strong> ${tool.desc}</p>
+                        <p class="bg-white p-3 rounded-xl border"><strong>🎯 情境：</strong> ${tool.scenario}</p>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function toggleAccordion(index) {
+            const content = document.getElementById(`acc-content-${index}`);
+            content.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
