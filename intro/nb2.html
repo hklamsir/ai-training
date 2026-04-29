@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nano Banana 2 — 提示詞寫作技巧與實用模板</title>
+<style>
+  /* ─── 全域 ─── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --banana: #FFD600;
+    --banana-dark: #F9A825;
+    --banana-light: #FFF9C4;
+    --green: #2E7D32;
+    --green-light: #E8F5E9;
+    --blue: #1565C0;
+    --blue-light: #E3F2FD;
+    --purple: #6A1B9A;
+    --purple-light: #F3E5F5;
+    --orange: #E65100;
+    --orange-light: #FFF3E0;
+    --teal: #00695C;
+    --teal-light: #E0F2F1;
+    --red: #C62828;
+    --red-light: #FFEBEE;
+    --dark: #1A1A2E;
+    --mid: #374151;
+    --light: #6B7280;
+    --bg: #FAFAFA;
+    --card: #FFFFFF;
+    --border: #E5E7EB;
+    --radius: 12px;
+    --shadow: 0 2px 12px rgba(0,0,0,.08);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,.12);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Helvetica Neue', Arial, 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+    background: var(--bg);
+    color: var(--mid);
+    line-height: 1.7;
+    font-size: 19px;
+  }
+
+  /* ─── 頂部導覽 ─── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(26,26,46,.95);
+    backdrop-filter: blur(12px);
+    padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 58px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.3);
+  }
+  .nav-brand {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 800; font-size: 18px; color: var(--banana);
+    text-decoration: none;
+  }
+  .nav-brand span { font-size: 24px; }
+  .nav-links {
+    display: flex; gap: 6px; list-style: none;
+    overflow-x: auto; white-space: nowrap; padding: 4px 0;
+  }
+  .nav-links a {
+    color: #CBD5E0; font-size: 16px; font-weight: 500;
+    text-decoration: none; padding: 6px 12px;
+    border-radius: 20px; transition: all .2s;
+  }
+  .nav-links a:hover { background: rgba(255,214,0,.15); color: var(--banana); }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: linear-gradient(135deg, #1A1A2E 0%, #16213E 50%, #0F3460 100%);
+    padding: 72px 24px 60px;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 70% 30%, rgba(255,214,0,.15) 0%, transparent 60%),
+                radial-gradient(circle at 20% 80%, rgba(21,101,192,.2) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,214,0,.15); border: 1px solid rgba(255,214,0,.4);
+    color: var(--banana); border-radius: 20px;
+    padding: 4px 16px; font-size: 14px; font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900; color: #FFFFFF;
+    line-height: 1.15; margin-bottom: 16px;
+    letter-spacing: -.5px;
+  }
+  .hero h1 em { color: var(--banana); font-style: normal; }
+  .hero p {
+    font-size: clamp(18px, 2.5vw, 21px);
+    color: #94A3B8; max-width: 620px; margin: 0 auto 28px;
+  }
+  .hero-meta {
+    display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;
+  }
+  .hero-meta span {
+    color: #64748B; font-size: 14px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .hero-meta span b { color: #94A3B8; }
+
+  /* ─── 版面容器 ─── */
+  .container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+  section { padding: 56px 0; }
+  section:nth-child(even) { background: #F1F5F9; }
+
+  /* ─── 區塊標題 ─── */
+  .section-header { text-align: center; margin-bottom: 40px; }
+  .section-label {
+    display: inline-block;
+    background: var(--banana-light); color: #7B6000;
+    font-size: 15px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; padding: 4px 14px;
+    border-radius: 20px; margin-bottom: 10px;
+  }
+  .section-header h2 {
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 800; color: var(--dark);
+  }
+  .section-header p { color: var(--light); margin-top: 8px; font-size: 18px; }
+
+  /* ─── FACT CHECK 警示橫幅 ─── */
+  .fact-banner {
+    background: linear-gradient(135deg, #fff3cd, #fff8e1);
+    border-left: 4px solid #F59E0B;
+    border-radius: var(--radius);
+    padding: 18px 20px; margin-bottom: 32px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .fact-banner .icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+  .fact-banner h4 { font-size: 18px; font-weight: 700; color: #92400E; margin-bottom: 6px; }
+  .fact-banner p { font-size: 17px; color: #78350F; line-height: 1.6; }
+  .fact-banner code {
+    background: rgba(0,0,0,.06); padding: 1px 6px;
+    border-radius: 4px; font-family: monospace; font-size: 16px;
+  }
+
+  /* ─── 模型概覽卡片 ─── */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px; margin-top: 32px;
+  }
+  .feature-card {
+    background: var(--card); border-radius: var(--radius);
+    padding: 22px 18px; box-shadow: var(--shadow);
+    border-top: 3px solid var(--banana);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .feature-card .icon { font-size: 28px; margin-bottom: 10px; }
+  .feature-card h4 { font-size: 18px; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
+  .feature-card p { font-size: 16px; color: var(--light); }
+
+  /* ─── 比較表格 ─── */
+  .compare-table-wrap { overflow-x: auto; border-radius: var(--radius); box-shadow: var(--shadow); }
+  table { width: 100%; border-collapse: collapse; background: var(--card); }
+  thead tr { background: var(--dark); }
+  thead th {
+    padding: 14px 16px; text-align: left;
+    color: #E2E8F0; font-size: 16px; font-weight: 700;
+    white-space: nowrap;
+  }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background .15s; }
+  tbody tr:hover { background: var(--banana-light); }
+  tbody td { padding: 12px 16px; font-size: 17px; }
+  tbody td:first-child { font-weight: 600; color: var(--mid); }
+  .badge-nb1 { background: #E0E7FF; color: #3730A3; padding: 2px 10px; border-radius: 20px; font-size: 15px; font-weight: 600; }
+  .badge-nb2 { background: #FEF3C7; color: #92400E; padding: 2px 10px; border-radius: 20px; font-size: 15px; font-weight: 600; }
+  .badge-pro { background: #D1FAE5; color: #065F46; padding: 2px 10px; border-radius: 20px; font-size: 15px; font-weight: 600; }
+
+  /* ─── Prompt 核心結構 ─── */
+  .anatomy-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  .anatomy-item {
+    background: var(--card); border-radius: var(--radius);
+    padding: 18px; box-shadow: var(--shadow);
+    border-left: 4px solid transparent;
+    transition: transform .2s;
+  }
+  .anatomy-item:hover { transform: translateX(4px); }
+  .anatomy-item.c0 { border-color: #EF4444; }
+  .anatomy-item.c1 { border-color: #F97316; }
+  .anatomy-item.c2 { border-color: #EAB308; }
+  .anatomy-item.c3 { border-color: #22C55E; }
+  .anatomy-item.c4 { border-color: #3B82F6; }
+  .anatomy-item.c5 { border-color: #8B5CF6; }
+  .anatomy-item.c6 { border-color: #EC4899; }
+  .anatomy-num { font-size: 14px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+  .anatomy-item.c0 .anatomy-num { color: #EF4444; }
+  .anatomy-item.c1 .anatomy-num { color: #F97316; }
+  .anatomy-item.c2 .anatomy-num { color: #EAB308; }
+  .anatomy-item.c3 .anatomy-num { color: #22C55E; }
+  .anatomy-item.c4 .anatomy-num { color: #3B82F6; }
+  .anatomy-item.c5 .anatomy-num { color: #8B5CF6; }
+  .anatomy-item.c6 .anatomy-num { color: #EC4899; }
+  .anatomy-item h4 { font-size: 18px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+  .anatomy-item p { font-size: 16px; color: var(--light); margin-bottom: 8px; }
+  .anatomy-item .example {
+    background: #F8FAFC; border-radius: 6px;
+    padding: 6px 10px; font-size: 15px; color: var(--mid);
+    font-style: italic;
+  }
+
+  /* ─── 公式條 ─── */
+  .formula-box {
+    background: var(--dark); border-radius: var(--radius);
+    padding: 20px 24px; margin: 24px 0;
+    font-family: monospace; font-size: 17px; color: var(--banana);
+    overflow-x: auto; white-space: pre-wrap; word-break: break-all;
+    line-height: 1.8;
+    box-shadow: var(--shadow-lg);
+  }
+  .formula-box .kw { color: #67E8F9; }
+  .formula-box .op { color: #A3E635; }
+
+  /* ─── 技巧卡片 ─── */
+  .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+  .tip-card {
+    background: var(--card); border-radius: var(--radius);
+    padding: 22px; box-shadow: var(--shadow);
+    position: relative; overflow: hidden;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .tip-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .tip-card .tip-num {
+    position: absolute; right: 16px; top: 12px;
+    font-size: 40px; font-weight: 900; color: rgba(0,0,0,.04);
+    line-height: 1;
+  }
+  .tip-card .tip-icon { font-size: 26px; margin-bottom: 10px; }
+  .tip-card h4 { font-size: 18px; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+  .tip-card p { font-size: 16px; color: var(--light); line-height: 1.6; margin-bottom: 10px; }
+  .tip-bad, .tip-good {
+    border-radius: 6px; padding: 8px 12px;
+    font-size: 15px; line-height: 1.5; margin-bottom: 6px;
+  }
+  .tip-bad { background: var(--red-light); color: var(--red); }
+  .tip-good { background: var(--green-light); color: var(--green); }
+  .tip-bad::before { content: '❌ '; }
+  .tip-good::before { content: '✅ '; }
+
+  /* ─── 模板區 ─── */
+  .template-tabs {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 24px;
+  }
+  .tab-btn {
+    padding: 7px 16px; border-radius: 20px;
+    border: 2px solid var(--border);
+    background: var(--card); color: var(--mid);
+    font-size: 16px; font-weight: 600;
+    cursor: pointer; transition: all .2s;
+  }
+  .tab-btn.active, .tab-btn:hover {
+    background: var(--banana); border-color: var(--banana);
+    color: var(--dark);
+  }
+  .template-panel { display: none; }
+  .template-panel.active { display: block; }
+  .template-card {
+    background: var(--card); border-radius: var(--radius);
+    box-shadow: var(--shadow); overflow: hidden;
+  }
+  .template-header {
+    background: var(--dark); padding: 16px 20px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .template-header h3 { color: var(--banana); font-size: 19px; font-weight: 700; }
+  .template-tag {
+    background: rgba(255,214,0,.2); color: var(--banana);
+    font-size: 14px; font-weight: 600; padding: 3px 10px;
+    border-radius: 12px;
+  }
+  .template-body { padding: 20px; }
+  .template-label { font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--light); margin-bottom: 6px; }
+  .template-struct {
+    background: #F1F5F9; border-radius: 8px;
+    padding: 14px 16px; font-size: 16px; color: var(--mid);
+    margin-bottom: 16px; font-family: monospace; line-height: 1.7;
+    white-space: pre-wrap; word-break: break-all;
+  }
+  .template-example {
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    border-radius: 8px; padding: 16px;
+    margin-bottom: 14px; position: relative;
+  }
+  .template-example p {
+    color: #E2E8F0; font-size: 16.5px; line-height: 1.8;
+    font-family: 'Helvetica Neue', Arial, 'PingFang TC', sans-serif;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .copy-btn {
+    position: absolute; top: 10px; right: 10px;
+    background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+    color: #94A3B8; padding: 4px 12px; border-radius: 6px;
+    font-size: 15px; cursor: pointer; transition: all .2s;
+  }
+  .copy-btn:hover { background: var(--banana); color: var(--dark); border-color: var(--banana); }
+  .copy-btn.copied { background: #22C55E; color: white; border-color: #22C55E; }
+  .use-case {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 16px; color: var(--light);
+  }
+  .use-case span { color: var(--mid); }
+
+  /* ─── 技術規格 ─── */
+  .specs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+  .spec-item {
+    background: var(--card); border-radius: var(--radius);
+    padding: 18px; box-shadow: var(--shadow);
+    text-align: center;
+  }
+  .spec-item .spec-icon { font-size: 34px; margin-bottom: 8px; }
+  .spec-item .spec-label { font-size: 18px; color: var(--light); font-weight: 600; letter-spacing: .5px; margin-bottom: 4px; }
+  .spec-item .spec-val { font-size: 28px; font-weight: 800; color: var(--dark); }
+  .spec-item .spec-sub { font-size: 17px; color: var(--light); margin-top: 2px; }
+
+  /* ─── JSON 技巧 ─── */
+  .json-steps { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+  .json-step {
+    background: var(--card); border-radius: var(--radius);
+    padding: 20px; box-shadow: var(--shadow);
+    position: relative;
+  }
+  .step-arrow {
+    display: none;
+  }
+  @media (min-width: 700px) {
+    .json-steps { grid-template-columns: 1fr 32px 1fr 32px 1fr; align-items: center; }
+    .step-arrow { display: flex; justify-content: center; align-items: center; font-size: 22px; color: var(--banana); }
+  }
+  .json-step .step-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--banana); color: var(--dark);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 800; margin-bottom: 10px;
+  }
+  .json-step h4 { font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
+  .json-step p { font-size: 12px; color: var(--light); }
+  .json-code {
+    background: var(--dark); border-radius: 8px;
+    padding: 14px 16px; font-family: monospace; font-size: 12px;
+    color: #A5F3FC; line-height: 1.6; overflow-x: auto;
+    margin-top: 20px;
+  }
+  .json-code .str { color: #86EFAC; }
+  .json-code .key { color: #FDE68A; }
+  .json-code .num { color: #FDA4AF; }
+
+  /* ─── 底部 ─── */
+  footer {
+    background: var(--dark); padding: 40px 20px;
+    text-align: center;
+  }
+  footer p { color: #64748B; font-size: 16px; margin-bottom: 6px; }
+  footer .footer-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 12px; }
+  footer .footer-links a { color: #94A3B8; font-size: 15px; text-decoration: none; }
+  footer .footer-links a:hover { color: var(--banana); }
+
+  /* ─── 滾動進度條 ─── */
+  #progress-bar {
+    position: fixed; top: 0; left: 0; z-index: 200;
+    height: 3px; background: var(--banana);
+    width: 0%; transition: width .1s linear;
+  }
+
+  /* ─── 返回頂部 ─── */
+  #back-top {
+    position: fixed; bottom: 24px; right: 24px;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--banana); color: var(--dark);
+    border: none; font-size: 23px; cursor: pointer;
+    box-shadow: var(--shadow-lg);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity .3s;
+    z-index: 50;
+  }
+  #back-top.show { opacity: 1; pointer-events: auto; }
+
+  /* ─── 漢堡選單按鈕 ─── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-right: 8px;
+  }
+  .hamburger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--banana);
+    border-radius: 2px;
+    transition: all .3s;
+  }
+  .hamburger.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+  /* ─── 響應式 ─── */
+  @media (max-width: 640px) {
+    .hamburger { display: flex; }
+    .nav-links {
+      display: none;
+      position: fixed;
+      top: 58px;
+      left: 0;
+      right: 0;
+      background: rgba(26,26,46,.98);
+      flex-direction: column;
+      padding: 16px;
+      gap: 4px;
+      box-shadow: 0 4px 12px rgba(0,0,0,.3);
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a {
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    .tips-grid { grid-template-columns: 1fr; }
+    .features-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- 導覽 -->
+<nav>
+  <a href="#" class="nav-brand"><span>🍌</span> Nano Banana 2</a>
+  <button class="hamburger" id="hamburger" aria-label="選單">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#what-is">模型介紹</a></li>
+    <li><a href="#anatomy">提示詞結構</a></li>
+    <li><a href="#tips">關鍵技巧</a></li>
+    <li><a href="#templates">10大模板</a></li>
+    <li><a href="#specs">技術規格</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Nano Banana 2<br><em>提示詞寫作技巧</em>與實用模板</h1>
+  <p>Google 最新 AI 圖像生成模型完整攻略，從提示詞結構到 10 個實用模板，一頁掌握專業級圖像生成技巧。</p>
+</div>
+
+<!-- 一、模型介紹 -->
+<section id="what-is">
+<div class="container">
+  <div class="section-header">
+    <span class="section-label">模型介紹</span>
+    <h2>🍌 Nano Banana 2 是什麼？</h2>
+    <p>Google DeepMind 於 2026年2月26日正式發布的新世代 AI 圖像生成模型</p>
+  </div>
+
+  <div style="margin-top: 32px; text-align: center;">
+    <img src="features.png" alt="Nano Banana 2 功能特色" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: var(--shadow-lg);">
+  </div>
+
+  <!-- 版本比較 -->
+  <h3 style="margin: 40px 0 16px; font-size: 23px; color: var(--dark);">版本比較</h3>
+  <div class="compare-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>特性</th>
+          <th>Nano Banana 1 <span class="badge-nb1">NB1</span></th>
+          <th>Nano Banana 2 <span class="badge-nb2">NB2</span></th>
+          <th>Nano Banana Pro <span class="badge-pro">Pro</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>技術名稱</td><td>Gemini 2.0 Flash Image</td><td>Gemini 3.1 Flash Image</td><td>Gemini 3 Pro Image</td></tr>
+        <tr><td>發布時間</td><td>2025年</td><td>2026年2月26日</td><td>2025年11月</td></tr>
+        <tr><td>速度</td><td>最快</td><td>快</td><td>較慢</td></tr>
+        <tr><td>價格</td><td>最低</td><td>中等</td><td>最高</td></tr>
+        <tr><td>視覺接地（Grounding）</td><td>❌ 無</td><td>✅ 有</td><td>✅ 有</td></tr>
+        <tr><td>複雜指令遵循</td><td>一般</td><td>優秀</td><td>最優秀</td></tr>
+        <tr><td>文字渲染</td><td>基礎</td><td>優秀</td><td>優秀</td></tr>
+        <tr><td>輸入上下文窗口</td><td>較小</td><td>131,072 tokens</td><td>65,536 tokens</td></tr>
+        
+        <tr><td>角色一致性上限</td><td>無</td><td>5角色 + 14物體</td><td>5角色 + 14物體</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+<!-- 二、提示詞核心結構 -->
+<section id="anatomy" style="background: #F1F5F9;">
+<div class="container">
+  <div class="section-header">
+    <span class="section-label">Prompt 解剖</span>
+    <h2>🔬 提示詞核心結構</h2>
+    <p>每一個有效的 Nano Banana 2 提示詞都應涵蓋以下要素（不需全部，但越具體越好）</p>
+  </div>
+
+  <div class="anatomy-grid">
+    <div class="anatomy-item c0">
+      <div class="anatomy-num">要素 1</div>
+      <h4>Subject 主體</h4>
+      <p>主體是誰或什麼</p>
+      <div class="example">一位穿著精緻和服的女子 / 清晨時分的香港街市</div>
+    </div>
+    <div class="anatomy-item c1">
+      <div class="anatomy-num">要素 2</div>
+      <h4>Action / State 動作</h4>
+      <p>發生什麼事 / 狀態</p>
+      <div class="example">正在街邊品嚐雞蛋仔 / 在雨中排隊等巴士</div>
+    </div>
+    <div class="anatomy-item c2">
+      <div class="anatomy-num">要素 3</div>
+      <h4>Environment 環境</h4>
+      <p>環境 / 場景 / 時間天氣</p>
+      <div class="example">暴雨時段的旺角街頭，晚間七時 / 昭和年間的東京淺草寺</div>
+    </div>
+    <div class="anatomy-item c3">
+      <div class="anatomy-num">要素 4</div>
+      <h4>Composition / Camera 構圖</h4>
+      <p>構圖 / 鏡頭 / 角度</p>
+      <div class="example">標準50mm鏡頭，人物居中，淺景深</div>
+    </div>
+    <div class="anatomy-item c4">
+      <div class="anatomy-num">要素 5</div>
+      <h4>Lighting / Mood 光線</h4>
+      <p>光線 / 情緒</p>
+      <div class="example">黃金時段，金色逆光邊緣光 / 冷調實驗室白光</div>
+    </div>
+    <div class="anatomy-item c5">
+      <div class="anatomy-num">要素 6</div>
+      <h4>Style 風格</h4>
+      <p>藝術或攝影風格參考</p>
+      <div class="example">電影感色調、柔和暖色光、復古菲林感</div>
+    </div>
+    <div class="anatomy-item c6">
+      <div class="anatomy-num">要素 7</div>
+      <h4>Exclusions 排除</h4>
+      <p>明確說明不要什麼</p>
+      <div class="example">不要文字、不要浮水印、不要路人甲</div>
+    </div>
+  </div>
+
+  <!-- 公式 -->
+  <h3 style="margin: 40px 0 14px; font-size: 21px; color: var(--dark);">📐 通用骨架公式</h3>
+  <div class="formula-box"><span class="kw">[主體]</span> <span class="op">+</span> <span class="kw">[動作/狀態]</span> <span class="op">+</span> <span class="kw">[場景環境]</span> <span class="op">+</span> <span class="kw">[攝影/藝術風格]</span> <span class="op">+</span> <span class="kw">[鏡頭/構圖]</span> <span class="op">+</span> <span class="kw">[光線/色調]</span> <span class="op">+</span> <span class="kw">[額外細節]</span> <span class="op">+</span> <span class="kw">[排除項目]</span></div>
+
+  <h3 style="margin: 28px 0 14px; font-size: 21px; color: var(--dark);">✏️ 圖像編輯公式</h3>
+  <div class="formula-box"><span class="kw">保持</span>（必須不變的部分）<span class="op">+</span> <span class="kw">改變</span>（要修改的項目）<span class="op">+</span> 位置/強度 <span class="op">+</span> 風格一致 <span class="op">+</span> 光線匹配 <span class="op">+</span> 排除副作用</div>
+</div>
+</section>
+
+<!-- 三、關鍵技巧 -->
+<section id="tips">
+<div class="container">
+  <div class="section-header">
+    <span class="section-label">最佳實踐</span>
+    <h2>💡 7 大關鍵技巧</h2>
+    <p>掌握這些技巧，讓你的提示詞從「可用」提升至「專業」</p>
+  </div>
+
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-num">1</div>
+      <div class="tip-icon">🎬</div>
+      <h4>像創意總監一樣說話</h4>
+      <p>NB2 是思考模型，理解意圖而非匹配關鍵字。用自然語言描述你想要的畫面。</p>
+      <div class="tip-bad">貓 夜晚 城市 霓虹燈</div>
+      <div class="tip-good">一隻淘氣的貓試圖從廚房料理台上偷魚，溫暖的廚房光線，鮮豔漫畫風格</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-num">2</div>
+      <div class="tip-icon">📷</div>
+      <h4>使用具體的攝影語言</h4>
+      <p>提到真實相機、菲林、鏡頭型號，NB2 會精確模擬這些設備的視覺行為。</p>
+      <div class="tip-good">使用萊卡 M10 拍攝，50mm Summilux 鏡頭，Kodak Portra 400 菲林</div>
+      <div class="tip-good">85mm f/1.4 大光圈鏡頭，背景柔化成夢幻散景</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-num">3</div>
+      <div class="tip-icon">📝</div>
+      <h4>文字渲染記得用雙引號</h4>
+      <p>想在圖像中顯示特定文字，必須用雙引號包圍，否則可能被當成構圖指令。</p>
+      <div class="tip-bad">在圖上寫 灣仔茶餐廳</div>
+      <div class="tip-good">顯示文字：「灣仔茶餐廳」（雙引號 = 字面渲染）</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-num">4</div>
+      <div class="tip-icon">🎨</div>
+      <h4>加入參考風格，一鍵激活</h4>
+      <p>一個好的參考詞可以一次激活多種視覺關聯，是最高效的提示詞捷徑。</p>
+      <div class="tip-good">王家衛電影配色，參考《花樣年華》的2000年風格</div>
+      <div class="tip-good">國家地理雜誌人文紀實風格</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-num">5</div>
+      <div class="tip-icon">🚫</div>
+      <h4>善用負面提示</h4>
+      <p>清楚告訴模型「不要」什麼，通常比只說「要」什麼更有效。</p>
+      <div class="tip-bad">只描述想要的元素</div>
+      <div class="tip-good">不要文字、不要浮水印、不要其他路人、不要模糊</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-num">6</div>
+      <div class="tip-icon">🔄</div>
+      <h4>迭代編輯是 NB2 強項</h4>
+      <p>圖像 80% 正確時，不要全部重來，給出精確的修改指令即可。</p>
+      <div class="tip-good">很好，但請把光線改成夕陽效果，並把文字改成藍色</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-num">7</div>
+      <div class="tip-icon">📐</div>
+      <h4>每次都加上比例（AR）</h4>
+      <p>資產類型 + 比例決定生成方向，不指定比例會使用預設，可能不符需求。</p>
+      <div class="tip-good">16:9 電影分鏡 / 4:5 資訊圖表 / 9:16 社群媒體直式</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- 四、10大模板 -->
+<section id="templates" style="background: #F1F5F9;">
+<div class="container">
+  <div class="section-header">
+    <span class="section-label">實用模板</span>
+    <h2>📋 10 個場景化模板提示詞</h2>
+    <p>整合兩份文件精華，可直接複製修改使用</p>
+  </div>
+
+  <div class="template-tabs">
+    <button class="tab-btn active" onclick="switchTab(event, 't1')">①攝影寫真</button>
+    <button class="tab-btn" onclick="switchTab(event, 't2')">②中文海報</button>
+    <button class="tab-btn" onclick="switchTab(event, 't3')">③建築風景</button>
+    <button class="tab-btn" onclick="switchTab(event, 't4')">④角色一致</button>
+    <button class="tab-btn" onclick="switchTab(event, 't5')">⑤風格轉換</button>
+    <button class="tab-btn" onclick="switchTab(event, 't6')">⑥商品背景</button>
+    <button class="tab-btn" onclick="switchTab(event, 't7')">⑦漫畫分鏡</button>
+    <button class="tab-btn" onclick="switchTab(event, 't8')">⑧資訊圖表</button>
+    <button class="tab-btn" onclick="switchTab(event, 't9')">⑨圖像編輯</button>
+    <button class="tab-btn" onclick="switchTab(event, 't10')">⑩UI介面</button>
+  </div>
+
+  <!-- 模板一：攝影寫真 -->
+  <div class="template-panel active" id="t1">
+    <div class="template-card">
+      <div class="template-header">
+        <h3>【模板一】攝影寫真風格</h3>
+        <span class="template-tag">寫真 · 人物 · 城市</span>
+      </div>
+      <div class="template-body">
+        <div class="template-label">Prompt 結構</div>
+        <div class="template-struct">[主體描述，包括穿著/表情/姿勢]，拍攝於 [地點/時間/天氣]，
+[相機型號]，[鏡頭]，[構圖方式]，[景深]，[光線方向與色溫]，
+[風格參考]。不要出現 [排除元素]。</div>
+        <div class="template-label">範例提示詞（可直接使用）</div>
+        <div class="template-example">
+          <button class="copy-btn" onclick="copyPrompt(this)">複製</button>
+          <p id="p1">一位穿著淺色風衣的男子站在雨天的香港旺角街道上，濕潤的路面有霓虹燈倒影。寫實攝影風格，35mm鏡頭，中景，淺景深，夜晚冷色調，左側軟主光加暖色邊緣光分離主體與深色背景。不要文字，不要浮水印，不要其他路人。</p>
+        </div>
+        <div class="use-case">🎯 適合場景：<span>人物寫真、產品攝影、城市風光照</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 模板二：中文海報 -->
+  <div class="template-panel" id="t2">
+    <div class="template-card">
+      <div class="template-header">
+        <h3>【模板二】中文文字圖像（海報/廣告）</h3>
+        <span class="template-tag">海報 · 廣告 · 品牌</span>
+      </div>
+      <div class="template-body">
+        <div class="template-label">Prompt 結構</div>
+        <div class="template-struct">建立一張 [比例] 的 [資產類型]，主體是 [描述]。
+畫面上方居中顯示：「[主要文字]」，字體 [字體描述]，顏色 [顏色]。
+畫面下方居中顯示：「[副標文字]」，字體 [字體描述]，顏色 [顏色]。
+[風格/色調/氛圍描述]。所有文字必須準確無誤。</div>
+        <div class="template-label">範例提示詞（可直接使用）</div>
+        <div class="template-example">
+          <button class="copy-btn" onclick="copyPrompt(this)">複製</button>
+          <p id="p2">建立一張 3:4 直向的課程宣傳海報，主體是一隻正在接受年青學員護理的可愛柴犬，背景是溫暖的室內環境。畫面上方居中顯示：「香港基督教女青年會」，字體為粗體無襯線字，顏色為品牌藍色。畫面中央顯示：「寵物護理員基礎證書課程」，字體為粗宋體，顏色為專業深灰。畫面下方居中顯示：「現正招生｜ERB課程」，字體為中等粗細，顏色為淺灰色。暖色調，活潑正面氛圍，乾淨專業的商業設計。所有文字必須準確無誤。</p>
+        </div>
+        <div class="use-case">🎯 適合場景：<span>課程宣傳、社群廣告、活動海報</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 模板三：建築風景 -->
+  <div class="template-panel" id="t3">
+    <div class="template-card">
+      <div class="template-header">
+        <h3>【模板三】建築/風景寫實</h3>
+        <span class="template-tag">建築 · 地景 · 旅遊</span>
+      </div>
+      <div class="template-body">
+        <div class="template-label">Prompt 結構</div>
+        <div class="template-struct">[具體建築/地點名稱] 的 [具體角度/視角] 照片，
+[拍攝時間/光線條件]，[相機與鏡頭設定]，
+[風格，如寫實/電影感]，[額外細節如天氣/季節]。
+確認 [建築/地點] 的 [具體細節] 準確。</div>
+        <div class="template-label">範例提示詞（可直接使用）</div>
+        <div class="template-example">
+          <button class="copy-btn" onclick="copyPrompt(this)">複製</button>
+          <p id="p3">尖沙咀香港文化中心與幻彩詠香江夜景，標準視角從九龍一角拍攝，金黃色人造光源與城市倒影交織。寫實攝影，Canon EOS R5，24mm廣角鏡頭，三腳架長曝光，乾淨的構圖，無多餘人物。確保建築輪廓與實際外觀一致。</p>
+        </div>
+        <div class="use-case">🎯 適合場景：<span>旅遊素材、城市介紹、房地產宣傳</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 模板四：角色一致 -->
+  <div class="template-panel" id="t4">
+    <div class="template-card">
+      <div class="template-header">
+        <h3>【模板四】角色一致性多圖生成</h3>
+        <span class="template-tag">角色 · 連環 · 品牌</span>
+      </div>
+      <div class="template-body">
+        <div class="template-label">Prompt 結構</div>
+        <div class="template-struct">以這張圖片為角色參考，生成 [數量] 張不同場景的 [動作/表情]，
+每張圖片中角色外貌必須與原圖完全一致，
+包括 [具體特徵描述]。場景風格為 [風格]。</div>
+        <div class="template-label">範例提示詞（可直接使用）</div>
+        <div class="template-example">
+          <button class="copy-btn" onclick="copyPrompt(this)">複製</button>
+          <p id="p4">以這張圖片為角色參考，生成4張同一角色的不同場景：圖1在維多利亞港看夜景，圖2在茶餐廳吃早餐，圖3在太平山頂遠眺，圖4撐傘走在中環街道。每張圖中角色的黑色短髮、白皙皮膚、紅色外套必須與原圖完全一致。寫實攝影風格，電影感色調。</p>
+        </div>
+        <div class="use-case">🎯 適合場景：<span>故事漫畫、角色設定、行銷素材</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 模板五：風格轉換 -->
+  <div class="template-panel" id="t5">
+    <div class="template-card">
+      <div class="template-header">
+        <h3>【模板五】風格轉換（Style Transfer）</h3>
+        <span class="template-tag">風格 · 藝術化 · 再利用</span>
+      </div>
+      <div class="template-body">
+        <div class="template-label">Prompt 結構</div>
+        <div class="template-struct">保持原圖的 [構圖/主體位置/視角] 完全不變，
+將圖像轉換為 [目標風格]：[具體風格描述 + 色調 + 質感 + 光線]。
+不要添加新元素，不要改變主體位置，不要添加文字。</div>
+        <div class="template-label">範例提示詞（可直接使用）</div>
+        <div class="template-example">
+          <button class="copy-btn" onclick="copyPrompt(this)">複製</button>
+          <p id="p5">保持原圖中人物與場景的構圖和位置完全不變，將圖像轉換為水彩插畫風格：柔和暈染邊緣、紙張質感、溫和的色彩暈開。顏色應更明亮但不過度飽和。不要添加新元素，不要移動主體，不要添加文字。</p>
+        </div>
+        <div class="use-case">🎯 適合場景：<span>品牌風格統一、藝術化加工、現有素材再利用</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 模板六：商品背景 -->
+  <div class="template-panel" id="t6">
+    <div class="template-card">
+      <div class="template-header">
+        <h3>【模板六】商品乾淨背景圖</h3>
+        <span class="template-tag">電商 · 產品 · 商業</span>
+      </div>
+      <div class="template-body">
+        <div class="template-label">Prompt 結構</div>
+        <div class="template-struct">[產品名稱與詳細描述]，位於 [位置/姿勢]，
+白色或純色背景，[產品角度/展示方式]，
+工作室級商業攝影光線（[光線描述]），
+[風格/光線/色調要求]。不要背景裝飾物，不要浮水印，不要文字。</div>
+        <div class="template-label">範例提示詞（可直接使用）</div>
+        <div class="template-example">
+          <button class="copy-btn" onclick="copyPrompt(this)">複製</button>
+          <p id="p6">一個透明玻璃香氛蠟燭罐，啞光磨砂白色罐身，品牌名稱以金色燙金字體印於正面下半部，頂部有木質圓形蓋。產品置於畫面中央，45度斜側角度，淺灰漸層背景。工作室商業攝影，均勻柔光箱光源，精準還原玻璃通透感與木蓋質感。不要背景裝飾物，不要浮水印，不要文字。</p>
+        </div>
+        <div class="use-case">🎯 適合場景：<span>電子商務、產品型錄、客戶提案素材</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 模板七：漫畫分鏡 -->
+  <div class="template-panel" id="t7">
+    <div class="template-card">
+      <div class="template-header">
+        <h3>【模板七】漫畫/分鏡創作</h3>
+        <span class="template-tag">漫畫 · 敘事 · 社群</span>
+      </div>
+      <div class="template-body">
+        <div class="template-label">Prompt 結構</div>
+        <div class="template-struct">[數量] 格橫向漫畫分鏡，比例 [如 4:1]，
+故事講述 [具體劇情描述]，風格為 [漫畫風格，如日式少年漫/法式漫畫]。
+保持角色設計在所有格子中一致，
+每格有不同的 [表情/動作/場景變化]。</div>
+        <div class="template-label">範例提示詞（可直接使用）</div>
+        <div class="template-example">
+          <button class="copy-btn" onclick="copyPrompt(this)">複製</button>
+          <p id="p7">4格橫向漫畫分鏡，比例 4:1，講述一個穿校服的高中生在茶餐廳點了一杯鴛鴦，卻發現杯子裡是菠蘿油的故事。使用日式少年漫畫風格，清晰的黑線稿配網點紙。角色穿白色襯衫、深藍色西裝褲、黑色皮鞋，保持所有格子一致。第四格加入爆炸效果框強調角色驚訝表情。</p>
+        </div>
+        <div class="use-case">🎯 適合場景：<span>社群內容、故事敘述、行銷短漫</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 模板八：資訊圖表 -->
+  <div class="template-panel" id="t8">
+    <div class="template-card">
+      <div class="template-header">
+        <h3>【模板八】資訊圖表（Infographic）</h3>
+        <span class="template-tag">資訊 · 教育 · 數據</span>
+      </div>
+      <div class="template-body">
+        <div class="template-label">Prompt 結構</div>
+        <div class="template-struct">建立一張 [比例] 的資訊圖表，主題是 [主題描述]，
+包含 [數量] 個主要資訊區塊：[具體內容描述]。
+使用 [色調，如暖色/科技感/清新] 配色方案，
+[字體/排版風格]，乾淨的版面設計。
+[附加要求，如：包含標題/包含數據視覺化]。</div>
+        <div class="template-label">範例提示詞（可直接使用）</div>
+        <div class="template-example">
+          <button class="copy-btn" onclick="copyPrompt(this)">複製</button>
+          <p id="p8">建立一張 4:5 的繁體中文資訊圖表，主題是香港十大必吃傳統美食，包含5個主要資訊區塊：菠蘿油、蛋撻、奶茶、雲吞麵、咖哩魚蛋。使用傳統香港茶餐廳風格配色（米白、紅、綠、奶白），大字標題，副標題解釋，乾淨現代的版面設計，每個美食區配有插圖化呈現。</p>
+        </div>
+        <div class="use-case">🎯 適合場景：<span>教育內容、社交媒體分享、品牌資訊傳遞</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 模板九：圖像編輯 -->
+  <div class="template-panel" id="t9">
+    <div class="template-card">
+      <div class="template-header">
+        <h3>【模板九】圖像局部編輯（加入元素）</h3>
+        <span class="template-tag">合成 · 編輯 · 加工</span>
+      </div>
+      <div class="template-body">
+        <div class="template-label">Prompt 結構</div>
+        <div class="template-struct">在原圖的 [指定位置] 加入 [新元素詳細描述]，
+新元素的光線方向必須與原圖現有光源一致，
+透視角度必須與原圖匹配。
+不要遮擋主體，不要改變整體色調與風格，
+保持所有現有元素位置不變。</div>
+        <div class="template-label">範例提示詞（可直接使用）</div>
+        <div class="template-example">
+          <button class="copy-btn" onclick="copyPrompt(this)">複製</button>
+          <p id="p9">在原圖街道場景的右側加入一台經典紅色的士，停在路邊。紅色車身乾淨有光澤，金色車牌。車身受左側路燈暖光照射，投影方向與原圖其他車輛一致。透視角度為輕微仰視，符合街道消失點透視。不要遮擋主體人物，不要改變整體電影感色調，保持所有現有元素位置不變。</p>
+        </div>
+        <div class="use-case">🎯 適合場景：<span>場景豐富化、電影感加工、品牌元素植入</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 模板十：UI介面 -->
+  <div class="template-panel" id="t10">
+    <div class="template-card">
+      <div class="template-header">
+        <h3>【模板十】UI/介面設計圖</h3>
+        <span class="template-tag">UI · App · Mockup</span>
+      </div>
+      <div class="template-body">
+        <div class="template-label">Prompt 結構</div>
+        <div class="template-struct">建立一個 [設備] 上的 [應用類型] 介面設計截圖，
+主畫面顯示 [功能模組描述]，整體採用 [設計語言]，使用 [主色調] 配色，
+圓角 [大小]，陰影 [風格]。乾淨的高保真截圖，無狀態列干擾。</div>
+        <div class="template-label">範例提示詞（可直接使用）</div>
+        <div class="template-example">
+          <button class="copy-btn" onclick="copyPrompt(this)">複製</button>
+          <p id="p10">建立一個 iPhone 17 Pro 上的繁體中文天氣應用介面截圖，主畫面顯示當前天氣卡片（28度，多雲，屯門區）、未來6小時逐時預報橫向列表、九日天氣概覽。使用極簡現代設計語言，主色調為藍白漸變，卡片圓角16px，輕柔陰影。乾淨的高保真 Mockup 截圖，狀態列乾淨無干擾字樣，背景模擬真實室內場景。</p>
+        </div>
+        <div class="use-case">🎯 適合場景：<span>產品提案、介面展示、簡報素材</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+
+
+<!-- 六、技術規格 -->
+<section id="specs" style="background: #F1F5F9;">
+<div class="container">
+  <div class="section-header">
+    <span class="section-label">技術規格</span>
+    <h2>📊 Nano Banana 2 技術參數</h2>
+    <p>基於 Google 官方文件的完整技術規格摘要</p>
+  </div>
+
+  <div class="specs-grid">
+    <div class="spec-item">
+      <div class="spec-icon">🔧</div>
+      <div class="spec-label">技術名稱</div>
+      <div class="spec-val" style="font-size:16px; margin-top: 4px;">Gemini 3.1 Flash Image</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-icon">📅</div>
+      <div class="spec-label">發布日期</div>
+      <div class="spec-val" style="font-size:17px;">2026.02.26</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-icon">🪟</div>
+      <div class="spec-label">輸入上下文</div>
+      <div class="spec-val">131K</div>
+      <div class="spec-sub">tokens</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-icon">📤</div>
+      <div class="spec-label">輸出 tokens</div>
+      <div class="spec-val">32,768</div>
+      <div class="spec-sub">tokens</div>
+    </div>
+    
+    <div class="spec-item">
+      <div class="spec-icon">📐</div>
+      <div class="spec-label">支援長寬比</div>
+      <div class="spec-val">14+</div>
+      <div class="spec-sub">1:1 ~ 8:1 ~ 1:8</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-icon">📸</div>
+      <div class="spec-label">最多參考圖</div>
+      <div class="spec-val">14</div>
+      <div class="spec-sub">張</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-icon">👤</div>
+      <div class="spec-label">角色一致上限</div>
+      <div class="spec-val">5+14</div>
+      <div class="spec-sub">角色 + 物體</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-icon">🔤</div>
+      <div class="spec-label">文字渲染語言</div>
+      <div class="spec-val">10+</div>
+      <div class="spec-sub">語言</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-icon">🌐</div>
+      <div class="spec-label">即時數據</div>
+      <div class="spec-val" style="font-size: 17px;">Google 搜索接地</div>
+    </div>
+  </div>
+
+  <!-- 支援長寬比詳細列表 -->
+  <div style="margin-top: 32px; background: var(--card); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow);">
+    <h4 style="font-size:19px; font-weight:700; color:var(--dark); margin-bottom: 14px;">📐 完整支援長寬比列表</h4>
+    <div style="display:flex; flex-wrap:wrap; gap:8px;">
+      <span style="background:#EEF2FF; color:#4338CA; padding:5px 14px; border-radius:20px; font-size:16px; font-weight:600;">1:1 方形</span>
+      <span style="background:#EEF2FF; color:#4338CA; padding:5px 14px; border-radius:20px; font-size:16px; font-weight:600;">3:2</span>
+      <span style="background:#EEF2FF; color:#4338CA; padding:5px 14px; border-radius:20px; font-size:16px; font-weight:600;">2:3</span>
+      <span style="background:#EEF2FF; color:#4338CA; padding:5px 14px; border-radius:20px; font-size:16px; font-weight:600;">4:3</span>
+      <span style="background:#EEF2FF; color:#4338CA; padding:5px 14px; border-radius:20px; font-size:16px; font-weight:600;">3:4</span>
+      <span style="background:#FEF3C7; color:#92400E; padding:5px 14px; border-radius:20px; font-size:16px; font-weight:600;">4:5 Instagram</span>
+      <span style="background:#FEF3C7; color:#92400E; padding:5px 14px; border-radius:20px; font-size:16px; font-weight:600;">5:4</span>
+      <span style="background:#D1FAE5; color:#065F46; padding:5px 14px; border-radius:20px; font-size:16px; font-weight:600;">16:9 橫向</span>
+      <span style="background:#D1FAE5; color:#065F46; padding:5px 14px; border-radius:20px; font-size:16px; font-weight:600;">9:16 垂直</span>
+      <span style="background:#D1FAE5; color:#065F46; padding:5px 14px; border-radius:20px; font-size:16px; font-weight:600;">21:9 超寬</span>
+      <span style="background:#F3E8FF; color:#6B21A8; padding:5px 14px; border-radius:20px; font-size:16px; font-weight:600;">4:1 分鏡</span>
+      <span style="background:#F3E8FF; color:#6B21A8; padding:5px 14px; border-radius:20px; font-size:16px; font-weight:600;">1:4</span>
+      <span style="background:#F3E8FF; color:#6B21A8; padding:5px 14px; border-radius:20px; font-size:16px; font-weight:600;">8:1 極寬</span>
+      <span style="background:#F3E8FF; color:#6B21A8; padding:5px 14px; border-radius:20px; font-size:16px; font-weight:600;">1:8 極高</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- 底部 -->
+<footer>
+  <div style="font-size:28px; margin-bottom:12px;">🍌</div>
+  <p>Nano Banana 2 提示詞寫作技巧與實用模板，林 SIR 構思制作</p>
+  <div class="footer-links">
+    <a href="https://blog.google/innovation-and-ai/technology/ai/nano-banana-2/" target="_blank">Google 官方博客</a>
+    <a href="https://ai.google.dev/gemini-api/docs/image-generation" target="_blank">Google AI Dev 文件</a>
+    <a href="https://cloud.google.com/blog/products/ai-machine-learning/ultimate-prompting-guide-for-nano-banana" target="_blank">Google Cloud Prompt 指南</a>
+  </div>
+</footer>
+
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ─── 標籤切換 ───
+function switchTab(e, id) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.template-panel').forEach(p => p.classList.remove('active'));
+  e.target.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+
+// ─── 複製按鈕 ───
+function copyPrompt(btn) {
+  const panel = btn.closest('.template-panel');
+  const p = panel.querySelector('p[id]');
+  const text = p ? p.innerText : '';
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✓ 已複製';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '複製';
+      btn.classList.remove('copied');
+    }, 2000);
+  }).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = '✓ 已複製';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '複製'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+// ─── 滾動進度條 ───
+const progressBar = document.getElementById('progress-bar');
+const backTop = document.getElementById('back-top');
+window.addEventListener('scroll', () => {
+  const scrollTop = document.documentElement.scrollTop;
+  const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+  progressBar.style.width = progress + '%';
+  if (scrollTop > 400) backTop.classList.add('show');
+  else backTop.classList.remove('show');
+});
+
+// ─── 導覽高亮 ───
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(a => {
+        a.style.background = '';
+        a.style.color = '';
+        if (a.getAttribute('href') === '#' + entry.target.id) {
+          a.style.background = 'rgba(255,214,0,.15)';
+          a.style.color = '#FFD600';
+        }
+      });
+    }
+  });
+}, { rootMargin: '-40% 0px -50% 0px' });
+sections.forEach(s => observer.observe(s));
+
+// ─── 漢堡選單 ───
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('nav-links');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  navMenu.classList.toggle('open');
+});
+// 點擊選單連結後關閉
+navMenu.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+    navMenu.classList.remove('open');
+  });
+});
+</script>
+</body>
+</html>
