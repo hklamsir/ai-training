@@ -197,11 +197,11 @@
             <section id="section-concepts" class="fade-in hidden">
                 <div class="mb-8">
                     <h2 class="text-4xl font-bold text-slate-800 mb-4">生成式人工智能 (Generative AI) 核心概念解密</h2>
-                    <p class="text-lg text-slate-600 leading-relaxed mb-6">深入理解大語言模型 (Large Language Model) 的運作機制、記憶限制與優化技巧。</p>
+                    <p class="text-lg text-slate-600 leading-relaxed mb-6">理解大語言模型 (Large Language Model) 的運作機制、記憶限制與優化技巧。</p>
                     
                     <div class="bg-teal-50 border-l-4 border-teal-500 p-6 rounded-r-xl shadow-sm border border-teal-100/50">
                         <ul class="space-y-4 text-base text-slate-700 leading-relaxed">
-                            <li><strong>🧠 大語言模型 (LLM)：</strong> 想像一位讀過人類所有藏書的「超級學霸」。它並沒有真正的人類意識，但因為預訓練 (Pre-trained) 時看過的書籍與文章太多，所以能根據我們輸入的文字，精準「猜」出下一個最合理的字詞。這就是 ChatGPT 或 Gemini 等 AI 工具的基礎大腦。</li>
+                            <li><strong>🧠 大語言模型 (LLM)：</strong> 想像一位讀過人類所有藏書的「超級學霸」。它並沒有真正的人類意識，但因為預訓練 (Pre-trained) 時看過海量的書籍與文章，所以能根據我們輸入的文字，精準「猜」出下一個最合理的字詞。這就是 ChatGPT 或 Gemini 等 AI 工具的基礎大腦。</li>
                             <li><strong>⚡ Transformer 架構：</strong> 這是讓 AI 產生跨時代突破的「閱讀超能力」。傳統 AI 只能逐字閱讀，讀到後面就忘了前面；而 Transformer 擁有「注意力機制 (Attention)」，能一眼看穿整段對話，瞬間理解詞彙之間的前後文關聯。就像讀推理小說時，能立刻將第一頁的線索與最後一頁的結局完美連結。</li>
                         </ul>
                     </div>
@@ -242,7 +242,7 @@
                                 2. 它影響了 AI 回答的速度。<br>
                                 3. 它與「上下文窗口」的極限息息相關。
                             </p>
-                        </div>
+                        </div><br>
                         <a href="https://token-calculator.net/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mt-3 text-sm font-semibold text-teal-600 hover:text-teal-800 transition-colors">
                             🔗 Token Calculator for LLMs
                         </a>
@@ -251,7 +251,7 @@
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
                         <h3 class="text-2xl font-bold text-blue-600 mb-4 flex items-center"><span class="text-3xl mr-2">🪧</span> Context Window (上下文窗口)：記憶限制</h3>
                         <p class="text-slate-600 mb-4 text-base leading-relaxed">
-                            AI 的記憶是有限的。想像一塊空間有限的「滾動白板」，當新對話不斷寫入底部，頂端的舊資訊就會被推出去並擦除。本展示模擬記憶極限為 <b>6 個對話</b>，超出後舊訊息將被「遺忘」。
+                            AI 每一個對話串的記憶是有限的。想像一塊空間有限的「滾動白板」，當新對話不斷寫入底部，頂端的舊資訊就會被推出去並擦除。本展示模擬記憶極限為 <b>6 個對話</b>，超出後舊訊息將被「遺忘」。
                         </p>
                         <div class="whiteboard-container mb-4" id="whiteboard">
                             <div class="whiteboard-items" id="whiteboard-items">
@@ -373,9 +373,9 @@
                                 <select id="care-e" class="w-full p-2 border border-stone-300 rounded-lg bg-stone-50 text-base focus:outline-none focus:ring-2 focus:ring-teal-500">
                                     <option value="-">- (無參考例子)</option>
                                     <option value="請參考以下格式撰寫，保持語氣親切且簡潔：【稱謂】→【感謝查詢】→【正文】→【聯絡方式】。">機構電郵標準格式</option>
-                                    <option value="書寫風格請參考邀請函範本，使用正式但不失溫度的語氣，並附上報名連結及截止日期。">活動邀請函格式</option>
+                                    <option value="書寫風格請參考附件的邀請函範本，使用正式但不失溫度的語氣，並附上報名連結及截止日期。">活動邀請函格式</option>
                                     <option value="風格請參考附件的 Facebook Post，加入 2–3 個相關 Emoji 及合適的 Hash Tags，吸引在職成人。">附件 FB Post 風格 + Emoji</option>
-                                    <option value="行文風格輕鬆易明，適合長者閱讀，避免技術術語，每段不超過 3 句，字體建議放大。">長者友善格式（短句、無術語）</option>
+                                    <option value="書寫風格及排版請參考附件的格式。">機構報告標準格式</option>
                                 </select>
                             </div>
                             <button onclick="generatePrompt()" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-4 rounded-xl transition-all text-xl mt-2">✨ 組合提示詞 (Generate)</button>
@@ -450,7 +450,7 @@
                             </div>
                             <div class="scenario-answer hidden mt-3 pt-3 border-t border-stone-100">
                                 <p class="text-sm text-slate-700 mb-2"><span class="font-bold text-purple-700">🥇 首選：DeepSeek</span> — 支援長文本處理與深度推理分析，適合複雜任務。</p>
-                                <p class="text-sm text-slate-700"><span class="font-bold text-teal-700">🥈 備選：Gemini</span> — 上傳錄音檔案讓 Gemini 讀取，配合 Gems「會議摘要助手」使用。</p>
+                                <p class="text-sm text-slate-700"><span class="font-bold text-teal-700">🥈 備選：Gemini</span> — 上傳錄音檔案讓 Gemini 讀取再編寫完整文檔。</p>
                             </div>
                         </div>
                         <div class="scenario-card border-2 border-stone-200 rounded-xl p-4 cursor-pointer hover:border-teal-400 transition-all" onclick="toggleScenario(this)">
@@ -492,7 +492,7 @@
                             </div>
                             <div class="scenario-answer hidden mt-3 pt-3 border-t border-stone-100">
                                 <p class="text-sm text-slate-700 mb-2"><span class="font-bold text-amber-700">🥇 首選：Perplexity</span> — 每個答案均附原始連結，是查證數據的最佳工具。</p>
-                                <p class="text-sm text-slate-700"><span class="font-bold text-teal-700">🥈 備選：Gemini</span> — 開啟 Google 搜尋擴展後亦可引用網頁資料，但建議二次查證。</p>
+                                <p class="text-sm text-slate-700"><span class="font-bold text-teal-700">🥈 備選：Gemini</span> — 通過 Google 搜尋亦可引用網頁資料，但建議二次查證。</p>
                             </div>
                         </div>
                     </div>
@@ -545,7 +545,7 @@
                         <div class="bg-white p-4 rounded-lg border border-teal-100 text-base mb-4 shadow-sm">
                             <span class="font-bold text-slate-700 block mb-2">💡 精準觸發指令範例：</span>
                             <div class="font-mono text-slate-600 text-sm">
-                                「你是一位教學設計專家。請根據附件，為我設計一份針對 <strong>求職青年</strong> 的詳細教案。包含教學目標與時間分配。 <br>**特別要求**：<br>1. 設計 5 條 Kahoot! 互動問題。 <br>2. 擬定 <br>3 條關鍵回饋問卷。」
+                                「你是一位教學設計專家。請根據附上的課程筆記及大綱，為我設計一份針對 <strong>求職青年</strong> 的詳細教案。包含教學目標與時間分配。 <br>**特別要求**：設計 5 條 Kahoot! 互動問題。」
                             </div>
                         </div>
                         
@@ -926,7 +926,7 @@
                             </div>
                             <div class="bg-slate-900 rounded-xl p-4 relative mb-3">
                                 <button onclick="copyImgPrompt('img-p1', this)" class="absolute top-3 right-3 bg-white/10 hover:bg-amber-400 hover:text-slate-900 text-slate-300 text-xs px-3 py-1 rounded-lg transition-all">複製</button>
-                                <p id="img-p1" class="text-slate-200 text-sm leading-relaxed font-mono pr-16">建立一張 3:4 直向的課程宣傳海報，主體是一隻正在接受年青學員護理的可愛柴犬，背景是溫暖的室內環境。畫面上方居中顯示：「香港基督教女青年會」，字體為粗體無襯線字，顏色為品牌藍色。畫面中央顯示：「寵物護理員基礎證書課程」，字體為粗宋體，顏色為專業深灰。畫面下方居中顯示：「現正招生｜ERB課程」，字體為中等粗細，顏色為淺灰色。暖色調，活潑正面氛圍，乾淨專業的商業設計。所有文字必須準確無誤。</p>
+                                <p id="img-p1" class="text-slate-200 text-sm leading-relaxed font-mono pr-16">建立一張 3:4 直向的課程宣傳海報，主體是一隻正在接受年青學員護理的可愛柴犬，背景是溫暖的室內環境。畫面上方居中顯示：「職涯發展及持續教育部」，字體為粗體無襯線字，顏色為品牌藍色。畫面中央顯示：「寵物護理員基礎證書課程」，字體為粗宋體，顏色為專業深灰。畫面下方居中顯示：「現正招生｜ERB課程」，字體為中等粗細，顏色為淺灰色。暖色調，活潑正面氛圍，乾淨專業的商業設計。所有文字必須準確無誤。</p>
                             </div>
                             <p class="text-xs text-slate-500">🎯 適合場景：課程宣傳、社群廣告、活動海報</p>
                         </div>
@@ -962,7 +962,7 @@
                             </div>
                             <div class="bg-slate-900 rounded-xl p-4 relative mb-3">
                                 <button onclick="copyImgPrompt('img-p3', this)" class="absolute top-3 right-3 bg-white/10 hover:bg-amber-400 hover:text-slate-900 text-slate-300 text-xs px-3 py-1 rounded-lg transition-all">複製</button>
-                                <p id="img-p3" class="text-slate-200 text-sm leading-relaxed font-mono pr-16">一位穿著淺色風衣的男子站在雨天的香港旺角街道上，濕潤的路面有霓虹燈倒影。寫實攝影風格，35mm鏡頭，中景，淺景深，夜晚冷色調，左側軟主光加暖色邊緣光分離主體與深色背景。不要文字，不要浮水印，不要其他路人。</p>
+                                <p id="img-p3" class="text-slate-200 text-sm leading-relaxed font-mono pr-16">一位穿著淺色風衣的男子站在雨天的香港旺角街道上，濕潤的路面有霓虹燈倒影。寫實攝影風格，35mm鏡頭，淺景深，夜晚冷色調，左側軟主光加暖色邊緣光分離主體與深色背景。不要其他路人。</p>
                             </div>
                             <p class="text-xs text-slate-500">🎯 適合場景：人物寫真、產品攝影、城市風光照</p>
                         </div>
@@ -1015,8 +1015,8 @@
                             
                             <div>
                                 <strong>實作規程 (De-identification)：</strong><br>
-                                「屏蔽法」：利用 <strong class="text-teal-700">Word 的「尋找及取代」功能</strong>，將個案姓名批量替換為「XXX」或「某學員」。<br>
-                                「泛化法」：將具體年齡 72 歲改為「70 歲以上長者」。
+                                「屏蔽法」：利用 <strong class="text-teal-700">Word / Excel 的「尋找及取代」功能</strong>，將個案姓名批量替換為「XXX」或「某學員」。<br>
+                                「泛化法」：將具體年齡 62 歲改為「60 歲以上長者」。
                             </div>
                             <div class="text-sm text-slate-500 mt-2 border-t pt-2">
                                 註：個人帳戶與機構 Workspace 帳戶在數據處理政策上是有差異的。
@@ -1030,7 +1030,7 @@
                         <h3 class="text-2xl font-bold text-slate-800 mb-3 flex items-center"><span class="mr-2">👻</span> 幻覺與算法偏誤</h3>
                         <div class="space-y-4 text-base text-slate-700">
                             <p><strong>幻覺 (Hallucination) 本質：</strong><br>AI 追求「機率上的正確」而非「事實上的真理」。當找不到答案時，會傾向創造「聽起來很像真的」的內容。<br>
-                            <em class="text-amber-700">案例：「根據香港勞工處 2025 年最新報告，AI 對就業市場的影響是什麼？請提供報告名稱和關鍵數據。」，請進行二次查證。</em></p>
+                            <em class="text-amber-700">案例：「根據香港勞工處 2025 年最新報告，AI 對就業市場的影響是什麼？請提供報告名稱和關鍵數據。」</em>，請進行二次查證。</p>
                             
                             <hr class="border-stone-100">
                             
