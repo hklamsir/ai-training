@@ -125,13 +125,9 @@
             </button>
             <div class="mt-4 pt-4 border-t border-stone-200">
                 <p class="text-xs font-bold text-slate-400 uppercase tracking-wider px-2 mb-2">延伸資源</p>
-                <a href="nb2.html" target="_blank" class="flex items-center gap-2 px-4 py-3 rounded-xl bg-amber-50 border border-amber-200 hover:bg-amber-100 transition-all text-sm font-semibold text-amber-800 flex-shrink-0">
-                    <span class="text-lg">🍌</span>
-                    <div>
-                        <div>Nano Banana 2</div>
-                        <div class="text-xs font-normal text-amber-600">影像提示詞完整攻略 ↗</div>
-                    </div>
-                </a>
+                <button onclick="navigate('resources')" id="nav-resources" class="w-full text-left px-4 py-3 rounded-xl bg-amber-50 border border-amber-200 hover:bg-amber-100 transition-all text-base font-semibold text-amber-800 flex-shrink-0">
+                    <span class="mr-2">🧩</span> 延伸學習資源
+                </button>
             </div>
         </div>
     </nav>
@@ -574,6 +570,7 @@
                             <li>1. <b>推理路徑：</b> 檢索政府數據 ➔ 尋找 NGO 報告 ➔ 對比國際案例。</li>
                             <li>2. <b>動態追問：</b> AI 反向提問，體現「協作式研究」。</li>
                             <li>3. <b>可信度建設：</b> 報告末尾的參考文獻連結，對撰寫 Funding Proposal 至關重要。</li>
+                            <li>4. <b>儲存為 Google 文件：</b> 研究完成後，點擊報告右上角的「匯出」按鈕，選擇「匯出至 Google 文件」，即可將完整報告（含參考來源連結）直接存入你的 Google 雲端硬碟，方便後續以 Canvas 協作編輯。</li>
                         </ul>
                     </div>
                 </div>
@@ -1059,6 +1056,88 @@
                         <strong class="text-2xl">工具在手，更要心中有「人」</strong>
                     </p>
                 </div>
+
+            </section>
+
+            <section id="section-resources" class="fade-in hidden">
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-800 mb-4 leading-tight">🧩 延伸學習資源</h2>
+                <p class="text-xl text-slate-500 mb-8">課堂時間有限，以下資源助你持續精進 AI 應用能力。</p>
+
+                <!-- Nano Banana 2 精選卡片 -->
+                <a href="nb2.html" target="_blank" class="block mb-8 p-6 rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-300 hover:border-amber-500 hover:shadow-lg transition-all group">
+                    <div class="flex flex-col md:flex-row items-start md:items-center gap-4">
+                        <div class="text-5xl flex-shrink-0">🍌</div>
+                        <div class="flex-grow">
+                            <h3 class="text-2xl font-bold text-amber-900 group-hover:text-amber-700 mb-1">Nano Banana 2 — 影像提示詞完整攻略</h3>
+                            <p class="text-base text-amber-700">10 個場景提示詞模板 × 7 要素公式 × 版本比較，課後反覆練習即學即用。</p>
+                        </div>
+                        <div class="text-amber-500 group-hover:text-amber-700 text-3xl flex-shrink-0">↗</div>
+                    </div>
+                </a>
+
+                <!-- 課後延伸學習資源 -->
+                <div class="bg-white border border-stone-200 rounded-2xl p-6 shadow-sm">
+                    <h3 class="text-2xl font-bold text-slate-800 mb-2 flex items-center"><span class="mr-2">🔗</span> 課後延伸學習資源</h3>
+                    <p class="text-base text-slate-500 mb-5">善用這些平台，讓 AI 成為你的日常工作夥伴。</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" class="flex items-start gap-3 p-4 rounded-xl border border-stone-200 hover:border-teal-400 hover:bg-teal-50/30 transition-all group">
+                            <div class="text-2xl">🌐</div>
+                            <div>
+                                <div class="font-bold text-slate-800 group-hover:text-teal-700 text-base">Google Gemini</div>
+                                <div class="text-sm text-slate-500">官方平台入口，隨時練習對話與 Canvas 編輯</div>
+                            </div>
+                        </a>
+                        <a href="https://ai.google.dev/gemini-api/docs" target="_blank" rel="noopener noreferrer" class="flex items-start gap-3 p-4 rounded-xl border border-stone-200 hover:border-teal-400 hover:bg-teal-50/30 transition-all group">
+                            <div class="text-2xl">📖</div>
+                            <div>
+                                <div class="font-bold text-slate-800 group-hover:text-teal-700 text-base">Gemini API 官方文件</div>
+                                <div class="text-sm text-slate-500">深入了解模型能力與技術規格</div>
+                            </div>
+                        </a>
+                        <a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer" class="flex items-start gap-3 p-4 rounded-xl border border-stone-200 hover:border-teal-400 hover:bg-teal-50/30 transition-all group">
+                            <div class="text-2xl">🛠️</div>
+                            <div>
+                                <div class="font-bold text-slate-800 group-hover:text-teal-700 text-base">Google AI Studio (香港需要VPN連接)</div>
+                                <div class="text-sm text-slate-500">免費試玩最新模型，進階提示詞實驗平台</div>
+                            </div>
+                        </a>
+                        <a href="https://cloud.google.com/learn" target="_blank" rel="noopener noreferrer" class="flex items-start gap-3 p-4 rounded-xl border border-stone-200 hover:border-teal-400 hover:bg-teal-50/30 transition-all group">
+                            <div class="text-2xl">☁️</div>
+                            <div>
+                                <div class="font-bold text-slate-800 group-hover:text-teal-700 text-base">Google Cloud 學習中心</div>
+                                <div class="text-sm text-slate-500">雲端 AI 服務教學與認證路徑</div>
+                            </div>
+                        </a>
+                        <a href="https://www.perplexity.ai/" target="_blank" rel="noopener noreferrer" class="flex items-start gap-3 p-4 rounded-xl border border-stone-200 hover:border-teal-400 hover:bg-teal-50/30 transition-all group">
+                            <div class="text-2xl">🔍</div>
+                            <div>
+                                <div class="font-bold text-slate-800 group-hover:text-teal-700 text-base">Perplexity AI</div>
+                                <div class="text-sm text-slate-500">AI 搜尋引擎，課後持續用於查證與研究</div>
+                            </div>
+                        </a>
+                        <a href="https://chat.deepseek.com/" target="_blank" rel="noopener noreferrer" class="flex items-start gap-3 p-4 rounded-xl border border-stone-200 hover:border-teal-400 hover:bg-teal-50/30 transition-all group">
+                            <div class="text-2xl">🔮</div>
+                            <div>
+                                <div class="font-bold text-slate-800 group-hover:text-teal-700 text-base">DeepSeek</div>
+                                <div class="text-sm text-slate-500">長文本推理與深度分析，處理報告的好幫手</div>
+                            </div>
+                        </a>
+                        <a href="https://www.doubao.com/" target="_blank" rel="noopener noreferrer" class="flex items-start gap-3 p-4 rounded-xl border border-stone-200 hover:border-teal-400 hover:bg-teal-50/30 transition-all group">
+                            <div class="text-2xl">🫘</div>
+                            <div>
+                                <div class="font-bold text-slate-800 group-hover:text-teal-700 text-base">豆包 AI</div>
+                                <div class="text-sm text-slate-500">字節跳動出品，支援語音對話與多模態創作</div>
+                            </div>
+                        </a>
+                        <a href="https://blog.google/innovation-and-ai/technology/ai/nano-banana-2/" target="_blank" rel="noopener noreferrer" class="flex items-start gap-3 p-4 rounded-xl border border-stone-200 hover:border-amber-400 hover:bg-amber-50/30 transition-all group">
+                            <div class="text-2xl">🍌</div>
+                            <div>
+                                <div class="font-bold text-slate-800 group-hover:text-amber-700 text-base">Nano Banana 2 官方博客</div>
+                                <div class="text-sm text-slate-500">Google 官方圖像生成模型技術介紹</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </section>
         </div>
     </main>
@@ -1122,6 +1201,8 @@
                 targetSec.classList.remove('hidden');
                 targetSec.classList.add('fade-in');
             }
+            // 切換頁面時滾動回頂部
+            document.querySelector('main').scrollTop = 0;
             if (sectionId === 'tools' && !chartInstance) {
                 initChart();
                 renderToolsAccordion();
