@@ -146,31 +146,31 @@
                 <h3 class="text-3xl font-bold text-teal-800 mt-12 mb-1">&nbsp; 📚 課堂內容</h3>
                 <p class="text-base text-slate-500 mb-6 ml-2">上課時間：14:30-18:00　|　中間休息 15分鐘　|　最後10分鐘做問卷</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
-                    <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col" onclick="navigate('concepts')">
+                    <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md hover:-translate-y-1 hover:border-teal-300 transition-all cursor-pointer flex flex-col" onclick="navigate('concepts')">
                         <div class="text-4xl mb-3">🧩</div>
                         <div class="inline-block bg-teal-50 text-teal-700 text-xs font-bold px-2 py-1 rounded-full mb-2 self-start">⏱ 30 分鐘</div>
                         <h3 class="text-lg font-bold text-slate-800 mb-1">拆解底層邏輯</h3>
                         <p class="text-slate-600 text-sm flex-grow">從文字接龍到記憶窗口，掌握 AI 的思考邊界。</p>
                     </div>
-                    <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col" onclick="navigate('care-lab')">
+                    <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md hover:-translate-y-1 hover:border-teal-300 transition-all cursor-pointer flex flex-col" onclick="navigate('care-lab')">
                         <div class="text-4xl mb-3">⌨️</div>
                         <div class="inline-block bg-teal-50 text-teal-700 text-xs font-bold px-2 py-1 rounded-full mb-2 self-start">⏱ 30 分鐘</div>
                         <h3 class="text-lg font-bold text-slate-800 mb-1">提示詞工程</h3>
                         <p class="text-slate-600 text-sm flex-grow">透過 C-A-R-E 框架，讓行政與教學指令輸出更精確。</p>
                     </div>
-                    <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col" onclick="navigate('tools')">
+                    <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md hover:-translate-y-1 hover:border-amber-300 transition-all cursor-pointer flex flex-col" onclick="navigate('tools')">
                         <div class="text-4xl mb-3">🧭</div>
                         <div class="inline-block bg-amber-50 text-amber-700 text-xs font-bold px-2 py-1 rounded-full mb-2 self-start">⏱ 20 分鐘</div>
                         <h3 class="text-lg font-bold text-slate-800 mb-1">工具選擇能力</h3>
                         <p class="text-slate-600 text-sm flex-grow">比較 5 大工具，按場景選出最合適的 AI 助手。</p>
                     </div>
-                    <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col" onclick="navigate('gemini-basics')">
+                    <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md hover:-translate-y-1 hover:border-teal-300 transition-all cursor-pointer flex flex-col" onclick="navigate('gemini-basics')">
                         <div class="text-4xl mb-3">🚀</div>
                         <div class="inline-block bg-teal-50 text-teal-700 text-xs font-bold px-2 py-1 rounded-full mb-2 self-start">⏱ 90 分鐘</div>
                         <h3 class="text-lg font-bold text-slate-800 mb-1">Gemini 實戰</h3>
                         <p class="text-slate-600 text-sm flex-grow">Canvas 協作、Deep Research、建立 Gems 與生成圖片。</p>
                     </div>
-                    <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col" onclick="navigate('action')">
+                    <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md hover:-translate-y-1 hover:border-red-300 transition-all cursor-pointer flex flex-col" onclick="navigate('action')">
                         <div class="text-4xl mb-3">🛡️</div>
                         <div class="inline-block bg-red-50 text-red-700 text-xs font-bold px-2 py-1 rounded-full mb-2 self-start">⏱ 15 分鐘</div>
                         <h3 class="text-lg font-bold text-slate-800 mb-1">AI 倫理與邊界</h3>
@@ -198,13 +198,15 @@
                     <div class="bg-teal-50 border-l-4 border-teal-500 p-6 rounded-r-xl shadow-sm border border-teal-100/50">
                         <ul class="space-y-4 text-base text-slate-700 leading-relaxed">
                             <li><strong>🧠 大語言模型 (LLM)：</strong> 想像一位讀過人類所有藏書的「超級學霸」。它並沒有真正的人類意識，但因為預訓練 (Pre-trained) 時看過海量的書籍與文章，所以能根據我們輸入的文字，精準「猜」出下一個最合理的字詞。這就是 ChatGPT 或 Gemini 等 AI 工具的基礎大腦。</li>
-                            <li><strong>⚡ Transformer 架構：</strong> 這是讓 AI 產生跨時代突破的「閱讀超能力」。傳統 AI 只能逐字閱讀，讀到後面就忘了前面；而 Transformer 擁有「注意力機制 (Attention)」，能一眼看穿整段對話，瞬間理解詞彙之間的前後文關聯。就像讀推理小說時，能立刻將第一頁的線索與最後一頁的結局完美連結。</li>
+                            <li><strong>⚡ Transformer 架構：</strong> 這是讓 AI 產生跨時代突破的「閱讀超能力」。傳統 AI 只能逐字閱讀，讀到後面就忘了前面；而 Transformer 擁有「注意力機制 (Attention)」，能一眼看穿整段對話，瞬間理解詞彙之間的前後文關聯。就像讀推理小說時，能立刻將第一頁的線索與最後一頁的結局完美連結。<br>
+                                <a href="https://youtu.be/xrL6yDz2TKs" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 mt-1 text-sm font-semibold text-teal-600 hover:text-teal-800 transition-colors">🎬 延伸影片：Transformer 架構詳解</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200 hover:shadow-md hover:-translate-y-0.5 hover:border-teal-300 transition-all">
                         <h3 class="text-2xl font-bold text-teal-700 mb-4 flex items-center"><span class="text-3xl mr-2">🎲</span> 機率性的「文字接龍」</h3>
                         <p class="text-slate-600 mb-4 text-base leading-relaxed">
                             大語言模型並非真的「讀懂」知識。它是一個巨大的<b>統計預測引擎</b>。當您輸入一段文字時，它會計算下一個詞彙出現的機率。
@@ -222,7 +224,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200 hover:shadow-md hover:-translate-y-0.5 hover:border-teal-300 transition-all">
                         <h3 class="text-2xl font-bold text-teal-700 mb-4 flex items-center"><span class="text-3xl mr-2">🪙</span> Token (詞元)：處理單位</h3>
                         <p class="text-slate-600 mb-4 text-base leading-relaxed">
                             AI 不直接讀取單字，而是將文字拆解為 <b>Token</b>。這是 AI 處理資訊的最小單位。
@@ -244,7 +246,7 @@
                         </a>
                     </div>
 
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200 hover:shadow-md hover:-translate-y-0.5 hover:border-blue-300 transition-all">
                         <h3 class="text-2xl font-bold text-blue-600 mb-4 flex items-center"><span class="text-3xl mr-2">🪧</span> Context Window (上下文窗口)：記憶限制</h3>
                         <p class="text-slate-600 mb-4 text-base leading-relaxed">
                             AI 每一個對話串的記憶是有限的。想像一塊空間有限的「滾動白板」，當新對話不斷寫入底部，頂端的舊資訊就會被推出去並擦除。本展示模擬記憶極限為 <b>6 個對話</b>，超出後舊訊息將被「遺忘」。
@@ -262,7 +264,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200 hover:shadow-md hover:-translate-y-0.5 hover:border-blue-300 transition-all">
                         <h3 class="text-2xl font-bold text-blue-600 mb-4 flex items-center"><span class="text-3xl mr-2">🎯</span> Prompt Engineering (提示詞工程)</h3>
                         <p class="text-slate-600 mb-4 text-base leading-relaxed">
                             提示詞（Prompt）是你下達給 AI 的指令。精準的提示詞能大幅減少 AI 的「幻覺」，引導它產出高質量、符合目標的內容。
@@ -277,13 +279,13 @@
                         </p>
                     </div>
 
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200 hover:shadow-md hover:-translate-y-0.5 hover:border-amber-300 transition-all">
                         <h3 class="text-2xl font-bold text-amber-600 mb-4 flex items-center"><span class="text-3xl mr-2">👁️‍🗨️</span> 多模態 (Multimodal)：跨越文本</h3>
                         <p class="text-slate-600 mb-4 text-base leading-relaxed">
                             現代 AI 不再侷限於文字。它能同時理解、處理並生成圖像、語音甚至是影片，如同人類運用多種感官來認知世界。
                         </p>
                         <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-100 text-base mb-4">
-                            <strong>💡 應用情境：</strong> 上傳一張手繪的活動流程草圖，AI 能瞬間看懂，並為你轉換成結構化的 Word 表格或企劃書草稿。
+                            <strong>💡 應用情境：</strong> 上傳一張手繪的活動流程草圖，AI 能瞬間看懂，並為你轉換成結構化的 Google文件。
                         </div>
                         <p class="text-base text-slate-600">
                             <b>核心優勢：</b><br>
@@ -293,7 +295,7 @@
                         </p>
                     </div>
 
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200 hover:shadow-md hover:-translate-y-0.5 hover:border-amber-300 transition-all">
                         <h3 class="text-2xl font-bold text-amber-600 mb-4 flex items-center"><span class="text-3xl mr-2">🏗️</span> Context Engineering (上下文工程)：精準度優化</h3>
                         <p class="text-slate-600 mb-4 text-base leading-relaxed">
                             除了提問，提供「參考樣本」及「規格書」等能顯著提升 AI 表現。這被稱為 <b>Few-shot Prompting</b>。
@@ -569,8 +571,8 @@
                         <ul class="text-base text-slate-600 space-y-1">
                             <li>1. <b>推理路徑：</b> 檢索政府數據 ➔ 尋找 NGO 報告 ➔ 對比國際案例。</li>
                             <li>2. <b>動態追問：</b> AI 反向提問，體現「協作式研究」。</li>
-                            <li>3. <b>可信度建設：</b> 報告末尾的參考文獻連結，對撰寫 Funding Proposal 至關重要。</li>
-                            <li>4. <b>儲存為 Google 文件：</b> 研究完成後，點擊報告右上角的「匯出」按鈕，選擇「匯出至 Google 文件」，即可將完整報告（含參考來源連結）直接存入你的 Google 雲端硬碟，方便後續以 Canvas 協作編輯。</li>
+                            <li>3. <b>可信度建設：</b> 報告末尾的參考文獻連結，對撰寫計劃書至關重要。</li>
+                            <li>4. <b>儲存為 Google 文件：</b> 研究完成後，點擊報告右上角的「分享」按鈕，選擇「匯出至文件」，即可將完整報告（含參考來源連結）直接存入你的 Google 雲端硬碟。</li>
                         </ul>
                     </div>
                 </div>
@@ -776,46 +778,46 @@
                         <h3 class="text-2xl font-bold text-slate-800 flex items-center gap-2"><span>🔬</span> 提示詞 7 大要素</h3>
                         <span class="text-xs font-bold bg-amber-100 text-amber-800 px-3 py-1 rounded-full uppercase tracking-wide">Nano Banana 2 精華</span>
                     </div>
-                    <p class="text-sm text-slate-500 mb-4">每個有效的影像提示詞都應涵蓋以下要素（不需全部，但越具體越好）</p>
+                    <p class="text-base text-slate-500 mb-4">每個有效的影像提示詞都應涵蓋以下要素（不需全部，但越具體越好）</p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
                         <div class="p-3 rounded-xl border-l-4 bg-red-50" style="border-color:#EF4444">
-                            <div class="text-xs font-bold text-red-500 mb-1">要素 1</div>
-                            <div class="font-bold text-slate-800 text-sm">Subject 主體</div>
-                            <div class="text-xs text-slate-500 mt-1 italic">一位穿和服的女子 / 清晨香港街市</div>
+                            <div class="text-sm font-bold text-red-500 mb-1">要素 1</div>
+                            <div class="font-bold text-slate-800 text-base">Subject 主體</div>
+                            <div class="text-sm text-slate-500 mt-1 italic">一位穿和服的女子 / 清晨香港街市</div>
                         </div>
                         <div class="p-3 rounded-xl border-l-4 bg-orange-50" style="border-color:#F97316">
-                            <div class="text-xs font-bold text-orange-500 mb-1">要素 2</div>
-                            <div class="font-bold text-slate-800 text-sm">Action 動作/狀態</div>
-                            <div class="text-xs text-slate-500 mt-1 italic">正在品嚐雞蛋仔 / 在雨中排隊</div>
+                            <div class="text-sm font-bold text-orange-500 mb-1">要素 2</div>
+                            <div class="font-bold text-slate-800 text-base">Action 動作/狀態</div>
+                            <div class="text-sm text-slate-500 mt-1 italic">正在品嚐雞蛋仔 / 在雨中排隊</div>
                         </div>
                         <div class="p-3 rounded-xl border-l-4 bg-yellow-50" style="border-color:#EAB308">
-                            <div class="text-xs font-bold text-yellow-600 mb-1">要素 3</div>
-                            <div class="font-bold text-slate-800 text-sm">Environment 環境</div>
-                            <div class="text-xs text-slate-500 mt-1 italic">暴雨時段的旺角街頭，晚間七時</div>
+                            <div class="text-sm font-bold text-yellow-600 mb-1">要素 3</div>
+                            <div class="font-bold text-slate-800 text-base">Environment 環境</div>
+                            <div class="text-sm text-slate-500 mt-1 italic">暴雨時段的旺角街頭，晚間七時</div>
                         </div>
                         <div class="p-3 rounded-xl border-l-4 bg-green-50" style="border-color:#22C55E">
-                            <div class="text-xs font-bold text-green-600 mb-1">要素 4</div>
-                            <div class="font-bold text-slate-800 text-sm">Composition 構圖</div>
-                            <div class="text-xs text-slate-500 mt-1 italic">50mm 鏡頭，人物居中，淺景深</div>
+                            <div class="text-sm font-bold text-green-600 mb-1">要素 4</div>
+                            <div class="font-bold text-slate-800 text-base">Composition 構圖</div>
+                            <div class="text-sm text-slate-500 mt-1 italic">50mm 鏡頭，人物居中，淺景深</div>
                         </div>
                         <div class="p-3 rounded-xl border-l-4 bg-blue-50" style="border-color:#3B82F6">
-                            <div class="text-xs font-bold text-blue-500 mb-1">要素 5</div>
-                            <div class="font-bold text-slate-800 text-sm">Lighting 光線/情緒</div>
-                            <div class="text-xs text-slate-500 mt-1 italic">黃金時段，金色逆光邊緣光</div>
+                            <div class="text-sm font-bold text-blue-500 mb-1">要素 5</div>
+                            <div class="font-bold text-slate-800 text-base">Lighting 光線/情緒</div>
+                            <div class="text-sm text-slate-500 mt-1 italic">黃金時段，金色逆光邊緣光</div>
                         </div>
                         <div class="p-3 rounded-xl border-l-4 bg-purple-50" style="border-color:#8B5CF6">
-                            <div class="text-xs font-bold text-purple-500 mb-1">要素 6</div>
-                            <div class="font-bold text-slate-800 text-sm">Style 風格</div>
-                            <div class="text-xs text-slate-500 mt-1 italic">電影感色調、復古菲林感</div>
+                            <div class="text-sm font-bold text-purple-500 mb-1">要素 6</div>
+                            <div class="font-bold text-slate-800 text-base">Style 風格</div>
+                            <div class="text-sm text-slate-500 mt-1 italic">電影感色調、復古菲林感</div>
                         </div>
                         <div class="p-3 rounded-xl border-l-4 bg-pink-50 sm:col-span-2" style="border-color:#EC4899">
-                            <div class="text-xs font-bold text-pink-500 mb-1">要素 7</div>
-                            <div class="font-bold text-slate-800 text-sm">Exclusions 排除項</div>
-                            <div class="text-xs text-slate-500 mt-1 italic">不要文字、不要浮水印、不要路人</div>
+                            <div class="text-sm font-bold text-pink-500 mb-1">要素 7</div>
+                            <div class="font-bold text-slate-800 text-base">Exclusions 排除項</div>
+                            <div class="text-sm text-slate-500 mt-1 italic">不要文字、不要浮水印、不要路人</div>
                         </div>
                     </div>
-                    <div class="bg-slate-900 rounded-xl px-5 py-3 font-mono text-sm leading-relaxed overflow-x-auto">
-                        <span class="text-cyan-400">[主體]</span><span class="text-green-400"> + </span><span class="text-cyan-300">[動作/狀態]</span><span class="text-green-400"> + </span><span class="text-cyan-300">[場景環境]</span><span class="text-green-400"> + </span><span class="text-cyan-300">[攝影/藝術風格]</span><span class="text-green-400"> + </span><span class="text-cyan-300">[鏡頭/構圖]</span><span class="text-green-400"> + </span><span class="text-cyan-300">[光線/色調]</span><span class="text-green-400"> + </span><span class="text-cyan-300">[排除項目]</span>
+                    <div class="bg-slate-900 rounded-xl px-5 py-3 font-mono text-lg leading-relaxed overflow-x-auto">
+                        <span class="text-cyan-400">[主體]</span><span class="text-green-400"> + </span><span class="text-cyan-400">[動作/狀態]</span><span class="text-green-400"> + </span><span class="text-cyan-400">[場景環境]</span><span class="text-green-400"> + </span><span class="text-cyan-400">[鏡頭/構圖]</span><span class="text-green-400"> + </span><span class="text-cyan-400">[光線/色調]</span><span class="text-green-400"> + </span><span class="text-cyan-400">[風格]</span><span class="text-green-400"> + </span><span class="text-cyan-400">[排除項目]</span>
                     </div>
                 </div>
 
@@ -829,64 +831,64 @@
                         <div class="flex gap-3 p-4 bg-stone-50 rounded-xl border border-stone-100">
                             <div class="text-2xl flex-shrink-0">🎬</div>
                             <div>
-                                <div class="font-bold text-slate-800 text-sm mb-1">像創意總監一樣說話</div>
-                                <div class="text-xs text-slate-500 mb-2">用自然語言描述畫面，而非堆砌關鍵字</div>
-                                <div class="text-xs text-red-600 bg-red-50 rounded px-2 py-1 mb-1">❌ 貓 夜晚 城市 霓虹燈</div>
-                                <div class="text-xs text-green-700 bg-green-50 rounded px-2 py-1">✅ 一隻淘氣的貓試圖偷魚，溫暖廚房光，漫畫風格</div>
+                                <div class="font-bold text-slate-800 text-lg mb-1">像創意總監一樣說話</div>
+                                <div class="text-base text-slate-500 mb-2">用自然語言描述畫面，而非堆砌關鍵字</div>
+                                <div class="text-base text-red-600 bg-red-50 rounded px-2 py-1 mb-1">❌ 貓 夜晚 城市 霓虹燈</div>
+                                <div class="text-base text-green-700 bg-green-50 rounded px-2 py-1">✅ 一隻淘氣的貓試圖偷魚，溫暖廚房光，漫畫風格</div>
                             </div>
                         </div>
                         <div class="flex gap-3 p-4 bg-stone-50 rounded-xl border border-stone-100">
                             <div class="text-2xl flex-shrink-0">📷</div>
                             <div>
-                                <div class="font-bold text-slate-800 text-sm mb-1">使用具體攝影語言</div>
-                                <div class="text-xs text-slate-500 mb-2">提及真實相機、菲林、鏡頭型號</div>
-                                <div class="text-xs text-green-700 bg-green-50 rounded px-2 py-1">✅ 萊卡 M10，50mm Summilux，Kodak Portra 400 菲林</div>
+                                <div class="font-bold text-slate-800 text-lg mb-1">使用具體攝影語言</div>
+                                <div class="text-base text-slate-500 mb-2">提及真實相機、菲林、鏡頭型號</div>
+                                <div class="text-base text-green-700 bg-green-50 rounded px-2 py-1">✅ 萊卡 M10，50mm Summilux，Kodak Portra 400 菲林</div>
                             </div>
                         </div>
                         <div class="flex gap-3 p-4 bg-stone-50 rounded-xl border border-stone-100">
                             <div class="text-2xl flex-shrink-0">📝</div>
                             <div>
-                                <div class="font-bold text-slate-800 text-sm mb-1">文字渲染用雙引號</div>
-                                <div class="text-xs text-slate-500 mb-2">圖像中顯示特定文字必須加雙引號</div>
-                                <div class="text-xs text-red-600 bg-red-50 rounded px-2 py-1 mb-1">❌ 在圖上寫 灣仔茶餐廳</div>
-                                <div class="text-xs text-green-700 bg-green-50 rounded px-2 py-1">✅ 顯示文字：「灣仔茶餐廳」</div>
+                                <div class="font-bold text-slate-800 text-lg mb-1">文字渲染用雙引號</div>
+                                <div class="text-base text-slate-500 mb-2">圖像中顯示特定文字必須加雙引號</div>
+                                <div class="text-base text-red-600 bg-red-50 rounded px-2 py-1 mb-1">❌ 在圖上寫 灣仔茶餐廳</div>
+                                <div class="text-base text-green-700 bg-green-50 rounded px-2 py-1">✅ 顯示文字：「灣仔茶餐廳」</div>
                             </div>
                         </div>
                         <div class="flex gap-3 p-4 bg-stone-50 rounded-xl border border-stone-100">
                             <div class="text-2xl flex-shrink-0">🎨</div>
                             <div>
-                                <div class="font-bold text-slate-800 text-sm mb-1">加入參考風格</div>
-                                <div class="text-xs text-slate-500 mb-2">一個好的參考詞激活多種視覺關聯</div>
-                                <div class="text-xs text-green-700 bg-green-50 rounded px-2 py-1">✅ 王家衛配色，參考《花樣年華》2000年風格</div>
+                                <div class="font-bold text-slate-800 text-lg mb-1">加入參考風格</div>
+                                <div class="text-base text-slate-500 mb-2">一個好的參考詞激活多種視覺關聯</div>
+                                <div class="text-base text-green-700 bg-green-50 rounded px-2 py-1">✅ 王家衛配色，參考《花樣年華》2000年風格</div>
                             </div>
                         </div>
                         <div class="flex gap-3 p-4 bg-stone-50 rounded-xl border border-stone-100">
                             <div class="text-2xl flex-shrink-0">🚫</div>
                             <div>
-                                <div class="font-bold text-slate-800 text-sm mb-1">善用負面提示</div>
-                                <div class="text-xs text-slate-500 mb-2">說清楚「不要」通常比只說「要」更有效</div>
-                                <div class="text-xs text-green-700 bg-green-50 rounded px-2 py-1">✅ 不要文字、不要浮水印、不要路人、不要模糊</div>
+                                <div class="font-bold text-slate-800 text-lg mb-1">善用負面提示</div>
+                                <div class="text-base text-slate-500 mb-2">說清楚「不要」通常比只說「要」更有效</div>
+                                <div class="text-base text-green-700 bg-green-50 rounded px-2 py-1">✅ 不要文字、不要路人、不要模糊</div>
                             </div>
                         </div>
                         <div class="flex gap-3 p-4 bg-stone-50 rounded-xl border border-stone-100">
                             <div class="text-2xl flex-shrink-0">🔄</div>
                             <div>
-                                <div class="font-bold text-slate-800 text-sm mb-1">迭代編輯是強項</div>
-                                <div class="text-xs text-slate-500 mb-2">圖像 80% 正確時不要全部重來</div>
-                                <div class="text-xs text-green-700 bg-green-50 rounded px-2 py-1">✅ 很好，但請把光線改成夕陽，文字改成藍色</div>
+                                <div class="font-bold text-slate-800 text-lg mb-1">迭代編輯是強項</div>
+                                <div class="text-base text-slate-500 mb-2">圖像 80% 正確時不要全部重來</div>
+                                <div class="text-base text-green-700 bg-green-50 rounded px-2 py-1">✅ 很好，但請把光線改成夕陽，文字改成藍色</div>
                             </div>
                         </div>
                         <div class="flex gap-3 p-4 bg-stone-50 rounded-xl border border-stone-100 md:col-span-2">
                             <div class="text-2xl flex-shrink-0">📐</div>
                             <div>
-                                <div class="font-bold text-slate-800 text-sm mb-1">每次都加上比例（AR）</div>
-                                <div class="text-xs text-slate-500 mb-2">不指定比例會使用預設，可能不符需求</div>
+                                <div class="font-bold text-slate-800 text-lg mb-1">每次都加上比例（AR）</div>
+                                <div class="text-base text-slate-500 mb-2">不指定比例會使用預設，可能不符需求</div>
                                 <div class="flex flex-wrap gap-2 mt-1">
-                                    <span class="text-xs bg-indigo-50 text-indigo-700 px-2 py-1 rounded font-semibold">16:9 電影/橫向</span>
-                                    <span class="text-xs bg-amber-50 text-amber-700 px-2 py-1 rounded font-semibold">4:5 Instagram</span>
-                                    <span class="text-xs bg-green-50 text-green-700 px-2 py-1 rounded font-semibold">9:16 社群直式</span>
-                                    <span class="text-xs bg-purple-50 text-purple-700 px-2 py-1 rounded font-semibold">4:1 漫畫分鏡</span>
-                                    <span class="text-xs bg-stone-100 text-stone-700 px-2 py-1 rounded font-semibold">3:4 海報</span>
+                                    <span class="text-base bg-indigo-50 text-indigo-700 px-2 py-1 rounded font-semibold">16:9 電影/橫向</span>
+                                    <span class="text-base bg-amber-50 text-amber-700 px-2 py-1 rounded font-semibold">4:5 Instagram</span>
+                                    <span class="text-base bg-green-50 text-green-700 px-2 py-1 rounded font-semibold">9:16 社群直式</span>
+                                    <span class="text-base bg-purple-50 text-purple-700 px-2 py-1 rounded font-semibold">4:1 漫畫分鏡</span>
+                                    <span class="text-base bg-stone-100 text-stone-700 px-2 py-1 rounded font-semibold">3:4 海報</span>
                                 </div>
                             </div>
                         </div>
@@ -899,69 +901,69 @@
                         <h3 class="text-2xl font-bold text-slate-800 flex items-center gap-2"><span>📋</span> 精選模板預覽（3／10）</h3>
                         <span class="text-xs font-bold bg-amber-100 text-amber-800 px-3 py-1 rounded-full uppercase tracking-wide">Nano Banana 2 精華</span>
                     </div>
-                    <p class="text-sm text-slate-500 mb-4">以下為課堂最常用的 3 個模板，完整 10 個模板請前往 Nano Banana 2。</p>
+                    <p class="text-base text-slate-500 mb-4">以下為課堂最常用的 3 個模板，完整 10 個模板請前往 Nano Banana 2。</p>
 
                     <!-- 模板 Tabs -->
                     <div class="flex gap-2 mb-0 border-b border-stone-200 overflow-x-auto">
-                        <button onclick="switchImgTab('img-t1')" id="img-tab-1" class="px-4 py-2.5 rounded-t-xl font-bold text-sm transition-all border border-b-0 border-stone-200 bg-white text-amber-700 -mb-px whitespace-nowrap">📣 中文海報</button>
-                        <button onclick="switchImgTab('img-t2')" id="img-tab-2" class="px-4 py-2.5 rounded-t-xl font-bold text-sm transition-all border border-b-0 border-stone-200 bg-stone-100 text-slate-500 hover:text-amber-700 hover:bg-stone-50 whitespace-nowrap">📊 資訊圖表</button>
-                        <button onclick="switchImgTab('img-t3')" id="img-tab-3" class="px-4 py-2.5 rounded-t-xl font-bold text-sm transition-all border border-b-0 border-stone-200 bg-stone-100 text-slate-500 hover:text-amber-700 hover:bg-stone-50 whitespace-nowrap">📷 攝影寫真</button>
+                        <button onclick="switchImgTab('img-t1')" id="img-tab-1" class="px-4 py-2.5 rounded-t-xl font-bold text-lg transition-all border border-b-0 border-stone-200 bg-white text-amber-700 -mb-px whitespace-nowrap">📣 中文海報</button>
+                        <button onclick="switchImgTab('img-t2')" id="img-tab-2" class="px-4 py-2.5 rounded-t-xl font-bold text-lg transition-all border border-b-0 border-stone-200 bg-stone-100 text-slate-500 hover:text-amber-700 hover:bg-stone-50 whitespace-nowrap">📊 資訊圖表</button>
+                        <button onclick="switchImgTab('img-t3')" id="img-tab-3" class="px-4 py-2.5 rounded-t-xl font-bold text-lg transition-all border border-b-0 border-stone-200 bg-stone-100 text-slate-500 hover:text-amber-700 hover:bg-stone-50 whitespace-nowrap">📷 攝影寫真</button>
                     </div>
                     <div class="border border-t-0 border-stone-200 rounded-b-xl rounded-tr-xl overflow-hidden">
 
                         <!-- 模板一：中文海報 -->
                         <div id="img-t1" class="p-5">
                             <div class="flex items-center gap-2 mb-3">
-                                <span class="text-xs font-bold bg-slate-800 text-amber-400 px-2 py-1 rounded">模板二：中文海報/廣告</span>
-                                <span class="text-xs text-slate-400">海報 · 廣告 · 品牌</span>
+                                <span class="text-base font-bold bg-slate-800 text-amber-400 px-2 py-1 rounded">模板二：中文海報/廣告</span>
+                                <span class="text-base text-slate-400">海報 · 廣告 · 品牌</span>
                             </div>
-                            <div class="bg-stone-100 rounded-lg p-3 text-xs text-slate-500 font-mono mb-3 leading-relaxed">
+                            <div class="bg-stone-100 rounded-lg p-3 text-base text-slate-500 font-mono mb-3 leading-relaxed">
 建立一張 [比例] 的 [資產類型]，主體是 [描述]。<br>
 畫面上方居中顯示：「[主要文字]」，字體 [字體描述]，顏色 [顏色]。<br>
 畫面下方居中顯示：「[副標文字]」，字體 [字體描述]，顏色 [顏色]。<br>
 [風格/色調/氛圍描述]。所有文字必須準確無誤。
                             </div>
                             <div class="bg-slate-900 rounded-xl p-4 relative mb-3">
-                                <button onclick="copyImgPrompt('img-p1', this)" class="absolute top-3 right-3 bg-white/10 hover:bg-amber-400 hover:text-slate-900 text-slate-300 text-xs px-3 py-1 rounded-lg transition-all">複製</button>
-                                <p id="img-p1" class="text-slate-200 text-sm leading-relaxed font-mono pr-16">建立一張 3:4 直向的課程宣傳海報，主體是一隻正在接受年青學員護理的可愛柴犬，背景是溫暖的室內環境。畫面上方居中顯示：「職涯發展及持續教育部」，字體為粗體無襯線字，顏色為品牌藍色。畫面中央顯示：「寵物護理員基礎證書課程」，字體為粗宋體，顏色為專業深灰。畫面下方居中顯示：「現正招生｜ERB課程」，字體為中等粗細，顏色為淺灰色。暖色調，活潑正面氛圍，乾淨專業的商業設計。所有文字必須準確無誤。</p>
+                                <button onclick="copyImgPrompt('img-p1', this)" class="absolute top-3 right-3 bg-white/10 hover:bg-amber-400 hover:text-slate-900 text-slate-300 text-sm px-3 py-1 rounded-lg transition-all">複製</button>
+                                <p id="img-p1" class="text-slate-200 text-lg leading-relaxed font-mono pr-16">建立一張 3:4 直向的課程宣傳海報，主體是一隻正在接受年青學員護理的可愛柴犬，背景是溫暖的室內環境。畫面上方居中顯示：「職涯發展及持續教育部」，字體為粗體無襯線字，顏色為品牌藍色。畫面中央顯示：「寵物護理員基礎證書課程」，字體為粗宋體，顏色為專業深灰。畫面下方居中顯示：「現正招生｜ERB課程」，字體為中等粗細，顏色為淺灰色。暖色調，活潑正面氛圍，乾淨專業的商業設計。所有文字必須準確無誤。</p>
                             </div>
-                            <p class="text-xs text-slate-500">🎯 適合場景：課程宣傳、社群廣告、活動海報</p>
+                            <p class="text-base text-slate-500">🎯 適合場景：課程宣傳、社群廣告、活動海報</p>
                         </div>
 
                         <!-- 模板二：資訊圖表 -->
                         <div id="img-t2" class="p-5 hidden">
                             <div class="flex items-center gap-2 mb-3">
-                                <span class="text-xs font-bold bg-slate-800 text-amber-400 px-2 py-1 rounded">模板八：資訊圖表</span>
-                                <span class="text-xs text-slate-400">資訊 · 教育 · 數據</span>
+                                <span class="text-base font-bold bg-slate-800 text-amber-400 px-2 py-1 rounded">模板八：資訊圖表</span>
+                                <span class="text-base text-slate-400">資訊 · 教育 · 數據</span>
                             </div>
-                            <div class="bg-stone-100 rounded-lg p-3 text-xs text-slate-500 font-mono mb-3 leading-relaxed">
+                            <div class="bg-stone-100 rounded-lg p-3 text-base text-slate-500 font-mono mb-3 leading-relaxed">
 建立一張 [比例] 的資訊圖表，主題是 [主題描述]，<br>
 包含 [數量] 個主要資訊區塊：[具體內容描述]。<br>
 使用 [色調] 配色方案，[字體/排版風格]，乾淨的版面設計。
                             </div>
                             <div class="bg-slate-900 rounded-xl p-4 relative mb-3">
-                                <button onclick="copyImgPrompt('img-p2', this)" class="absolute top-3 right-3 bg-white/10 hover:bg-amber-400 hover:text-slate-900 text-slate-300 text-xs px-3 py-1 rounded-lg transition-all">複製</button>
-                                <p id="img-p2" class="text-slate-200 text-sm leading-relaxed font-mono pr-16">建立一張 4:5 的繁體中文資訊圖表，主題是香港十大必吃傳統美食，包含5個主要資訊區塊：菠蘿油、蛋撻、奶茶、雲吞麵、咖哩魚蛋。使用傳統香港茶餐廳風格配色（米白、紅、綠、奶白），大字標題，副標題解釋，乾淨現代的版面設計，每個美食區配有插圖化呈現。</p>
+                                <button onclick="copyImgPrompt('img-p2', this)" class="absolute top-3 right-3 bg-white/10 hover:bg-amber-400 hover:text-slate-900 text-slate-300 text-sm px-3 py-1 rounded-lg transition-all">複製</button>
+                                <p id="img-p2" class="text-slate-200 text-lg leading-relaxed font-mono pr-16">建立一張 4:5 的繁體中文資訊圖表，主題是香港十大必吃傳統美食，包含5個主要資訊區塊：菠蘿油、蛋撻、奶茶、雲吞麵、咖哩魚蛋。使用傳統香港茶餐廳風格配色（米白、紅、綠、奶白），大字標題，副標題解釋，乾淨現代的版面設計，每個美食區配有插圖化呈現。</p>
                             </div>
-                            <p class="text-xs text-slate-500">🎯 適合場景：教育內容、社交媒體分享、品牌資訊傳遞</p>
+                            <p class="text-base text-slate-500">🎯 適合場景：教育內容、社交媒體分享、品牌資訊傳遞</p>
                         </div>
 
                         <!-- 模板三：攝影寫真 -->
                         <div id="img-t3" class="p-5 hidden">
                             <div class="flex items-center gap-2 mb-3">
-                                <span class="text-xs font-bold bg-slate-800 text-amber-400 px-2 py-1 rounded">模板一：攝影寫真</span>
-                                <span class="text-xs text-slate-400">寫真 · 人物 · 城市</span>
+                                <span class="text-base font-bold bg-slate-800 text-amber-400 px-2 py-1 rounded">模板一：攝影寫真</span>
+                                <span class="text-base text-slate-400">寫真 · 人物 · 城市</span>
                             </div>
-                            <div class="bg-stone-100 rounded-lg p-3 text-xs text-slate-500 font-mono mb-3 leading-relaxed">
+                            <div class="bg-stone-100 rounded-lg p-3 text-base text-slate-500 font-mono mb-3 leading-relaxed">
 [主體描述，包括穿著/表情/姿勢]，拍攝於 [地點/時間/天氣]，<br>
 [相機型號]，[鏡頭]，[構圖方式]，[景深]，[光線方向與色溫]，<br>
 [風格參考]。不要出現 [排除元素]。
                             </div>
                             <div class="bg-slate-900 rounded-xl p-4 relative mb-3">
-                                <button onclick="copyImgPrompt('img-p3', this)" class="absolute top-3 right-3 bg-white/10 hover:bg-amber-400 hover:text-slate-900 text-slate-300 text-xs px-3 py-1 rounded-lg transition-all">複製</button>
-                                <p id="img-p3" class="text-slate-200 text-sm leading-relaxed font-mono pr-16">一位穿著淺色風衣的男子站在雨天的香港旺角街道上，濕潤的路面有霓虹燈倒影。寫實攝影風格，35mm鏡頭，淺景深，夜晚冷色調，左側軟主光加暖色邊緣光分離主體與深色背景。不要其他路人。</p>
+                                <button onclick="copyImgPrompt('img-p3', this)" class="absolute top-3 right-3 bg-white/10 hover:bg-amber-400 hover:text-slate-900 text-slate-300 text-sm px-3 py-1 rounded-lg transition-all">複製</button>
+                                <p id="img-p3" class="text-slate-200 text-lg leading-relaxed font-mono pr-16">一位穿著淺色風衣的男子站在雨天的香港旺角街道上，濕潤的路面有霓虹燈倒影。寫實攝影風格，35mm鏡頭，淺景深，夜晚冷色調，左側軟主光加暖色邊緣光分離主體與深色背景。不要其他路人。</p>
                             </div>
-                            <p class="text-xs text-slate-500">🎯 適合場景：人物寫真、產品攝影、城市風光照</p>
+                            <p class="text-base text-slate-500">🎯 適合場景：人物寫真、產品攝影、城市風光照</p>
                         </div>
                     </div>
                 </div>
