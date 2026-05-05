@@ -78,6 +78,46 @@
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* ─── Embedded Prompt Collapsible Blocks ─── */
+        .prompt-embed { margin-top: 20px; border: 2px solid #e7e5e4; border-radius: 16px; overflow: hidden; }
+        .prompt-toggle {
+            width: 100%; text-align: left; padding: 14px 18px;
+            background: #f5f5f4; border: none; cursor: pointer;
+            font-size: 1rem; font-weight: 700; color: #44403c;
+            display: flex; align-items: center; justify-content: space-between;
+            transition: background 0.2s;
+        }
+        .prompt-toggle:hover { background: #e7e5e4; }
+        .prompt-toggle .arrow { transition: transform 0.3s; }
+        .prompt-toggle.active .arrow { transform: rotate(180deg); }
+        .prompt-panel { display: none; padding: 16px 18px; background: #fafaf9; }
+        .prompt-panel.active { display: block; }
+        .prompt-panel pre {
+            background: #1e293b; color: #e2e8f0; padding: 14px;
+            border-radius: 10px; font-family: monospace; font-size: 0.95rem;
+            line-height: 1.6; white-space: pre-wrap; word-break: break-word;
+            margin-bottom: 10px;
+        }
+        .prompt-panel .copy-mini {
+            background: #0f766e; color: white; border: none;
+            padding: 6px 14px; border-radius: 8px; font-size: 0.85rem;
+            font-weight: 600; cursor: pointer; transition: background 0.2s;
+        }
+        .prompt-panel .copy-mini:hover { background: #115e59; }
+        .prompt-panel .copy-mini.copied { background: #059669; }
+
+        /* ─── Post-class Checklist ─── */
+        .checklist-item {
+            display: flex; align-items: center; gap: 10px;
+            padding: 8px 12px; border-radius: 8px;
+            transition: background 0.15s;
+        }
+        .checklist-item:hover { background: #f5f5f4; }
+        .checklist-item input[type="checkbox"] {
+            width: 20px; height: 20px; accent-color: #0f766e; cursor: pointer;
+        }
+        .checklist-item.checked label { text-decoration: line-through; color: #a8a29e; }
     </style>
 </head>
 <body class="antialiased h-screen flex flex-col md:flex-row overflow-hidden">
@@ -312,6 +352,62 @@
                         </p>
                     </div>
                 </div>
+
+                <!-- 🎯 本環節練習提示詞 -->
+                <div class="mt-8 bg-amber-50 border border-amber-200 rounded-2xl p-5">
+                    <h4 class="text-lg font-bold text-amber-800 mb-3 flex items-center gap-2">📝 本環節練習提示詞（點擊展開）</h4>
+
+                    <!-- Prompt 1 -->
+                    <div class="prompt-embed mb-3">
+                        <button class="prompt-toggle" onclick="togglePromptEmbed(this)">
+                            <span>Prompt #1：LLM 機率原理</span>
+                            <span class="arrow">▼</span>
+                        </button>
+                        <div class="prompt-panel">
+                            <pre>請用三個不同風格（正式、輕鬆、詩意）完成這句話：「今天的工作坊，讓我感到⋯⋯」</pre>
+                            <button class="copy-mini" onclick="copyEmbedPrompt(this)">📋 複製</button>
+                        </div>
+                    </div>
+
+                    <!-- Prompt 2 -->
+                    <div class="prompt-embed mb-3">
+                        <button class="prompt-toggle" onclick="togglePromptEmbed(this)">
+                            <span>Prompt #2：幻覺現象</span>
+                            <span class="arrow">▼</span>
+                        </button>
+                        <div class="prompt-panel">
+                            <pre>請列出香港僱員再培訓局（ERB）於 2027 年最新發佈的五項政策文件及其發佈日期。</pre>
+                            <button class="copy-mini" onclick="copyEmbedPrompt(this)">📋 複製</button>
+                        </div>
+                    </div>
+
+                    <!-- Prompt 3 -->
+                    <div class="prompt-embed mb-3">
+                        <button class="prompt-toggle" onclick="togglePromptEmbed(this)">
+                            <span>Prompt #3：多模態能力</span>
+                            <span class="arrow">▼</span>
+                        </button>
+                        <div class="prompt-panel">
+                            <pre>（上傳單據、FO Expenses Report Template 必要欄位截圖）分析上傳 ?? 張 單據的資料，製作一個如最後一張圖片的表格 (必要資料: Transaction date, Payment method, Transaction amount, Merchant, Additional Information，沒有資料的欄位請留空)，日期資料需為Excel的日期數值而格式為YYYY/MM/DD，最後將表格製成 xlsx 格式檔案。</pre>
+                            <button class="copy-mini" onclick="copyEmbedPrompt(this)">📋 複製</button>
+                        </div>
+                    </div>
+
+                    <!-- Prompt 4 -->
+                    <div class="prompt-embed">
+                        <button class="prompt-toggle" onclick="togglePromptEmbed(this)">
+                            <span>Prompt #4：弱 vs 強提示（對比練習）</span>
+                            <span class="arrow">▼</span>
+                        </button>
+                        <div class="prompt-panel">
+                            <p class="text-sm font-bold text-red-500 mb-1">❌ 弱提示</p>
+                            <pre>幫我寫一則給學員的中心停電的短訊。</pre>
+                            <p class="text-sm font-bold text-green-600 mb-1 mt-3">✅ 強提示</p>
+                            <pre>以班主任的溫暖語氣，寫一封60-70字的中文短訊，說明因中心停電，下星期一及二的erb課堂將順延兩天，並提醒留意補課安排。</pre>
+                            <button class="copy-mini mt-2" onclick="copyEmbedPrompt(this)">📋 複製強提示</button>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <section id="section-care-lab" class="fade-in hidden">
@@ -386,6 +482,26 @@
                                 <span class="text-amber-400 font-bold text-base" id="accuracy-indicator">精確度預估：待計算</span>
                                 <button onclick="copyPrompt()" class="bg-stone-700 hover:bg-stone-600 px-4 py-2 rounded-lg transition-all text-base">📋 複製</button>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 🎯 本環節練習提示詞 -->
+                <div class="mt-8 bg-amber-50 border border-amber-200 rounded-2xl p-5">
+                    <h4 class="text-lg font-bold text-amber-800 mb-3 flex items-center gap-2">📝 本環節練習提示詞（點擊展開）</h4>
+
+                    <!-- Prompt 5 -->
+                    <div class="prompt-embed">
+                        <button class="prompt-toggle" onclick="togglePromptEmbed(this)">
+                            <span>Prompt #5：CARE — 中心WhatsApp 回覆</span>
+                            <span class="arrow">▼</span>
+                        </button>
+                        <div class="prompt-panel">
+                            <pre>【Context】你是ERB課程中心的行政幹事，負責回覆學員查詢，機構語氣親切專業。
+【Action】撰寫一個 WhatsApp 範本，回覆學員關於報名資格及課程費用的常見查詢。
+【Result】格式：稱謂→感謝查詢→正文→聯絡方式，字數約100字。
+【Example】參考附件的機構之前的 WhatsApp 訊息範本。</pre>
+                            <button class="copy-mini" onclick="copyEmbedPrompt(this)">📋 複製</button>
                         </div>
                     </div>
                 </div>
@@ -574,6 +690,23 @@
                             <li>3. <b>可信度建設：</b> 報告末尾的參考文獻連結，對撰寫計劃書至關重要。</li>
                             <li>4. <b>儲存為 Google 文件：</b> 研究完成後，點擊報告右上角的「分享」按鈕，選擇「匯出至文件」，即可將完整報告（含參考來源連結）直接存入你的 Google 雲端硬碟。</li>
                         </ul>
+                    </div>
+                </div>
+
+                <!-- 🎯 本環節練習提示詞 -->
+                <div class="mt-8 bg-amber-50 border border-amber-200 rounded-2xl p-5">
+                    <h4 class="text-lg font-bold text-amber-800 mb-3 flex items-center gap-2">📝 本環節練習提示詞（點擊展開）</h4>
+
+                    <!-- Prompt 12 -->
+                    <div class="prompt-embed">
+                        <button class="prompt-toggle" onclick="togglePromptEmbed(this)">
+                            <span>Prompt #12：Canvas 協作</span>
+                            <span class="arrow">▼</span>
+                        </button>
+                        <div class="prompt-panel">
+                            <pre>你是一位具備10年培訓經驗的溝通技巧顧問，為我起草一份兩頁的「處理刁難人士」講座的建議書，講座參加者為erb課程導師。建議書需包含：課程簡介、目標學員、學習成效、課程大綱及所需資源。完成後我想在 Canvas 上繼續修改細節。</pre>
+                            <button class="copy-mini" onclick="copyEmbedPrompt(this)">📋 複製</button>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -989,6 +1122,23 @@
                         <strong>⚠️ 倫理提醒：</strong> 生成的圖片可能帶有「刻板印象」（如：搜尋「醫生」預設出現男性），需要批判性地觀察生成結果。
                     </div>
                 </div>
+
+                <!-- 🎯 本環節練習提示詞 -->
+                <div class="mt-8 bg-amber-50 border border-amber-200 rounded-2xl p-5">
+                    <h4 class="text-lg font-bold text-amber-800 mb-3 flex items-center gap-2">📝 本環節練習提示詞（點擊展開）</h4>
+
+                    <!-- Prompt 14 -->
+                    <div class="prompt-embed">
+                        <button class="prompt-toggle" onclick="togglePromptEmbed(this)">
+                            <span>Prompt #14：影像生成（中文海報）</span>
+                            <span class="arrow">▼</span>
+                        </button>
+                        <div class="prompt-panel">
+                            <pre>建立一張 3:4 直向課程宣傳海報，主體是一位年輕學員正在使用電腦學習，電腦畫面顯示 Gemini的頁面。溫暖室內背景。畫面右上方有2個標籤「免學費」「有津貼」，中央顯示「人工智能知識及應用證書（兼讀制）」（粗宋體，深灰），下方顯示「現正招生 | ERB課程」（淺灰）。暖色調，活潑正面，乾淨商業設計風格。所有圖片內的人物為香港華人，不要出現外國人。</pre>
+                            <button class="copy-mini" onclick="copyEmbedPrompt(this)">📋 複製</button>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <section id="section-action" class="fade-in hidden">
@@ -1076,6 +1226,57 @@
                         <div class="text-amber-500 group-hover:text-amber-700 text-3xl flex-shrink-0">↗</div>
                     </div>
                 </a>
+
+                <!-- 課後練習清單 -->
+                <div class="bg-white border border-stone-200 rounded-2xl p-6 shadow-sm mb-8">
+                    <h3 class="text-2xl font-bold text-slate-800 mb-2 flex items-center"><span class="mr-2">✅</span> 課後自我練習清單</h3>
+                    <p class="text-base text-slate-500 mb-5">以下提示詞建議在課後自行練習，逐步掌握 CARE 框架與 Gemini 進階功能。勾選後進度會自動儲存於本裝置。</p>
+                    <div class="space-y-1" id="post-class-checklist">
+                        <div class="checklist-item">
+                            <input type="checkbox" id="chk-p3" onchange="saveChecklist()">
+                            <label for="chk-p3">我已試過 Prompt #3（多模態能力 — 上傳圖片分析單據）</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="chk-p6" onchange="saveChecklist()">
+                            <label for="chk-p6">我已試過 Prompt #6（CARE — 宣傳文案創作）</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="chk-p7" onchange="saveChecklist()">
+                            <label for="chk-p7">我已試過 Prompt #7（CARE — 課程大綱設計）</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="chk-p8" onchange="saveChecklist()">
+                            <label for="chk-p8">我已試過 Prompt #8（CARE — 成效報告撰寫）</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="chk-p9" onchange="saveChecklist()">
+                            <label for="chk-p9">我已試過 Prompt #9（角色扮演練習）</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="chk-p10" onchange="saveChecklist()">
+                            <label for="chk-p10">我已試過 Prompt #10（工具選擇 — 比較不同 AI 輸出）</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="chk-p11" onchange="saveChecklist()">
+                            <label for="chk-p11">我已試過 Prompt #11（PDF 文件分析）</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="chk-p13" onchange="saveChecklist()">
+                            <label for="chk-p13">我已試過 Prompt #13（Deep Research 自動研究）</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="chk-p15" onchange="saveChecklist()">
+                            <label for="chk-p15">我已試過 Prompt #15（核實 AI 輸出 — 追問準確性）</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="chk-nb2" onchange="saveChecklist()">
+                            <label for="chk-nb2">我已參考 Nano Banana 2 練習影像生成（至少 3 個模板）</label>
+                        </div>
+                    </div>
+                    <div class="mt-4 p-3 bg-teal-50 border border-teal-100 rounded-lg text-sm text-teal-700">
+                        💡 小提示：完成全部練習後，你將能獨立運用 CARE 框架處理行政、教學與宣傳三大場景的 AI 協作需求。
+                    </div>
+                </div>
 
                 <!-- 課後延伸學習資源 -->
                 <div class="bg-white border border-stone-200 rounded-2xl p-6 shadow-sm">
@@ -1421,6 +1622,58 @@
                 setTimeout(() => { btn.innerText = orig; btn.classList.remove('bg-amber-400','text-slate-900'); }, 1500);
             });
         }
+
+        // ─── Embedded Prompt Toggle ───
+        function togglePromptEmbed(btn) {
+            const panel = btn.nextElementSibling;
+            const isOpen = panel.classList.contains('active');
+            if (isOpen) {
+                panel.classList.remove('active');
+                btn.classList.remove('active');
+            } else {
+                panel.classList.add('active');
+                btn.classList.add('active');
+            }
+        }
+
+        // ─── Copy Embedded Prompt ───
+        function copyEmbedPrompt(btn) {
+            const panel = btn.closest('.prompt-panel');
+            const pre = panel.querySelector('pre');
+            const text = pre.innerText || pre.textContent || '';
+            navigator.clipboard.writeText(text).then(() => {
+                const orig = btn.innerText;
+                btn.innerText = '✅ 已複製';
+                btn.classList.add('copied');
+                setTimeout(() => { btn.innerText = orig; btn.classList.remove('copied'); }, 1500);
+            });
+        }
+
+        // ─── Post-class Checklist Persistence ───
+        function saveChecklist() {
+            const checks = {};
+            document.querySelectorAll('#post-class-checklist input[type="checkbox"]').forEach(cb => {
+                checks[cb.id] = cb.checked;
+                cb.closest('.checklist-item').classList.toggle('checked', cb.checked);
+            });
+            localStorage.setItem('cdce-checklist', JSON.stringify(checks));
+        }
+
+        function loadChecklist() {
+            try {
+                const data = JSON.parse(localStorage.getItem('cdce-checklist') || '{}');
+                Object.entries(data).forEach(([id, checked]) => {
+                    const cb = document.getElementById(id);
+                    if (cb) {
+                        cb.checked = checked;
+                        cb.closest('.checklist-item').classList.toggle('checked', checked);
+                    }
+                });
+            } catch (e) { /* ignore */ }
+        }
+
+        // Load checklist on page load
+        document.addEventListener('DOMContentLoaded', loadChecklist);
     </script>
 </body>
 </html>

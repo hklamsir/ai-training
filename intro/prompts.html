@@ -63,6 +63,70 @@
             background: #059669;
             color: white;
         }
+
+        /* ─── Priority Badges ─── */
+        .badge-core {
+            background: #fee2e2;
+            color: #991b1b;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 9999px;
+            white-space: nowrap;
+        }
+        .badge-follow {
+            background: #fef3c7;
+            color: #92400e;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 9999px;
+            white-space: nowrap;
+        }
+        .badge-self {
+            background: #d1fae5;
+            color: #065f46;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 9999px;
+            white-space: nowrap;
+        }
+
+        /* ─── Filter Buttons ─── */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+        .filter-btn {
+            padding: 6px 16px;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid #e7e5e4;
+            background: white;
+            color: #57534e;
+        }
+        .filter-btn:hover {
+            border-color: #a8a29e;
+        }
+        .filter-btn.active {
+            background: #0f766e;
+            color: white;
+            border-color: #0f766e;
+        }
+
+        /* Hidden card for filtering */
+        .prompt-card {
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        .prompt-card.hidden {
+            display: none;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -84,6 +148,22 @@
     <!-- Main Content -->
     <main class="max-w-5xl mx-auto px-6 md:px-10 py-8 pb-20">
 
+        <!-- Legend + Filter -->
+        <div class="bg-white rounded-2xl border border-stone-200 shadow-sm p-5 mb-6">
+            <div class="flex flex-wrap items-center gap-3 mb-3">
+                <span class="text-sm font-bold text-slate-500">分級說明：</span>
+                <span class="badge-core">必做課堂示範</span>
+                <span class="badge-follow">課堂跟做</span>
+                <span class="badge-self">課後自學</span>
+            </div>
+            <div class="filter-bar">
+                <button class="filter-btn active" onclick="filterPrompts('all', this)">顯示全部（15）</button>
+                <button class="filter-btn" onclick="filterPrompts('core', this)">只顯示課堂示範（5）</button>
+                <button class="filter-btn" onclick="filterPrompts('follow', this)">只顯示課堂跟做（5）</button>
+                <button class="filter-btn" onclick="filterPrompts('self', this)">只顯示課後自學（5）</button>
+            </div>
+        </div>
+
         <!-- 🧩 環節一 -->
         <section class="mb-12 fade-in">
             <div class="flex items-center gap-3 mb-5">
@@ -92,11 +172,12 @@
             </div>
 
             <!-- Prompt 1 -->
-            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+            <div class="prompt-card bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5" data-priority="follow">
                 <div class="p-5 pb-3">
-                    <div class="flex items-center gap-2 mb-2">
+                    <div class="flex items-center gap-2 mb-2 flex-wrap">
                         <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-teal-100 text-teal-800 text-base font-bold">1</span>
                         <h3 class="font-bold text-xl text-slate-800">LLM 機率原理</h3>
+                        <span class="badge-follow">課堂跟做</span>
                     </div>
                     <p class="text-base text-slate-500 mb-3">展示 AI「文字接龍」的本質，解釋幻覺成因</p>
                 </div>
@@ -107,11 +188,12 @@
             </div>
 
             <!-- Prompt 2 -->
-            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+            <div class="prompt-card bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5" data-priority="follow">
                 <div class="p-5 pb-3">
-                    <div class="flex items-center gap-2 mb-2">
+                    <div class="flex items-center gap-2 mb-2 flex-wrap">
                         <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-teal-100 text-teal-800 text-base font-bold">2</span>
                         <h3 class="font-bold text-xl text-slate-800">幻覺現象</h3>
+                        <span class="badge-follow">課堂跟做</span>
                     </div>
                     <p class="text-base text-slate-500 mb-3">示範 AI 編造資料的風險，提醒核實重要性</p>
                 </div>
@@ -122,11 +204,12 @@
             </div>
 
             <!-- Prompt 3 -->
-            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+            <div class="prompt-card bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5" data-priority="core">
                 <div class="p-5 pb-3">
-                    <div class="flex items-center gap-2 mb-2">
+                    <div class="flex items-center gap-2 mb-2 flex-wrap">
                         <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-teal-100 text-teal-800 text-base font-bold">3</span>
                         <h3 class="font-bold text-xl text-slate-800">多模態能力</h3>
+                        <span class="badge-core">必做課堂示範</span>
                     </div>
                     <p class="text-base text-slate-500 mb-3">上傳圖片示範 AI 跨格式理解能力</p>
                 </div>
@@ -135,21 +218,14 @@
                     <pre class="bg-slate-900 text-slate-200 rounded-xl p-4 pr-16 text-base leading-relaxed font-mono whitespace-pre-wrap overflow-x-auto">（上傳單據、FO Expenses Report Template 必要欄位截圖）分析上傳 ?? 張 單據的資料，製作一個如最後一張圖片的表格 (必要資料: Transaction date, Payment method, Transaction amount, Merchant, Additional Information，沒有資料的欄位請留空)，日期資料需為Excel的日期數值而格式為YYYY/MM/DD，最後將表格製成 xlsx 格式檔案。</pre>
                 </div>
             </div>
-        </section>
-
-        <!-- ⌨️ 環節二 -->
-        <section class="mb-12 fade-in">
-            <div class="flex items-center gap-3 mb-5">
-                <span class="text-3xl">⌨️</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-800">環節二：CARE 提示詞實驗室</h2>
-            </div>
 
             <!-- Prompt 4 -->
-            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+            <div class="prompt-card bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5" data-priority="core">
                 <div class="p-5 pb-3">
-                    <div class="flex items-center gap-2 mb-2">
-                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-amber-100 text-amber-800 text-base font-bold">4</span>
+                    <div class="flex items-center gap-2 mb-2 flex-wrap">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-teal-100 text-teal-800 text-base font-bold">4</span>
                         <h3 class="font-bold text-xl text-slate-800">弱 vs 強提示</h3>
+                        <span class="badge-core">必做課堂示範</span>
                     </div>
                     <p class="text-base text-slate-500 mb-3">對比弱提示與強提示的輸出差異</p>
                 </div>
@@ -168,13 +244,22 @@
                     </div>
                 </div>
             </div>
+        </section>
+
+        <!-- ⌨️ 環節二 -->
+        <section class="mb-12 fade-in">
+            <div class="flex items-center gap-3 mb-5">
+                <span class="text-3xl">⌨️</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800">環節二：CARE 提示詞實驗室</h2>
+            </div>
 
             <!-- Prompt 5 -->
-            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+            <div class="prompt-card bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5" data-priority="core">
                 <div class="p-5 pb-3">
-                    <div class="flex items-center gap-2 mb-2">
+                    <div class="flex items-center gap-2 mb-2 flex-wrap">
                         <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-amber-100 text-amber-800 text-base font-bold">5</span>
-                        <h3 class="font-bold text-xl text-slate-800">CARE — 行政電郵</h3>
+                        <h3 class="font-bold text-xl text-slate-800">CARE — 中心WhatsApp 回覆</h3>
+                        <span class="badge-core">必做課堂示範</span>
                     </div>
                     <p class="text-base text-slate-500 mb-3">示範完整 CARE 框架：撰寫機構 WhatsApp</p>
                 </div>
@@ -188,11 +273,12 @@
             </div>
 
             <!-- Prompt 6 -->
-            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+            <div class="prompt-card bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5" data-priority="follow">
                 <div class="p-5 pb-3">
-                    <div class="flex items-center gap-2 mb-2">
+                    <div class="flex items-center gap-2 mb-2 flex-wrap">
                         <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-amber-100 text-amber-800 text-base font-bold">6</span>
                         <h3 class="font-bold text-xl text-slate-800">CARE — 宣傳文案</h3>
+                        <span class="badge-follow">課堂跟做</span>
                     </div>
                     <p class="text-base text-slate-500 mb-3">社交媒體文案創作，展示角色設定效果</p>
                 </div>
@@ -206,11 +292,12 @@
             </div>
 
             <!-- Prompt 7 -->
-            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+            <div class="prompt-card bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5" data-priority="self">
                 <div class="p-5 pb-3">
-                    <div class="flex items-center gap-2 mb-2">
+                    <div class="flex items-center gap-2 mb-2 flex-wrap">
                         <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-amber-100 text-amber-800 text-base font-bold">7</span>
                         <h3 class="font-bold text-xl text-slate-800">CARE — 課程大綱</h3>
+                        <span class="badge-self">課後自學</span>
                     </div>
                     <p class="text-base text-slate-500 mb-3">教材研發場景，展示格式指定的重要性</p>
                 </div>
@@ -224,11 +311,12 @@
             </div>
 
             <!-- Prompt 8 -->
-            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+            <div class="prompt-card bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5" data-priority="self">
                 <div class="p-5 pb-3">
-                    <div class="flex items-center gap-2 mb-2">
+                    <div class="flex items-center gap-2 mb-2 flex-wrap">
                         <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-amber-100 text-amber-800 text-base font-bold">8</span>
                         <h3 class="font-bold text-xl text-slate-800">CARE — 成效報告</h3>
+                        <span class="badge-self">課後自學</span>
                     </div>
                     <p class="text-base text-slate-500 mb-3">報告撰寫場景，示範格式要求的精確輸出</p>
                 </div>
@@ -241,11 +329,12 @@
             </div>
 
             <!-- Prompt 9 -->
-            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+            <div class="prompt-card bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5" data-priority="self">
                 <div class="p-5 pb-3">
-                    <div class="flex items-center gap-2 mb-2">
+                    <div class="flex items-center gap-2 mb-2 flex-wrap">
                         <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-amber-100 text-amber-800 text-base font-bold">9</span>
                         <h3 class="font-bold text-xl text-slate-800">角色扮演練習</h3>
+                        <span class="badge-self">課後自學</span>
                     </div>
                     <p class="text-base text-slate-500 mb-3">學員練習：設定角色改變輸出風格</p>
                 </div>
@@ -264,11 +353,12 @@
             </div>
 
             <!-- Prompt 10 -->
-            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+            <div class="prompt-card bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5" data-priority="self">
                 <div class="p-5 pb-3">
-                    <div class="flex items-center gap-2 mb-2">
+                    <div class="flex items-center gap-2 mb-2 flex-wrap">
                         <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-blue-800 text-base font-bold">10</span>
                         <h3 class="font-bold text-xl text-slate-800">工具選擇</h3>
+                        <span class="badge-self">課後自學</span>
                     </div>
                     <p class="text-base text-slate-500 mb-3">同一任務分別交給不同工具，比較輸出差異</p>
                 </div>
@@ -279,11 +369,12 @@
             </div>
 
             <!-- Prompt 11 -->
-            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+            <div class="prompt-card bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5" data-priority="follow">
                 <div class="p-5 pb-3">
-                    <div class="flex items-center gap-2 mb-2">
+                    <div class="flex items-center gap-2 mb-2 flex-wrap">
                         <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-blue-800 text-base font-bold">11</span>
                         <h3 class="font-bold text-xl text-slate-800">PDF 文件分析</h3>
+                        <span class="badge-follow">課堂跟做</span>
                     </div>
                     <p class="text-base text-slate-500 mb-3">上傳 PDF 示範 Gemini 文件理解能力</p>
                 </div>
@@ -302,11 +393,12 @@
             </div>
 
             <!-- Prompt 12 -->
-            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+            <div class="prompt-card bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5" data-priority="core">
                 <div class="p-5 pb-3">
-                    <div class="flex items-center gap-2 mb-2">
+                    <div class="flex items-center gap-2 mb-2 flex-wrap">
                         <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-purple-100 text-purple-800 text-base font-bold">12</span>
                         <h3 class="font-bold text-xl text-slate-800">Canvas 協作</h3>
+                        <span class="badge-core">必做課堂示範</span>
                     </div>
                     <p class="text-base text-slate-500 mb-3">示範 Canvas 介面內即時修改長文件</p>
                 </div>
@@ -317,11 +409,12 @@
             </div>
 
             <!-- Prompt 13 -->
-            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+            <div class="prompt-card bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5" data-priority="follow">
                 <div class="p-5 pb-3">
-                    <div class="flex items-center gap-2 mb-2">
+                    <div class="flex items-center gap-2 mb-2 flex-wrap">
                         <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-purple-100 text-purple-800 text-base font-bold">13</span>
                         <h3 class="font-bold text-xl text-slate-800">Deep Research</h3>
+                        <span class="badge-follow">課堂跟做</span>
                     </div>
                     <p class="text-base text-slate-500 mb-3">示範 Deep Research 自動生成研究報告</p>
                 </div>
@@ -332,11 +425,12 @@
             </div>
 
             <!-- Prompt 14 -->
-            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+            <div class="prompt-card bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5" data-priority="core">
                 <div class="p-5 pb-3">
-                    <div class="flex items-center gap-2 mb-2">
+                    <div class="flex items-center gap-2 mb-2 flex-wrap">
                         <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-purple-100 text-purple-800 text-base font-bold">14</span>
                         <h3 class="font-bold text-xl text-slate-800">影像生成</h3>
+                        <span class="badge-core">必做課堂示範</span>
                     </div>
                     <p class="text-base text-slate-500 mb-3">示範課程宣傳海報生成（7大要素運用）</p>
                 </div>
@@ -355,11 +449,12 @@
             </div>
 
             <!-- Prompt 15 -->
-            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+            <div class="prompt-card bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5" data-priority="self">
                 <div class="p-5 pb-3">
-                    <div class="flex items-center gap-2 mb-2">
+                    <div class="flex items-center gap-2 mb-2 flex-wrap">
                         <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-red-800 text-base font-bold">15</span>
                         <h3 class="font-bold text-xl text-slate-800">核實 AI 輸出</h3>
+                        <span class="badge-self">課後自學</span>
                     </div>
                     <p class="text-base text-slate-500 mb-3">要求 AI 自我審視，示範「追問核實」習慣</p>
                 </div>
@@ -399,6 +494,23 @@
                     btn.innerText = '📋 複製';
                     btn.classList.remove('copied');
                 }, 1500);
+            });
+        }
+
+        // ─── Filter Logic ───
+        function filterPrompts(priority, btn) {
+            // Update button states
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Show/hide cards
+            document.querySelectorAll('.prompt-card').forEach(card => {
+                const cardPriority = card.getAttribute('data-priority');
+                if (priority === 'all' || cardPriority === priority) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
             });
         }
     </script>
