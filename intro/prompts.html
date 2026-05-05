@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15 個課堂示範 提示詞 — AI 素養及實務應用入門</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #fcfbf9;
+            color: #334155;
+            font-size: 1.0625rem;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Code block wrapper for copy button positioning */
+        .code-wrapper {
+            position: relative;
+        }
+        .code-wrapper .copy-btn {
+            position: absolute;
+            top: 3px;
+            background: rgba(255,255,255,0.12);
+            color: #94a3b8;
+            border: none;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            z-index: 10;
+        }
+        /* Wrapper with px-5 (1.25rem) padding — offset button to stay inside <pre> */
+        .code-wrapper.px-5 .copy-btn {
+            right: calc(1.25rem + 3px);
+        }
+        /* Wrapper without px-5 padding */
+        .code-wrapper:not(.px-5) .copy-btn {
+            right: 3px;
+        }
+        .code-wrapper .copy-btn:hover {
+            background: #0f766e;
+            color: white;
+        }
+        .code-wrapper .copy-btn.copied {
+            background: #059669;
+            color: white;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="bg-stone-100 border-b border-stone-200 shadow-sm">
+        <div class="max-w-5xl mx-auto px-6 md:px-10 py-6">
+            <p class="text-base font-semibold text-teal-600 uppercase tracking-wide mb-0">AI 素養及實務應用入門實戰筆記</p>
+            <p class="text-sm text-slate-400 mb-1">&copy; 林 SIR, 2026</p>
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-800 leading-tight">
+                15 個課堂示範 提示詞
+            </h1>
+            <p class="text-lg text-slate-500 mt-2">
+                按課程環節分類整理，方便課堂示範與課後回顧
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-6 md:px-10 py-8 pb-20">
+
+        <!-- 🧩 環節一 -->
+        <section class="mb-12 fade-in">
+            <div class="flex items-center gap-3 mb-5">
+                <span class="text-3xl">🧩</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800">環節一：GenAI 核心概念</h2>
+            </div>
+
+            <!-- Prompt 1 -->
+            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+                <div class="p-5 pb-3">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-teal-100 text-teal-800 text-base font-bold">1</span>
+                        <h3 class="font-bold text-xl text-slate-800">LLM 機率原理</h3>
+                    </div>
+                    <p class="text-base text-slate-500 mb-3">展示 AI「文字接龍」的本質，解釋幻覺成因</p>
+                </div>
+                <div class="px-5 pb-5 code-wrapper">
+                    <button class="copy-btn" onclick="copyCode(this)">📋 複製</button>
+                    <pre class="bg-slate-900 text-slate-200 rounded-xl p-4 pr-16 text-base leading-relaxed font-mono whitespace-pre-wrap overflow-x-auto">請用三個不同風格（正式、輕鬆、詩意）完成這句話：「今天的工作坊，讓我感到⋯⋯」</pre>
+                </div>
+            </div>
+
+            <!-- Prompt 2 -->
+            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+                <div class="p-5 pb-3">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-teal-100 text-teal-800 text-base font-bold">2</span>
+                        <h3 class="font-bold text-xl text-slate-800">幻覺現象</h3>
+                    </div>
+                    <p class="text-base text-slate-500 mb-3">示範 AI 編造資料的風險，提醒核實重要性</p>
+                </div>
+                <div class="px-5 pb-5 code-wrapper">
+                    <button class="copy-btn" onclick="copyCode(this)">📋 複製</button>
+                    <pre class="bg-slate-900 text-slate-200 rounded-xl p-4 pr-16 text-base leading-relaxed font-mono whitespace-pre-wrap overflow-x-auto">請列出香港僱員再培訓局（ERB）於 2027 年最新發佈的五項政策文件及其發佈日期。</pre>
+                </div>
+            </div>
+
+            <!-- Prompt 3 -->
+            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+                <div class="p-5 pb-3">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-teal-100 text-teal-800 text-base font-bold">3</span>
+                        <h3 class="font-bold text-xl text-slate-800">多模態能力</h3>
+                    </div>
+                    <p class="text-base text-slate-500 mb-3">上傳圖片示範 AI 跨格式理解能力</p>
+                </div>
+                <div class="px-5 pb-5 code-wrapper">
+                    <button class="copy-btn" onclick="copyCode(this)">📋 複製</button>
+                    <pre class="bg-slate-900 text-slate-200 rounded-xl p-4 pr-16 text-base leading-relaxed font-mono whitespace-pre-wrap overflow-x-auto">（上傳單據、FO Expenses Report Template 必要欄位截圖）分析上傳 ?? 張 單據的資料，製作一個如最後一張圖片的表格 (必要資料: Transaction date, Payment method, Transaction amount, Merchant, Additional Information，沒有資料的欄位請留空)，日期資料需為Excel的日期數值而格式為YYYY/MM/DD，最後將表格製成 xlsx 格式檔案。</pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- ⌨️ 環節二 -->
+        <section class="mb-12 fade-in">
+            <div class="flex items-center gap-3 mb-5">
+                <span class="text-3xl">⌨️</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800">環節二：CARE 提示詞實驗室</h2>
+            </div>
+
+            <!-- Prompt 4 -->
+            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+                <div class="p-5 pb-3">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-amber-100 text-amber-800 text-base font-bold">4</span>
+                        <h3 class="font-bold text-xl text-slate-800">弱 vs 強提示</h3>
+                    </div>
+                    <p class="text-base text-slate-500 mb-3">對比弱提示與強提示的輸出差異</p>
+                </div>
+                <div class="px-5 pb-3">
+                    <div class="text-sm font-bold text-red-500 uppercase tracking-wide mb-1">❌ 弱提示</div>
+                    <div class="code-wrapper">
+                        <button class="copy-btn" onclick="copyCode(this)">📋 複製</button>
+                        <pre class="bg-slate-900 text-slate-200 rounded-xl p-4 pr-16 text-base leading-relaxed font-mono whitespace-pre-wrap overflow-x-auto">幫我寫一則給學員的中心停電的短訊。</pre>
+                    </div>
+                </div>
+                <div class="px-5 pb-5">
+                    <div class="text-sm font-bold text-green-600 uppercase tracking-wide mb-1">✅ 強提示</div>
+                    <div class="code-wrapper">
+                        <button class="copy-btn" onclick="copyCode(this)">📋 複製</button>
+                        <pre class="bg-slate-900 text-green-100 rounded-xl p-4 pr-16 text-base leading-relaxed font-mono whitespace-pre-wrap overflow-x-auto">以班主任的溫暖語氣，寫一封60-70字的中文短訊，說明因中心停電，下星期一及二的erb課堂將順延兩天，並提醒留意補課安排。</pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prompt 5 -->
+            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+                <div class="p-5 pb-3">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-amber-100 text-amber-800 text-base font-bold">5</span>
+                        <h3 class="font-bold text-xl text-slate-800">CARE — 行政電郵</h3>
+                    </div>
+                    <p class="text-base text-slate-500 mb-3">示範完整 CARE 框架：撰寫機構 WhatsApp</p>
+                </div>
+                <div class="px-5 pb-5 code-wrapper">
+                    <button class="copy-btn" onclick="copyCode(this)">📋 複製</button>
+                    <pre class="bg-slate-900 text-slate-200 rounded-xl p-4 pr-16 text-base leading-relaxed font-mono whitespace-pre-wrap overflow-x-auto">【Context】你是ERB課程中心的行政幹事，負責回覆學員查詢，機構語氣親切專業。
+【Action】撰寫一個 WhatsApp 範本，回覆學員關於報名資格及課程費用的常見查詢。
+【Result】格式：稱謂→感謝查詢→正文→聯絡方式，字數約100字。
+【Example】參考附件的機構之前的 WhatsApp 訊息範本。</pre>
+                </div>
+            </div>
+
+            <!-- Prompt 6 -->
+            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+                <div class="p-5 pb-3">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-amber-100 text-amber-800 text-base font-bold">6</span>
+                        <h3 class="font-bold text-xl text-slate-800">CARE — 宣傳文案</h3>
+                    </div>
+                    <p class="text-base text-slate-500 mb-3">社交媒體文案創作，展示角色設定效果</p>
+                </div>
+                <div class="px-5 pb-5 code-wrapper">
+                    <button class="copy-btn" onclick="copyCode(this)">📋 複製</button>
+                    <pre class="bg-slate-900 text-slate-200 rounded-xl p-4 pr-16 text-base leading-relaxed font-mono whitespace-pre-wrap overflow-x-auto">【Context】你是一位熟悉香港社福機構受眾的文案撰寫人。
+【Action】為一個面向在職人士的 AI 入門工作坊撰寫 Facebook 宣傳帖文，突出「不需技術背景、即學即用」。
+【Result】帖文含標題、3個賣點、行動呼籲（CTA），約100字，附3個合適的 hashtag。
+【Example】參考以下的 FB貼文範本：。</pre>
+                </div>
+            </div>
+
+            <!-- Prompt 7 -->
+            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+                <div class="p-5 pb-3">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-amber-100 text-amber-800 text-base font-bold">7</span>
+                        <h3 class="font-bold text-xl text-slate-800">CARE — 課程大綱</h3>
+                    </div>
+                    <p class="text-base text-slate-500 mb-3">教材研發場景，展示格式指定的重要性</p>
+                </div>
+                <div class="px-5 pb-5 code-wrapper">
+                    <button class="copy-btn" onclick="copyCode(this)">📋 複製</button>
+                    <pre class="bg-slate-900 text-slate-200 rounded-xl p-4 pr-16 text-base leading-relaxed font-mono whitespace-pre-wrap overflow-x-auto">【Context】你是一位具備10年培訓經驗的資訊科技導師，對象是具中5程度或以上的在職學員。
+【Action】設計一份12小時 Agentic AI 商業應用基礎證書的課程大綱，重點結合實際工作場景。
+【Result】以表格呈現：時段、主題、教學活動、所需物資，並標示各環節時長。
+【Example】參考附件的課程大綱範本。</pre>
+                </div>
+            </div>
+
+            <!-- Prompt 8 -->
+            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+                <div class="p-5 pb-3">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-amber-100 text-amber-800 text-base font-bold">8</span>
+                        <h3 class="font-bold text-xl text-slate-800">CARE — 成效報告</h3>
+                    </div>
+                    <p class="text-base text-slate-500 mb-3">報告撰寫場景，示範格式要求的精確輸出</p>
+                </div>
+                <div class="px-5 pb-5 code-wrapper">
+                    <button class="copy-btn" onclick="copyCode(this)">📋 複製</button>
+                    <pre class="bg-slate-900 text-slate-200 rounded-xl p-4 pr-16 text-base leading-relaxed font-mono whitespace-pre-wrap overflow-x-auto">【Context】你是負責向資助機構提交報告的項目幹事，機構為香港賽馬會。
+【Action】根據以下數據撰寫活動成效報告摘要：參加人數25人、完成率92%、學員滿意度4.3/5。
+【Result】格式適合提交予政府資助機構，包含：背景、成效數據、學員反饋分析及改善建議，約300字。</pre>
+                </div>
+            </div>
+
+            <!-- Prompt 9 -->
+            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+                <div class="p-5 pb-3">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-amber-100 text-amber-800 text-base font-bold">9</span>
+                        <h3 class="font-bold text-xl text-slate-800">角色扮演練習</h3>
+                    </div>
+                    <p class="text-base text-slate-500 mb-3">學員練習：設定角色改變輸出風格</p>
+                </div>
+                <div class="px-5 pb-5 code-wrapper">
+                    <button class="copy-btn" onclick="copyCode(this)">📋 複製</button>
+                    <pre class="bg-slate-900 text-slate-200 rounded-xl p-4 pr-16 text-base leading-relaxed font-mono whitespace-pre-wrap overflow-x-auto">你是一位嚴格但公平的香港僱員再培訓局資訊科技課程顧問。請對附上的3個課程大綱提出三項批判性意見，並給出改善建議。</pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 🧭 環節三 -->
+        <section class="mb-12 fade-in">
+            <div class="flex items-center gap-3 mb-5">
+                <span class="text-3xl">🧭</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800">環節三：工具大比併</h2>
+            </div>
+
+            <!-- Prompt 10 -->
+            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+                <div class="p-5 pb-3">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-blue-800 text-base font-bold">10</span>
+                        <h3 class="font-bold text-xl text-slate-800">工具選擇</h3>
+                    </div>
+                    <p class="text-base text-slate-500 mb-3">同一任務分別交給不同工具，比較輸出差異</p>
+                </div>
+                <div class="px-5 pb-5 code-wrapper">
+                    <button class="copy-btn" onclick="copyCode(this)">📋 複製</button>
+                    <pre class="bg-slate-900 text-slate-200 rounded-xl p-4 pr-16 text-base leading-relaxed font-mono whitespace-pre-wrap overflow-x-auto">請用繁體中文，以香港社福機構的語氣，撰寫一段100字的 3小時 AI入門應用工作坊的 FB宣傳，對象是60歲以上的退休人士。</pre>
+                </div>
+            </div>
+
+            <!-- Prompt 11 -->
+            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+                <div class="p-5 pb-3">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-blue-800 text-base font-bold">11</span>
+                        <h3 class="font-bold text-xl text-slate-800">PDF 文件分析</h3>
+                    </div>
+                    <p class="text-base text-slate-500 mb-3">上傳 PDF 示範 Gemini 文件理解能力</p>
+                </div>
+                <div class="px-5 pb-5 code-wrapper">
+                    <button class="copy-btn" onclick="copyCode(this)">📋 複製</button>
+                    <pre class="bg-slate-900 text-slate-200 rounded-xl p-4 pr-16 text-base leading-relaxed font-mono whitespace-pre-wrap overflow-x-auto">（上傳學員守則 PDF）請從這份學員守則中，摘錄所有關於退款政策的條款，並以簡單易明的語言重新整理，方便前線同工向學員解釋。</pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 🚀 環節四 -->
+        <section class="mb-12 fade-in">
+            <div class="flex items-center gap-3 mb-5">
+                <span class="text-3xl">🚀</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800">環節四：Gemini 實戰演練</h2>
+            </div>
+
+            <!-- Prompt 12 -->
+            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+                <div class="p-5 pb-3">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-purple-100 text-purple-800 text-base font-bold">12</span>
+                        <h3 class="font-bold text-xl text-slate-800">Canvas 協作</h3>
+                    </div>
+                    <p class="text-base text-slate-500 mb-3">示範 Canvas 介面內即時修改長文件</p>
+                </div>
+                <div class="px-5 pb-5 code-wrapper">
+                    <button class="copy-btn" onclick="copyCode(this)">📋 複製</button>
+                    <pre class="bg-slate-900 text-slate-200 rounded-xl p-4 pr-16 text-base leading-relaxed font-mono whitespace-pre-wrap overflow-x-auto">你是一位具備10年培訓經驗的溝通技巧顧問，為我起草一份兩頁的「處理刁難人士」講座的建議書，講座參加者為erb課程導師。建議書需包含：課程簡介、目標學員、學習成效、課程大綱及所需資源。完成後我想在 Canvas 上繼續修改細節。</pre>
+                </div>
+            </div>
+
+            <!-- Prompt 13 -->
+            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+                <div class="p-5 pb-3">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-purple-100 text-purple-800 text-base font-bold">13</span>
+                        <h3 class="font-bold text-xl text-slate-800">Deep Research</h3>
+                    </div>
+                    <p class="text-base text-slate-500 mb-3">示範 Deep Research 自動生成研究報告</p>
+                </div>
+                <div class="px-5 pb-5 code-wrapper">
+                    <button class="copy-btn" onclick="copyCode(this)">📋 複製</button>
+                    <pre class="bg-slate-900 text-slate-200 rounded-xl p-4 pr-16 text-base leading-relaxed font-mono whitespace-pre-wrap overflow-x-auto">香港社福機構在 2024-2025 年度引入 AI 工具的現況、主要挑戰及成功案例，並生成一份結構化報告，附上資料來源。</pre>
+                </div>
+            </div>
+
+            <!-- Prompt 14 -->
+            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+                <div class="p-5 pb-3">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-purple-100 text-purple-800 text-base font-bold">14</span>
+                        <h3 class="font-bold text-xl text-slate-800">影像生成</h3>
+                    </div>
+                    <p class="text-base text-slate-500 mb-3">示範課程宣傳海報生成（7大要素運用）</p>
+                </div>
+                <div class="px-5 pb-5 code-wrapper">
+                    <button class="copy-btn" onclick="copyCode(this)">📋 複製</button>
+                    <pre class="bg-slate-900 text-slate-200 rounded-xl p-4 pr-16 text-base leading-relaxed font-mono whitespace-pre-wrap overflow-x-auto">建立一張 3:4 直向課程宣傳海報，主體是一位年輕學員正在使用電腦學習，電腦畫面顯示 Gemini的頁面。溫暖室內背景。畫面右上方有2個標籤「免學費」「有津貼」，中央顯示「人工智能知識及應用證書（兼讀制）」（粗宋體，深灰），下方顯示「現正招生 | ERB課程」（淺灰）。暖色調，活潑正面，乾淨商業設計風格。所有圖片內的人物為香港華人，不要出現外國人。</pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 🛡️ 環節五 -->
+        <section class="mb-12 fade-in">
+            <div class="flex items-center gap-3 mb-5">
+                <span class="text-3xl">🛡️</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800">環節五：AI 倫理與安全守則</h2>
+            </div>
+
+            <!-- Prompt 15 -->
+            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden mb-5">
+                <div class="p-5 pb-3">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-red-800 text-base font-bold">15</span>
+                        <h3 class="font-bold text-xl text-slate-800">核實 AI 輸出</h3>
+                    </div>
+                    <p class="text-base text-slate-500 mb-3">要求 AI 自我審視，示範「追問核實」習慣</p>
+                </div>
+                <div class="px-5 pb-5 code-wrapper">
+                    <button class="copy-btn" onclick="copyCode(this)">📋 複製</button>
+                    <pre class="bg-slate-900 text-slate-200 rounded-xl p-4 pr-16 text-base leading-relaxed font-mono whitespace-pre-wrap overflow-x-auto">你剛才提供的建議書範本中，有沒有任何資訊是你不確定準確性的？請逐點標示哪些內容需要我自行核實，並解釋原因。</pre>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function copyCode(btn) {
+            const wrapper = btn.parentElement;
+            const pre = wrapper.querySelector('pre');
+            const text = pre.innerText || pre.textContent || '';
+            navigator.clipboard.writeText(text).then(() => {
+                const orig = btn.innerText;
+                btn.innerText = '✅ 已複製';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.innerText = orig;
+                    btn.classList.remove('copied');
+                }, 1500);
+            }).catch(() => {
+                // Fallback for older browsers
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                btn.innerText = '✅ 已複製';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.innerText = '📋 複製';
+                    btn.classList.remove('copied');
+                }, 1500);
+            });
+        }
+    </script>
+
+</body>
+</html>
