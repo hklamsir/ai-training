@@ -6,126 +6,14 @@
     <title>AI 素養及實務應用入門：Google Gemini 專修班</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
-        
-        body {
-            font-family: 'Noto Sans TC', sans-serif;
-            background-color: #fcfbf9; 
-            color: #334155;
-            font-size: 1.0625rem;
-        }
-
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 400px;
-            max-height: 450px;
-        }
-
-        .whiteboard-container {
-            overflow-y: auto;
-            position: relative;
-            height: 300px;
-            background: #ffffff;
-            border: 4px solid #cbd5e1;
-            border-radius: 8px;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        .whiteboard-items {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            padding: 14px;
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .whiteboard-item {
-            background: #f1f5f9;
-            padding: 10px 14px;
-            border-radius: 6px;
-            border-left: 6px solid #0f766e;
-            opacity: 1;
-            transition: opacity 0.3s, background-color 0.3s;
-        }
-
-        .whiteboard-item.forgotten {
-            opacity: 0.2;
-            background: #fee2e2;
-            border-left-color: #ef4444;
-        }
-
-        .nav-active {
-            background-color: #0f766e;
-            color: white;
-            font-weight: 600;
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.4s ease-in-out forwards;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-
-        /* ─── Embedded Prompt Collapsible Blocks ─── */
-        .prompt-embed { margin-top: 20px; border: 2px solid #e7e5e4; border-radius: 16px; overflow: hidden; }
-        .prompt-toggle {
-            width: 100%; text-align: left; padding: 14px 18px;
-            background: #f5f5f4; border: none; cursor: pointer;
-            font-size: 1rem; font-weight: 700; color: #44403c;
-            display: flex; align-items: center; justify-content: space-between;
-            transition: background 0.2s;
-        }
-        .prompt-toggle:hover { background: #e7e5e4; }
-        .prompt-toggle .arrow { transition: transform 0.3s; }
-        .prompt-toggle.active .arrow { transform: rotate(180deg); }
-        .prompt-panel { display: none; padding: 16px 18px; background: #fafaf9; }
-        .prompt-panel.active { display: block; }
-        .prompt-panel pre {
-            background: #1e293b; color: #e2e8f0; padding: 14px;
-            border-radius: 10px; font-family: monospace; font-size: 0.95rem;
-            line-height: 1.6; white-space: pre-wrap; word-break: break-word;
-            margin-bottom: 10px;
-        }
-        .prompt-panel .copy-mini {
-            background: #0f766e; color: white; border: none;
-            padding: 6px 14px; border-radius: 8px; font-size: 0.85rem;
-            font-weight: 600; cursor: pointer; transition: background 0.2s;
-        }
-        .prompt-panel .copy-mini:hover { background: #115e59; }
-        .prompt-panel .copy-mini.copied { background: #059669; }
-
-        /* ─── Post-class Checklist ─── */
-        .checklist-item {
-            display: flex; align-items: center; gap: 10px;
-            padding: 8px 12px; border-radius: 8px;
-            transition: background 0.15s;
-        }
-        .checklist-item:hover { background: #f5f5f4; }
-        .checklist-item input[type="checkbox"] {
-            width: 20px; height: 20px; accent-color: #0f766e; cursor: pointer;
-        }
-        .checklist-item.checked label { text-decoration: line-through; color: #a8a29e; }
-    </style>
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body class="antialiased h-screen flex flex-col md:flex-row overflow-hidden">
 
     <nav class="w-full md:w-72 bg-stone-100 border-r border-stone-200 flex-shrink-0 flex flex-col md:h-full z-20 shadow-sm relative">
         <div class="p-6 pb-4 flex justify-between items-center">
             <h1 class="text-2xl font-bold text-teal-800 leading-tight">GenAI 實戰筆記<br>
-                <span class="text-sm font-normal text-slate-500">&copy; 林 SIR, MAY 2026 </span>
+                <span class="text-sm font-normal text-slate-500">&copy; 林 SIR, 2026年5月</span>
             </h1>
             <button onclick="toggleMobileMenu()" class="md:hidden text-slate-600 hover:text-teal-800 focus:outline-none p-2 rounded-lg bg-stone-200">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -902,8 +790,14 @@
             <section id="section-gemini-image" class="fade-in hidden">
                 <div class="mb-6">
                     <h2 class="text-4xl font-bold text-slate-800 mb-4">影像生成</h2>
-                    <p class="text-lg text-slate-600 leading-relaxed">模型根據「語義」轉化為「像素」，並非拼貼，而是全新創作。以下精華摘自 <strong>Nano Banana 2</strong> 完整攻略，課後可點擊進入深入學習。</p>
+                    <p class="text-lg text-slate-600 leading-relaxed">模型根據「語義」轉化為「像素」，並非拼貼，而是全新創作。</p>
                 </div>
+
+                <div class="mb-6 rounded-2xl overflow-hidden shadow-sm border border-stone-200">
+                    <img src="nb2_formula.png" alt="Nano Banana 2 提示詞七大要素與公式圖解" class="w-full block" style="max-height:520px; object-fit:contain; background:#f8fafc;">
+                </div>
+
+                    <br><p class="text-lg text-slate-600 leading-relaxed">以下精華摘自 <strong>Nano Banana 2</strong> 完整攻略，課後可點擊進入深入學習。</p><br>
 
                 <!-- ── 提示詞 7 大要素 ── -->
                 <div class="bg-white rounded-2xl border border-stone-200 shadow-sm p-6 mb-6">
@@ -1172,6 +1066,10 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="mb-6 rounded-2xl overflow-hidden shadow-sm border border-stone-200">
+                    <img src="privacy.png" alt="AI 倫理三條防線圖解：隱私脫敏、算法偏誤、幻覺核實" class="w-full block" style="max-height:480px; object-fit:contain; background:#f8fafc;">
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">

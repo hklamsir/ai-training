@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background-color: #fcfbf9;
+    color: #334155;
+    font-size: 1.0625rem;
+}
+
+.fade-in {
+    animation: fadeIn 0.4s ease-in-out forwards;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* Code block wrapper for copy button positioning */
+.code-wrapper {
+    position: relative;
+}
+.code-wrapper .copy-btn {
+    position: absolute;
+    top: 3px;
+    background: rgba(255,255,255,0.12);
+    color: #94a3b8;
+    border: none;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 10;
+}
+/* Wrapper with px-5 (1.25rem) padding — offset button to stay inside <pre> */
+.code-wrapper.px-5 .copy-btn {
+    right: calc(1.25rem + 3px);
+}
+/* Wrapper without px-5 padding */
+.code-wrapper:not(.px-5) .copy-btn {
+    right: 3px;
+}
+.code-wrapper .copy-btn:hover {
+    background: #0f766e;
+    color: white;
+}
+.code-wrapper .copy-btn.copied {
+    background: #059669;
+    color: white;
+}
+
+/* ─── Priority Badges ─── */
+.badge-core {
+    background: #fee2e2;
+    color: #991b1b;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 9999px;
+    white-space: nowrap;
+}
+.badge-follow {
+    background: #fef3c7;
+    color: #92400e;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 9999px;
+    white-space: nowrap;
+}
+.badge-self {
+    background: #d1fae5;
+    color: #065f46;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 9999px;
+    white-space: nowrap;
+}
+
+/* ─── Filter Buttons ─── */
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+.filter-btn {
+    padding: 6px 16px;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid #e7e5e4;
+    background: white;
+    color: #57534e;
+}
+.filter-btn:hover {
+    border-color: #a8a29e;
+}
+.filter-btn.active {
+    background: #0f766e;
+    color: white;
+    border-color: #0f766e;
+}
+
+/* Hidden card for filtering */
+.prompt-card {
+    transition: opacity 0.3s, transform 0.3s;
+}
+.prompt-card.hidden {
+    display: none;
+}
