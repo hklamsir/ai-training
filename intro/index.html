@@ -344,10 +344,10 @@
                             <div>
                                 <label class="block text-lg font-bold text-teal-700 mb-1">R (Result 格式)</label>
                                 <select id="care-r" class="w-full p-2 border border-stone-300 rounded-lg bg-stone-50 text-base focus:outline-none focus:ring-2 focus:ring-teal-500">
-                                    <option value="請以『資深行政主任』身份，以清晰、專業的語氣撰寫。輸出需使用列點，每點不超過兩行。">行政主任 + 列點輸出</option>
-                                    <option value="請以『具備 5 年經驗的程序幹事』身份。輸出需包含表格（項目、負責人、時間）方便跟進。">程序幹事 + 表格輸出</option>
-                                    <option value="請以『資深市場推廣主任』身份。輸出需為溫暖且具鼓勵性的社交媒體短文，避免官僚語言。">市場推廣主任 + 社交媒體短文</option>
-                                    <option value="請以『具備 10 年經驗的 STEAM 導師』身份。輸出需包含教學目標表格（時間、目標、活動）。">STEAM 導師 + 教學表格</option>
+                                    <option value="以清晰、專業的語氣撰寫。輸出需使用列點，每點不超過兩行。">以清晰、專業的語氣撰寫 + 列點輸出</option>
+                                    <option value="輸出需包含表格（項目、負責人、時間）方便跟進。">表格輸出</option>
+                                    <option value="溫暖且具鼓勵性的社交媒體短文（約150字），避免官僚語言。">社交媒體短文 + 避免官僚語言</option>
+                                    <option value="以資深STEAM導師的語氣風格撰寫，需包含教學目標表格（時間、目標、活動）。">STEAM導師風格 + 教學表格</option>
                                 </select>
                             </div>
                             <div>
@@ -1353,7 +1353,7 @@
             const r = document.getElementById('care-r').value;
             const e = document.getElementById('care-e').value;
             
-            let finalPrompt = `【背景 Context】\n${c}\n\n【任務 Action】\n${a}\n\n【格式 Role/Result】\n${r}`;
+            let finalPrompt = `【背景 Context】\n${c}\n\n【任務 Action】\n${a}\n\n【格式 Result】\n${r}`;
             
             // 加入判斷邏輯：如果是選 "-" 則不顯示
             if (e !== "-") {
