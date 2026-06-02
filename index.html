@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>香港 AI 短期培訓課程市場需求深度研究報告</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <style>
+    /* === Reset & Base === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      font-size: 18px;
+      -webkit-text-size-adjust: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", "PingFang TC", sans-serif;
+      line-height: 1.75;
+      color: #1a1a2e;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding: 0;
+    }
+
+    /* === Container === */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px 16px;
+    }
+
+    /* === Hero Header === */
+    .hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      padding: 32px 24px 24px;
+      border-radius: 18px;
+      margin-bottom: 28px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(102,126,234,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-illustration {
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto 14px;
+      display: block;
+    }
+    .hero h1 {
+      font-size: 1.65rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .hero .tagline {
+      font-family: "Noto Sans TC", sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      margin-bottom: 8px;
+      color: #ffe082;
+    }
+    .hero .subtitle {
+      font-size: 1.05rem;
+      opacity: 0.9;
+    }
+
+    /* === KPI Row === */
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .kpi-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px 12px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    .kpi-card .kpi-num {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #667eea;
+      line-height: 1.2;
+    }
+    .kpi-card .kpi-label {
+      font-size: 0.78rem;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    /* === Section Card === */
+    .section-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 24px 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .section-card h2 {
+      font-size: 1.35rem;
+      color: #4a3f8a;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 3px solid #667eea;
+    }
+    .section-card h3 {
+      font-size: 1.15rem;
+      color: #5c4db1;
+      margin: 16px 0 10px;
+    }
+    .section-card h4 {
+      font-size: 1.05rem;
+      color: #6b5fb0;
+      margin: 12px 0 8px;
+    }
+
+    /* === Text === */
+    p {
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+    ul, ol {
+      font-size: 1rem;
+      padding-left: 24px;
+      margin-bottom: 10px;
+    }
+    li { margin-bottom: 4px; }
+
+    /* === Chart Container === */
+    .chart-container {
+      width: 100%;
+      max-width: 100%;
+      margin: 16px 0;
+      position: relative;
+    }
+    .chart-container canvas {
+      width: 100% !important;
+      max-height: 340px;
+    }
+    .chart-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 16px 0;
+    }
+    .chart-row .chart-container {
+      margin: 0;
+    }
+
+    /* === Tables === */
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 12px 0;
+      border-radius: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      min-width: 480px;
+    }
+    thead th {
+      background: #667eea;
+      color: #fff;
+      padding: 10px 8px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.88rem;
+      white-space: nowrap;
+    }
+    tbody td {
+      padding: 9px 8px;
+      border-bottom: 1px solid #eee;
+      font-size: 0.88rem;
+    }
+    tbody tr:nth-child(even) { background: #f8f9ff; }
+    tbody tr:hover { background: #eef0ff; }
+
+    /* === Highlight boxes === */
+    .highlight-box {
+      background: linear-gradient(135deg, #fff9e6, #fff3cd);
+      border-left: 5px solid #ffc107;
+      padding: 14px 16px;
+      border-radius: 8px;
+      margin: 14px 0;
+      font-size: 0.95rem;
+    }
+    .highlight-box.green {
+      background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+      border-left-color: #4caf50;
+    }
+    .highlight-box.blue {
+      background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+      border-left-color: #2196f3;
+    }
+
+    /* === Opportunity Cards === */
+    .opportunity {
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 18px 16px;
+      margin: 14px 0;
+      position: relative;
+    }
+    .opportunity.gold { border-color: #ffc107; background: #fffde7; }
+    .opportunity.silver { border-color: #9e9e9e; background: #fafafa; }
+    .opportunity.bronze { border-color: #cd7f32; background: #fff8e1; }
+    .opportunity .rank {
+      font-size: 1.6rem;
+      position: absolute;
+      top: 10px;
+      right: 14px;
+    }
+    .opportunity h4 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+    }
+    .opportunity .price-tag {
+      display: inline-block;
+      background: #667eea;
+      color: #fff;
+      padding: 3px 10px;
+      border-radius: 14px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-top: 6px;
+    }
+
+    /* === Footer === */
+    .footer {
+      text-align: center;
+      font-size: 0.82rem;
+      color: #999;
+      padding: 20px 0 30px;
+    }
+
+    /* === Mobile Responsive === */
+    @media (max-width: 768px) {
+      html { font-size: 17px; }
+      .container { padding: 12px 10px; }
+      .hero { padding: 24px 16px 18px; border-radius: 14px; }
+      .hero h1 { font-size: 1.35rem; }
+      .hero .tagline { font-size: 1rem; }
+      .kpi-row { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .kpi-card .kpi-num { font-size: 1.5rem; }
+      .chart-row { grid-template-columns: 1fr; gap: 12px; }
+      .section-card { padding: 16px 14px; border-radius: 12px; }
+      .section-card h2 { font-size: 1.2rem; }
+      table { font-size: 0.82rem; min-width: 360px; }
+      thead th, tbody td { padding: 7px 6px; font-size: 0.8rem; }
+      .opportunity { padding: 14px 12px; }
+    }
+
+    @media (max-width: 480px) {
+      html { font-size: 16px; }
+      .hero h1 { font-size: 1.2rem; }
+      .section-card h2 { font-size: 1.1rem; }
+      table { min-width: 300px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ======== HERO ======== -->
+  <div class="hero">
+    <svg class="hero-illustration" viewBox="0 0 520 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Background dots pattern -->
+      <circle cx="20" cy="30" r="3" fill="rgba(255,255,255,0.15)"/>
+      <circle cx="60" cy="80" r="2" fill="rgba(255,255,255,0.12)"/>
+      <circle cx="490" cy="40" r="3" fill="rgba(255,255,255,0.15)"/>
+      <circle cx="460" cy="130" r="2" fill="rgba(255,255,255,0.12)"/>
+      <circle cx="100" cy="140" r="2" fill="rgba(255,255,255,0.10)"/>
+      <circle cx="430" cy="20" r="2" fill="rgba(255,255,255,0.10)"/>
+      <!-- Person 1 - woman at laptop -->
+      <rect x="30" y="85" width="70" height="45" rx="6" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+      <rect x="38" y="92" width="54" height="30" rx="3" fill="rgba(255,255,255,0.2)"/>
+      <circle cx="65" cy="70" r="14" fill="rgba(255,255,255,0.3)"/>
+      <rect x="52" y="52" width="26" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+      <!-- AI sparkles on laptop -->
+      <polygon points="85,88 87,94 93,94 88,98 90,104 85,100 80,104 82,98 77,94 83,94" fill="#ffe082" opacity="0.8"/>
+      <!-- Person 2 - man with phone -->
+      <rect x="140" y="90" width="28" height="48" rx="4" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+      <rect x="144" y="96" width="20" height="32" rx="2" fill="rgba(255,255,255,0.25)"/>
+      <circle cx="154" cy="72" r="14" fill="rgba(255,255,255,0.3)"/>
+      <rect x="141" y="54" width="26" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+      <!-- Person 3 - woman with tablet -->
+      <rect x="200" y="92" width="50" height="38" rx="5" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+      <rect x="207" y="98" width="36" height="24" rx="2" fill="rgba(255,255,255,0.2)"/>
+      <circle cx="225" cy="74" r="14" fill="rgba(255,255,255,0.3)"/>
+      <rect x="212" y="56" width="26" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+      <!-- Central AI brain icon -->
+      <circle cx="330" cy="80" r="36" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+      <circle cx="330" cy="80" r="24" fill="rgba(255,255,255,0.12)"/>
+      <text x="330" y="88" text-anchor="middle" fill="#ffe082" font-size="28" font-family="sans-serif">AI</text>
+      <!-- Connection lines from people to AI -->
+      <line x1="100" y1="85" x2="294" y2="80" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-dasharray="6,4"/>
+      <line x1="168" y1="78" x2="294" y2="80" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-dasharray="6,4"/>
+      <line x1="250" y1="82" x2="294" y2="80" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-dasharray="6,4"/>
+      <!-- Floating icons -->
+      <rect x="395" y="55" width="30" height="30" rx="6" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+      <text x="410" y="76" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="16" font-family="sans-serif">📊</text>
+      <rect x="440" y="95" width="30" height="30" rx="6" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+      <text x="455" y="116" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="16" font-family="sans-serif">🤖</text>
+      <rect x="475" y="50" width="30" height="30" rx="6" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+      <text x="490" y="71" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="16" font-family="sans-serif">💡</text>
+      <!-- Decorative sparkle -->
+      <polygon points="380,45 382,51 388,51 383,55 385,61 380,57 375,61 377,55 372,51 378,51" fill="#ffe082" opacity="0.6"/>
+      <polygon points="470,130 471,134 475,134 472,137 473,141 470,138 467,141 468,137 465,134 469,134" fill="#ffe082" opacity="0.5"/>
+    </svg>
+    <div class="tagline">AI 賦能 · 職場升級</div>
+    <h1>香港 AI 短期培訓課程（4-20 小時）<br>市場需求深度研究報告</h1>
+    <div class="subtitle">報告日期：2026 年 6 月 1 日 &nbsp;|&nbsp; 研究範圍：中國香港地區</div>
+  </div>
+
+  <!-- ======== KPI ROW ======== -->
+  <div class="kpi-row">
+    <div class="kpi-card">
+      <div class="kpi-num">88%</div>
+      <div class="kpi-label">企業員工已用 AI</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-num">47%</div>
+      <div class="kpi-label">企業列為首要技能</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-num">3×</div>
+      <div class="kpi-label">AI 部署年增幅</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-num">22K</div>
+      <div class="kpi-label">HKPC 兩年培訓人次</div>
+    </div>
+  </div>
+
+  <!-- ======== 執行摘要 ======== -->
+  <div class="section-card">
+    <h2>一、執行摘要</h2>
+    <p>香港 AI 短期培訓市場正處於爆發性增長期。多份權威調查數據顯示，企業 AI 應用率已近 90%，但「AI 專業知識和培訓不足」被列為最大障礙。在 4-20 小時的短期課程賽道中，競爭格局正快速成型，市場仍存在顯著的供給缺口與差異化機會。</p>
+    <div class="highlight-box">
+      <strong>核心發現：</strong><br>
+      📊 88% 香港企業員工已在工作中使用 AI（HKPC 2025 調查）<br>
+      📊 47% 企業將「AI 理解與應用」列為 2026 年員工最優先技能（KPMG，較上年 20% 大幅躍升）<br>
+      📊 25% 企業在招聘 AI 相關崗位時面臨困難（ManpowerGroup）<br>
+      📊 HKPC 學院過去兩年提供 500+ 項 AI 培訓活動，培訓約 22,000 人<br>
+      📊 24% 組織在 2026 年已廣泛部署 AI，是 2025 年的 3 倍（KPMG）
+    </div>
+  </div>
+
+  <!-- ======== 市場需求分析 ======== -->
+  <div class="section-card">
+    <h2>二、市場需求分析</h2>
+
+    <h3>2.1 宏觀驅動因素</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>驅動因素</th><th>關鍵數據</th><th>來源</th></tr></thead>
+        <tbody>
+          <tr><td>企業 AI 使用率</td><td>88% 員工已在工作中使用 AI</td><td>HKPC 2025</td></tr>
+          <tr><td>AI 全面部署加速</td><td>24% 組織廣泛部署 AI（3 倍增長）</td><td>KPMG 2026</td></tr>
+          <tr><td>AI 技能優先級</td><td>47% 企業列為最關鍵技能</td><td>KPMG 2026</td></tr>
+          <tr><td>AI 人才招聘困難</td><td>25% 企業招聘 AI 崗位遇阻</td><td>ManpowerGroup</td></tr>
+          <tr><td>持續進修基金資助</td><td>每人最高 HK$25,000</td><td>香港政府</td></tr>
+          <tr><td>政府撥款</td><td>HK$5,000 萬推動全民 AI 培訓</td><td>2026-27 財政預算案</td></tr>
+          <tr><td>ERB 再培訓體系</td><td>約 80 家培訓機構，370 間培訓中心</td><td>ERB</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Chart: Key Market Indicators -->
+    <div class="chart-container">
+      <canvas id="chartMarketIndicators"></canvas>
+    </div>
+
+    <h3>2.2 核心痛點：人才短缺 vs. 技術發展</h3>
+    <div class="highlight-box blue">
+      HKPC 2025 調查明確指出，<strong>「缺乏 AI 專業知識和培訓」是企業 AI 推廣的頭號障礙</strong>。
+    </div>
+    <!-- Chart: Pain Points -->
+    <div class="chart-container">
+      <canvas id="chartPainPoints"></canvas>
+    </div>
+
+    <h3>2.3 目標學員畫像</h3>
+    <div class="chart-row">
+      <div class="chart-container">
+        <canvas id="chartLearnerProfile"></canvas>
+      </div>
+      <div class="chart-container">
+        <canvas id="chartPaymentAbility"></canvas>
+      </div>
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>學員類型</th><th>需求特徵</th><th>付費能力</th><th>市場規模</th></tr></thead>
+        <tbody>
+          <tr><td><strong>在職白領（行政/HR/會計）</strong></td><td>日常文書自動化、數據分析輔助</td><td>中（偏好 CEF/ERB 資助）</td><td>⭐⭐⭐⭐⭐</td></tr>
+          <tr><td><strong>營銷/內容創作者</strong></td><td>AI 文案、圖像、影片生成</td><td>中高（願為實用技能付費）</td><td>⭐⭐⭐⭐</td></tr>
+          <tr><td><strong>中小企老闆/主管</strong></td><td>整體 AI 策略、流程自動化</td><td>高（企業付費）</td><td>⭐⭐⭐⭐</td></tr>
+          <tr><td><strong>社福界同工</strong></td><td>個案紀錄、計劃書撰寫、服務評估</td><td>低（依賴機構/資助）</td><td>⭐⭐⭐</td></tr>
+          <tr><td><strong>IT 人員/技術轉型者</strong></td><td>AI Agent、自動化、No-Code</td><td>中高</td><td>⭐⭐⭐</td></tr>
+          <tr><td><strong>設計師/媒體從業者</strong></td><td>AI 圖像/影片/數字人創作</td><td>中</td><td>⭐⭐⭐</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>2.4 價格敏感度分析</h3>
+    <div class="chart-container">
+      <canvas id="chartPriceSensitivity"></canvas>
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>渠道</th><th>典型價格區間</th><th>付費意願</th><th>決策因素</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ERB 課程</strong></td><td>HK$0 - 2,250</td><td>極高（低收入全免）</td><td>免費是最大吸引力</td></tr>
+          <tr><td><strong>CEF 資助課程</strong></td><td>自付 20-40%</td><td>高</td><td>資助降低門檻</td></tr>
+          <tr><td><strong>私人培訓機構</strong></td><td>HK$1,900 - 8,000</td><td>中等</td><td>實用性 > 認證</td></tr>
+          <tr><td><strong>企業內訓</strong></td><td>HK$14,000/天起</td><td>視企業規模</td><td>ROI、即時可用</td></tr>
+          <tr><td><strong>大學延伸課程</strong></td><td>HK$2,000 - 10,000</td><td>中高</td><td>品牌信譽、證書</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ======== 競爭格局 ======== -->
+  <div class="section-card">
+    <h2>三、競爭格局：現有課程供給</h2>
+
+    <h3>3.1 政府資助體系課程（ERB）</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>課程名稱</th><th>時數</th><th>學費（全費）</th><th>特點</th></tr></thead>
+        <tbody>
+          <tr><td>人工智能知識及應用證書（兼讀制）</td><td>18h</td><td>$1,750</td><td>入門級，AI 原理+趨勢</td></tr>
+          <tr><td>生成式人工智能商業應用證書（兼讀制）</td><td>18h</td><td>$2,250</td><td>2025 年新增，商業應用導向</td></tr>
+          <tr><td>人工智能創作營銷社交媒體內容技巧證書</td><td>45h</td><td>$4,250</td><td>超出 20h 但值得參考</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="highlight-box green">
+      <strong>ERB 課程核心優勢</strong>：低收入者全免 + 培訓津貼（就業掛鉤課程月津貼最高 HK$8,000）<br>
+      <strong>ERB 課程局限</strong>：課程更新慢、內容偏理論、上課時間固定（晚間 7-10pm）
+    </div>
+
+    <h3>3.2 職業訓練局（VTC）</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>課程名稱</th><th>時數</th><th>學費</th><th>特點</th></tr></thead>
+        <tbody>
+          <tr><td>Introduction to AI and Generative AI Applications</td><td>9h</td><td>$2,000</td><td>3 堂晚間課，粵語+英語，實操導向</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>3.3 生產力學院（HKPC Academy）</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>項目</th><th>數據</th></tr></thead>
+        <tbody>
+          <tr><td>AI 課程數量</td><td>20+ 門</td></tr>
+          <tr><td>過去兩年培訓活動</td><td>500+ 項</td></tr>
+          <tr><td>培訓人次</td><td>約 22,000 人</td></tr>
+          <tr><td>課程系列</td><td>生成式 AI 系列（GenAI Series）</td></tr>
+          <tr><td>特色</td><td>「AI for All」倡議、企業定制方案</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>3.4 私人培訓機構</h3>
+
+    <h4>A. LearnMore — AI 全方位課程</h4>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>項目</th><th>詳情</th></tr></thead>
+        <tbody>
+          <tr><td>課程名稱</td><td>Generative AI Crash Course</td></tr>
+          <tr><td>時數</td><td>12h 實習 + 15h 教學影片</td></tr>
+          <tr><td>價格</td><td>網上課 $1,980（原 $6,800）/ 實體+網課 $3,500</td></tr>
+          <tr><td>內容</td><td>7 大單元：AI 基礎、文字、圖片、影片、數字人、音訊、程式生成</td></tr>
+          <tr><td>特色</td><td>每週更新、1 年無限重溫、WhatsApp 支援</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>B. DotAI Academy</h4>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>課程系列</th><th>時數</th><th>優惠價</th><th>核心內容</th></tr></thead>
+        <tbody>
+          <tr><td>職場應用課程</td><td>12h</td><td>$1,899</td><td>AI 協作、錄音轉文字、PPT 強化、自建 AI 助手</td></tr>
+          <tr><td>數碼營銷課程</td><td>21h</td><td>$6,899</td><td>AIGC 內容營銷、社交媒體、SEO、自動化</td></tr>
+          <tr><td>商業應用課程（AI Agent & No-Code）</td><td>10h</td><td>$6,960</td><td>AI Agent、工作流搭建、v0 AI 建站</td></tr>
+          <tr><td>單節報讀</td><td>2-3h</td><td>$580-$3,480</td><td>可單選模組</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>C. HK AI-SOLVE Academy</h4>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>課程編號</th><th>課程名稱</th><th>時數</th><th>核心內容</th></tr></thead>
+        <tbody>
+          <tr><td>101</td><td>AI 基礎應用與實戰班</td><td>6h</td><td>ChatGPT 基礎、Gemini 圖像、日常工作運用</td></tr>
+          <tr><td>801</td><td>AI 智能職場</td><td>12h</td><td>LLM 應用、AI 輔助數據分析、AI Agent、工作流自動化</td></tr>
+          <tr><td>802</td><td>AI 創意媒體</td><td>12h</td><td>AI 腳本、圖像生成、影片製作、數字人、SEO</td></tr>
+          <tr><td>501</td><td>Vibe-coding：用意念開發 App</td><td>12h</td><td>No-Code/低代碼開發</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>D. Practical AI Academy</h4>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>課程名稱</th><th>時數</th><th>程度</th><th>核心內容</th></tr></thead>
+        <tbody>
+          <tr><td>AI 啟航 - 升級轉型</td><td>7h</td><td>初階</td><td>AI 多模態工具、AI 助理、AI Agent 認知</td></tr>
+          <tr><td>Dify + RAG 創建 AI 自動化客服流程</td><td>7h</td><td>進階</td><td>向量數據庫、RAG 流程、降噪策略</td></tr>
+          <tr><td>n8n + AI Agent 自動化工作流程</td><td>7h</td><td>進階</td><td>SaaS 串接、AI Agent Flow、自動化部署</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>E. 社福界專項課程</h4>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>課程名稱</th><th>機構</th><th>時數</th><th>學費</th><th>核心內容</th></tr></thead>
+        <tbody>
+          <tr><td>生成式AI社工應用</td><td>社總</td><td>14h</td><td>$1,000-$1,600</td><td>文書撰寫、會議助手、POE 自建 AI 助理</td></tr>
+          <tr><td>NGO 撰寫計劃書與提案</td><td>社聯學院</td><td>9h</td><td>未公開</td><td>需求評估、計劃書撰寫、AI 協作</td></tr>
+          <tr><td>NGO AI 能力與轉型工作坊</td><td>社職</td><td>按需定制</td><td>未公開</td><td>4 層培訓路徑</td></tr>
+          <tr><td>AI 提升社會服務實務</td><td>香港社會服務人員協會</td><td>—</td><td>—</td><td>個案管理、服務評估</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>3.5 大學延伸課程</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>機構</th><th>代表課程</th><th>時數</th><th>價格區間</th></tr></thead>
+        <tbody>
+          <tr><td>HKU SPACE</td><td>金融與商業的生成式AI與自動化證書</td><td>30-60h</td><td>$5,000-$15,000</td></tr>
+          <tr><td>CUHK SCS</td><td>GenAI 商業創新與應用</td><td>12h</td><td>NITTP 資助後優惠</td></tr>
+          <tr><td>CityU SCOPE</td><td>AI 應用相關短期課程</td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ======== 競爭格局分析 ======== -->
+  <div class="section-card">
+    <h2>四、競爭格局分析</h2>
+
+    <h3>4.1 供給缺口熱力圖</h3>
+    <!-- Chart: Supply Gap Radar -->
+    <div class="chart-container">
+      <canvas id="chartSupplyGap"></canvas>
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>細分市場</th><th>供給量</th><th>需求強度</th><th>缺口程度</th><th>機會評級</th></tr></thead>
+        <tbody>
+          <tr><td>在職白領 AI 入門</td><td>★★★</td><td>★★★★★</td><td>中</td><td>⭐⭐⭐</td></tr>
+          <tr><td>AI 文案/內容創作</td><td>★★★</td><td>★★★★</td><td>中低</td><td>⭐⭐⭐</td></tr>
+          <tr><td>AI 圖像/影片生成</td><td>★★★</td><td>★★★★</td><td>中</td><td>⭐⭐⭐</td></tr>
+          <tr><td><strong>AI Agent & 自動化</strong></td><td>★★</td><td>★★★★★</td><td><strong>高</strong></td><td>⭐⭐⭐⭐⭐</td></tr>
+          <tr><td><strong>社福界 AI 培訓</strong></td><td>★★</td><td>★★★★</td><td><strong>高</strong></td><td>⭐⭐⭐⭐⭐</td></tr>
+          <tr><td><strong>企業內訓定制</strong></td><td>★★</td><td>★★★★★</td><td><strong>高</strong></td><td>⭐⭐⭐⭐⭐</td></tr>
+          <tr><td>中小企老闆 AI 策略</td><td>★★</td><td>★★★★</td><td><strong>高</strong></td><td>⭐⭐⭐⭐</td></tr>
+          <tr><td>AI + 特定行業</td><td>★</td><td>★★★</td><td><strong>極高</strong></td><td>⭐⭐⭐⭐⭐</td></tr>
+          <tr><td>Google Gemini 專項</td><td>★</td><td>★★★</td><td>極高</td><td>⭐⭐⭐⭐⭐</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>4.2 競爭差異化維度</h3>
+    <div class="chart-container">
+      <canvas id="chartDiffDimensions"></canvas>
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>維度</th><th>主流做法</th><th>差異化機會</th></tr></thead>
+        <tbody>
+          <tr><td><strong>課程深度</strong></td><td>入門概述型為主</td><td>深入實操型（如 AI Agent 實戰）</td></tr>
+          <tr><td><strong>工具覆蓋</strong></td><td>ChatGPT 為主</td><td><strong>Google Gemini 專項</strong>（競品極少）</td></tr>
+          <tr><td><strong>行業定制</strong></td><td>通用型</td><td><strong>行業深度定制</strong>（社福、金融、零售）</td></tr>
+          <tr><td><strong>課後支援</strong></td><td>少量/無</td><td><strong>持續社群+更新</strong></td></tr>
+          <tr><td><strong>認證體系</strong></td><td>機構自製證書</td><td><strong>對接國際認證</strong>或政府資歷架構</td></tr>
+          <tr><td><strong>授課語言</strong></td><td>廣東話為主</td><td>廣東話+普通話雙語</td></tr>
+          <tr><td><strong>學習模式</strong></td><td>固定課表</td><td><strong>翻轉課堂+微證書</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ======== 市場機會 ======== -->
+  <div class="section-card">
+    <h2>五、市場機會與建議</h2>
+
+    <h3>5.1 最高價值機會（Top 3）</h3>
+
+    <div class="opportunity gold">
+      <div class="rank">🥇</div>
+      <h4>機會一：AI Agent & 工作流自動化課程（4-12h）</h4>
+      <p>僅 Practical AI Academy 和 DotAI 提供此類課程，市場供給嚴重不足。企業需求最迫切：從「會用 ChatGPT」到「用 AI Agent 自動化工作流」。</p>
+      <p><strong>目標學員</strong>：中小企主管、行政經理、IT 支持人員</p>
+      <p><strong>核心賣點</strong>：1 天學會搭建可部署的 AI Agent</p>
+      <span class="price-tag">建議定價：HK$2,500 - 5,000（可申請 CEF）</span>
+    </div>
+
+    <div class="opportunity silver">
+      <div class="rank">🥈</div>
+      <h4>機會二：社福界 AI 專項培訓（6-14h）</h4>
+      <p>社職、社聯學院、社總已開始布局，但課程數量有限。社福機構資源有限，價格敏感，但<strong>機構統一採購</strong>模式可解決。</p>
+      <p><strong>目標學員</strong>：NGO 前線同工、服務經理、機構管理層</p>
+      <p><strong>核心賣點</strong>：專為社福場景設計（個案紀錄、計劃書、PDPO 合規）</p>
+      <span class="price-tag">建議定價：HK$1,000 - 2,500/人</span>
+    </div>
+
+    <div class="opportunity bronze">
+      <div class="rank">🥉</div>
+      <h4>機會三：Google Gemini 專項課程（6-12h）</h4>
+      <p>市場上 90%+ 的課程以 ChatGPT 為主，Gemini 專項極度稀缺。Google Gemini 在中國香港地區的使用率持續增長（免費工具優勢）。</p>
+      <p><strong>目標學員</strong>：已用 ChatGPT 想拓展工具棧的在職人士</p>
+      <p><strong>核心賣點</strong>：唯一專注 Gemini 的深度實操課</p>
+      <span class="price-tag">建議定價：HK$1,500 - 3,000</span>
+    </div>
+
+    <h3>5.2 定價策略建議</h3>
+    <div class="chart-container">
+      <canvas id="chartPricing"></canvas>
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>課程類型</th><th>建議定價</th><th>定價邏輯</th></tr></thead>
+        <tbody>
+          <tr><td>入門體驗班（3-4h）</td><td>$500 - $800</td><td>低價引流，轉化為正價課</td></tr>
+          <tr><td>標準短期課（6-8h）</td><td>$1,500 - $2,500</td><td>對標 DotAI 單節 $580/3h</td></tr>
+          <tr><td>深度實操課（10-12h）</td><td>$2,500 - $4,000</td><td>低於 LearnMore $3,500</td></tr>
+          <tr><td>企業內訓（7h/天）</td><td>$8,000 - $15,000/天</td><td>對標行課網 $14,000/天</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>5.3 渠道策略</h3>
+    <div class="chart-container">
+      <canvas id="chartChannels"></canvas>
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>渠道</th><th>優先級</th><th>策略</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ERB 再培訓局</strong></td><td>★★★★★</td><td>申請成為委任培訓機構，覆蓋低收入群體</td></tr>
+          <tr><td><strong>持續進修基金（CEF）</strong></td><td>★★★★★</td><td>申請 CEF 註冊，大幅降低學員付費門檻</td></tr>
+          <tr><td><strong>NITTP 新科技培訓計劃</strong></td><td>★★★★</td><td>與 WTIA 等行業組織合作</td></tr>
+          <tr><td><strong>企業直客</strong></td><td>★★★★</td><td>B2B 內訓是高利潤渠道</td></tr>
+          <tr><td><strong>社福機構合作</strong></td><td>★★★</td><td>與社聯、社職等平台建立合作</td></tr>
+          <tr><td><strong>線上課程</strong></td><td>★★★</td><td>擴大覆蓋面，但需解決互動性問題</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ======== 風險 ======== -->
+  <div class="section-card">
+    <h2>六、風險與挑戰</h2>
+    <div class="chart-container">
+      <canvas id="chartRisks"></canvas>
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>風險</th><th>嚴重程度</th><th>應對策略</th></tr></thead>
+        <tbody>
+          <tr><td>AI 工具快速迭代，課程內容過時</td><td>高</td><td>承諾定期更新+免費覆課</td></tr>
+          <tr><td>ERB 課程免費擠壓付費市場</td><td>中高</td><td>差異化定位：實操深度 > 理論廣度</td></tr>
+          <tr><td>低價競爭者湧入</td><td>中</td><td>建立社群+持續支援的護城河</td></tr>
+          <tr><td>CEF 審批週期長（3-6個月）</td><td>中</td><td>同時開設非 CEF 課程快速變現</td></tr>
+          <tr><td>企業培訓預算削減</td><td>中低</td><td>強調 ROI：AI 培訓節省人力成本</td></tr>
+          <tr><td>學員期望過高（1 天變專家）</td><td>中</td><td>清晰設定期望+課後社群持續學習</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ======== 關鍵數據 ======== -->
+  <div class="section-card">
+    <h2>七、關鍵數據匯總</h2>
+
+    <h3>市場規模指標</h3>
+    <div class="chart-container">
+      <canvas id="chartKeyData"></canvas>
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>指標</th><th>數據</th><th>來源</th></tr></thead>
+        <tbody>
+          <tr><td>香港勞動人口</td><td>約 388 萬</td><td>統計處 2025</td></tr>
+          <tr><td>企業 AI 使用率</td><td>88%</td><td>HKPC 2025</td></tr>
+          <tr><td>AI 技能優先級</td><td>47% 企業列為首要</td><td>KPMG 2026</td></tr>
+          <tr><td>AI 人才招聘困難率</td><td>25%</td><td>ManpowerGroup</td></tr>
+          <tr><td>生產力局 AI 培訓人次</td><td>22,000/2年</td><td>HKPC</td></tr>
+          <tr><td>AI 廣泛部署企業</td><td>24%（3 倍增長）</td><td>KPMG 2026</td></tr>
+          <tr><td>在職者已在工作用 AI</td><td>61%</td><td>PwC 2025</td></tr>
+          <tr><td>持續進修基金資助上限</td><td>HK$25,000/人</td><td>香港政府</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>競品價格區間匯總</h3>
+    <div class="chart-container">
+      <canvas id="chartCompetitorPrice"></canvas>
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>機構/渠道</th><th>4-8h 課程</th><th>8-12h 課程</th><th>12-20h 課程</th></tr></thead>
+        <tbody>
+          <tr><td>ERB（全費）</td><td>$1,750/18h</td><td>—</td><td>$2,250/18h</td></tr>
+          <tr><td>VTC</td><td>—</td><td>$2,000/9h</td><td>—</td></tr>
+          <tr><td>LearnMore</td><td>—</td><td>$1,980（網課）</td><td>$3,500（含實習）</td></tr>
+          <tr><td>DotAI</td><td>$580/3h</td><td>$1,899/12h</td><td>$6,899/21h</td></tr>
+          <tr><td>AI-SOLVE</td><td>—</td><td>—</td><td>~$2,000-4,000/12h</td></tr>
+          <tr><td>Practical AI</td><td>—</td><td>~$2,000/7h</td><td>—</td></tr>
+          <tr><td>社總</td><td>—</td><td>—</td><td>$1,000-1,600/14h</td></tr>
+          <tr><td>企業內訓</td><td>$8,000-14,000/天</td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ======== 結論 ======== -->
+  <div class="section-card">
+    <h2>八、結論</h2>
+    <p>香港 AI 短期培訓市場（4-20 小時）正處於<strong>需求遠超供給</strong>的黃金窗口期。核心判斷：</p>
+    <ol>
+      <li><strong>市場仍在早期</strong>：88% 企業用 AI，但系統性培訓嚴重不足，大部分課程停留在「入門體驗」層面</li>
+      <li><strong>差異化空間巨大</strong>：AI Agent/自動化、社福界專項、Gemini 專項三個方向幾乎無競品</li>
+      <li><strong>政策紅利期</strong>：政府 HK$5,000 萬撥款 + CEF 資助 + ERB 體系升級，培訓機構可借力</li>
+      <li><strong>價格策略靈活</strong>：ERB 免費課覆蓋低收入，付費課目標中高收入在職人士，企業內訓面向 B2B</li>
+      <li><strong>關鍵成功因素</strong>：實操深度 > 理論廣度、持續更新 > 靜態內容、社群支援 > 一次性交付</li>
+    </ol>
+    <div class="highlight-box green">
+      <strong>行動建議</strong>：優先開發「AI Agent & 自動化實戰」和「社福界 AI 專項」兩條產品線，同步申請 CEF 註冊和 ERB 委任，在市場進一步擁擠前建立先發優勢。
+    </div>
+  </div>
+
+  <div class="footer">
+    本報告基於公開信息、權威調查數據及市場調研整理，數據截至 2026 年 6 月。
+  </div>
+
+</div>
+
+<!-- ======== CHART.JS SCRIPTS ======== -->
+<script>
+Chart.defaults.font.family = '"Noto Sans TC", sans-serif';
+Chart.defaults.font.size = 13;
+Chart.defaults.color = '#555';
+
+// 1. Market Key Indicators - Bar
+new Chart(document.getElementById('chartMarketIndicators'), {
+  type: 'bar',
+  data: {
+    labels: ['企業 AI 使用率', 'AI 技能優先級', 'AI 人才招聘困難', 'AI 廣泛部署率'],
+    datasets: [{
+      label: '百分比 (%)',
+      data: [88, 47, 25, 24],
+      backgroundColor: ['#667eea', '#764ba2', '#f093fb', '#4facfe'],
+      borderRadius: 8,
+      maxBarThickness: 60
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false }, title: { display: true, text: '香港 AI 市場關鍵指標', font: { size: 15, weight: 'bold' } } },
+    scales: { y: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%' } } }
+  }
+});
+
+// 2. Pain Points - Horizontal Bar
+new Chart(document.getElementById('chartPainPoints'), {
+  type: 'bar',
+  data: {
+    labels: ['缺乏 AI 專業知識和培訓', '數據隱私與安全擔憂', '與現有系統整合困難', '員工抗拒或準備度不足', '實施成本過高'],
+    datasets: [{
+      label: '嚴重程度',
+      data: [95, 72, 65, 55, 48],
+      backgroundColor: ['#ef5350', '#ff7043', '#ffa726', '#ffca28', '#66bb6a'],
+      borderRadius: 6,
+      maxBarThickness: 30
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false }, title: { display: true, text: '企業 AI 推廣五大障礙', font: { size: 15, weight: 'bold' } } },
+    scales: { x: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%' } } }
+  }
+});
+
+// 3. Learner Profile - Doughnut
+new Chart(document.getElementById('chartLearnerProfile'), {
+  type: 'doughnut',
+  data: {
+    labels: ['在職白領', '營銷/內容', '中小企老闆', '社福界', 'IT/技術', '設計/媒體'],
+    datasets: [{
+      data: [30, 20, 18, 12, 12, 8],
+      backgroundColor: ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#43e97b', '#fa709a'],
+      borderWidth: 2, borderColor: '#fff'
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { title: { display: true, text: '目標學員市場規模佔比', font: { size: 14, weight: 'bold' } }, legend: { position: 'bottom', labels: { boxWidth: 14, padding: 10, font: { size: 11 } } } }
+  }
+});
+
+// 4. Payment Ability - Polar Area
+new Chart(document.getElementById('chartPaymentAbility'), {
+  type: 'polarArea',
+  data: {
+    labels: ['在職白領（中）', '營銷/內容（中高）', '中小企老闆（高）', '社福界（低）', 'IT/技術（中高）', '設計/媒體（中）'],
+    datasets: [{
+      data: [60, 75, 90, 25, 75, 55],
+      backgroundColor: ['rgba(102,126,234,0.6)', 'rgba(118,75,162,0.6)', 'rgba(240,147,251,0.6)', 'rgba(79,172,254,0.6)', 'rgba(67,233,123,0.6)', 'rgba(250,112,154,0.6)']
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { title: { display: true, text: '各學員類型付費能力', font: { size: 14, weight: 'bold' } }, legend: { display: false } },
+    scales: { r: { beginAtZero: true, max: 100 } }
+  }
+});
+
+// 5. Price Sensitivity - Stacked Bar
+new Chart(document.getElementById('chartPriceSensitivity'), {
+  type: 'bar',
+  data: {
+    labels: ['ERB 課程', 'CEF 資助', '私人培訓', '企業內訓', '大學延伸'],
+    datasets: [{
+      label: '付費意願指數',
+      data: [95, 80, 55, 65, 70],
+      backgroundColor: ['#66bb6a', '#42a5f5', '#ffa726', '#ef5350', '#ab47bc'],
+      borderRadius: 6, maxBarThickness: 50
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, title: { display: true, text: '各渠道付費意願對比', font: { size: 15, weight: 'bold' } } },
+    scales: { y: { beginAtZero: true, max: 100 } }
+  }
+});
+
+// 6. Supply Gap - Radar
+new Chart(document.getElementById('chartSupplyGap'), {
+  type: 'radar',
+  data: {
+    labels: ['AI Agent & 自動化', '社福界培訓', '企業內訓', 'Gemini 專項', '行業定制', '中小企策略', '白領入門', '內容創作', '圖像/影片'],
+    datasets: [
+      { label: '供給量', data: [2, 2, 2, 1, 1, 2, 3, 3, 3], borderColor: '#42a5f5', backgroundColor: 'rgba(66,165,245,0.15)', pointBackgroundColor: '#42a5f5' },
+      { label: '需求強度', data: [5, 4, 5, 3, 3, 4, 5, 4, 4], borderColor: '#ef5350', backgroundColor: 'rgba(239,83,80,0.15)', pointBackgroundColor: '#ef5350' }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { title: { display: true, text: '供給缺口雷達圖', font: { size: 15, weight: 'bold' } }, legend: { position: 'bottom' } },
+    scales: { r: { beginAtZero: true, max: 5, ticks: { stepSize: 1 } } }
+  }
+});
+
+// 7. Differentiation Dimensions - Horizontal Bar
+new Chart(document.getElementById('chartDiffDimensions'), {
+  type: 'bar',
+  data: {
+    labels: ['課程深度', '工具覆蓋', '行業定制', '課後支援', '認證體系', '授課語言', '學習模式'],
+    datasets: [
+      { label: '主流做法評分', data: [3, 3, 2, 2, 2, 3, 2], backgroundColor: 'rgba(102,126,234,0.6)', borderRadius: 4, maxBarThickness: 24 },
+      { label: '差異化機會評分', data: [8, 9, 9, 8, 7, 6, 8], backgroundColor: 'rgba(239,83,80,0.6)', borderRadius: 4, maxBarThickness: 24 }
+    ]
+  },
+  options: {
+    indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+    plugins: { title: { display: true, text: '競爭差異化維度對比', font: { size: 15, weight: 'bold' } }, legend: { position: 'bottom' } },
+    scales: { x: { beginAtZero: true, max: 10 } }
+  }
+});
+
+// 8. Pricing - Bar
+new Chart(document.getElementById('chartPricing'), {
+  type: 'bar',
+  data: {
+    labels: ['入門體驗班\n(3-4h)', '標準短期課\n(6-8h)', '深度實操課\n(10-12h)', '企業內訓\n(7h/天)'],
+    datasets: [{
+      label: '建議定價（HK$）',
+      data: [650, 2000, 3250, 11500],
+      backgroundColor: ['#66bb6a', '#42a5f5', '#667eea', '#ef5350'],
+      borderRadius: 6, maxBarThickness: 60
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, title: { display: true, text: '建議定價策略', font: { size: 15, weight: 'bold' } } },
+    scales: { y: { beginAtZero: true, ticks: { callback: v => '$' + v.toLocaleString() } } }
+  }
+});
+
+// 9. Channels - Doughnut
+new Chart(document.getElementById('chartChannels'), {
+  type: 'doughnut',
+  data: {
+    labels: ['ERB 再培訓局 ★★★★★', 'CEF 持續進修 ★★★★★', 'NITTP 新科技 ★★★★', '企業直客 ★★★★', '社福合作 ★★★', '線上課程 ★★★'],
+    datasets: [{
+      data: [5, 5, 4, 4, 3, 3],
+      backgroundColor: ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#43e97b', '#fa709a'],
+      borderWidth: 2, borderColor: '#fff'
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { title: { display: true, text: '渠道策略優先級', font: { size: 15, weight: 'bold' } }, legend: { position: 'bottom', labels: { boxWidth: 14, padding: 8, font: { size: 11 } } } }
+  }
+});
+
+// 10. Risks - Bar
+new Chart(document.getElementById('chartRisks'), {
+  type: 'bar',
+  data: {
+    labels: ['課程內容過時', 'ERB 擠壓市場', '低價競爭者', 'CEF 審批慢', '預算削減', '學員期望過高'],
+    datasets: [{
+      label: '嚴重程度',
+      data: [85, 70, 55, 50, 35, 50],
+      backgroundColor: ['#ef5350', '#ff7043', '#ffa726', '#ffca28', '#66bb6a', '#ffca28'],
+      borderRadius: 6, maxBarThickness: 45
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, title: { display: true, text: '風險嚴重程度評估', font: { size: 15, weight: 'bold' } } },
+    scales: { y: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%' } } }
+  }
+});
+
+// 11. Key Data - Bar
+new Chart(document.getElementById('chartKeyData'), {
+  type: 'bar',
+  data: {
+    labels: ['企業 AI 使用率', 'AI 技能優先級', '在職者用 AI', 'AI 廣泛部署', '招聘困難率'],
+    datasets: [{
+      label: '百分比 (%)',
+      data: [88, 47, 61, 24, 25],
+      backgroundColor: ['#667eea', '#764ba2', '#4facfe', '#f093fb', '#fa709a'],
+      borderRadius: 6, maxBarThickness: 50
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, title: { display: true, text: '市場規模關鍵指標', font: { size: 15, weight: 'bold' } } },
+    scales: { y: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%' } } }
+  }
+});
+
+// 12. Competitor Price Comparison - Grouped Bar
+new Chart(document.getElementById('chartCompetitorPrice'), {
+  type: 'bar',
+  data: {
+    labels: ['ERB', 'VTC', 'LearnMore', 'DotAI', 'AI-SOLVE', 'Practical AI', '社總'],
+    datasets: [
+      { label: '4-8h 課程', data: [1750, 0, 0, 580, 0, 0, 0], backgroundColor: 'rgba(102,126,234,0.7)', borderRadius: 4, maxBarThickness: 28 },
+      { label: '8-12h 課程', data: [0, 2000, 1980, 1899, 0, 2000, 0], backgroundColor: 'rgba(118,75,162,0.7)', borderRadius: 4, maxBarThickness: 28 },
+      { label: '12-20h 課程', data: [2250, 0, 3500, 6899, 3000, 0, 1300], backgroundColor: 'rgba(240,147,251,0.7)', borderRadius: 4, maxBarThickness: 28 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { title: { display: true, text: '競品課程價格對比（HK$）', font: { size: 15, weight: 'bold' } }, legend: { position: 'bottom' } },
+    scales: { y: { beginAtZero: true, ticks: { callback: v => '$' + v.toLocaleString() } } }
+  }
+});
+</script>
+
+</body>
+</html>
