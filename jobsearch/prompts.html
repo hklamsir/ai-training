@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 求職教學 · 範例 Prompt 參考表</title>
+<meta name="description" content="AI 求職教學工作坊範例提示詞參考表，按教學環節分類，每條提示詞可一鍵複製。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --bg:#fcfbf9; --surface:#fff; --surf-alt:#f5f5f4;
+  --line:#e7e5e4; --line-2:#d6d3d1;
+  --ink:#334155; --ink-strong:#1e293b; --muted:#78716c; --muted-2:#a8a29e;
+  --teal:#0f766e; --teal-d:#115e59; --teal-soft:#f0fdfa; --teal-line:#99f6e4;
+  --code-bg:#1e293b; --code-ink:#e2e8f0; --ok:#059669;
+  --sh1:0 1px 2px rgba(28,25,23,.05),0 2px 6px rgba(28,25,23,.04);
+  --sh2:0 12px 28px -10px rgba(28,25,23,.18);
+  --mono:'JetBrains Mono','Cascadia Code',Consolas,Menlo,monospace;
+}
+body{font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--ink);font-size:20.5px;line-height:1.75;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.layout{display:flex;min-height:100vh}
+
+/* Sidebar */
+.sidebar{width:362px;flex:0 0 362px;background:var(--surf-alt);border-right:1px solid var(--line);
+  position:sticky;top:0;height:100vh;display:flex;flex-direction:column;z-index:30}
+.sb-head{padding:26px 22px 18px;border-bottom:1px solid var(--line)}
+.sb-head h1{font-size:1.51rem;font-weight:700;color:var(--teal-d);line-height:1.4}
+.sb-sub{display:block;margin-top:7px;font-size:1.03rem;font-weight:400;color:var(--muted-2);letter-spacing:.02em}
+.sb-nav{padding:14px 14px 26px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:3px}
+.nav-item{display:flex;gap:11px;align-items:flex-start;width:100%;padding:11px 15px;border:none;
+  border-radius:12px;background:transparent;font:inherit;font-size:1.15rem;color:#57534e;
+  text-align:left;cursor:pointer;transition:background .18s,color .18s,box-shadow .18s}
+.nav-item:hover{background:#e7e5e4;color:var(--ink-strong)}
+.nav-item.active{background:var(--teal);color:#fff;font-weight:600;box-shadow:0 4px 12px -4px rgba(15,118,110,.5)}
+.nav-item .n-idx{font-size:.99rem;opacity:.65;font-variant-numeric:tabular-nums;padding-top:3px;flex:0 0 auto}
+.sb-foot{padding:12px 22px 18px;border-top:1px solid var(--line);font-size:.97rem;color:var(--muted-2)}
+
+/* Main */
+.main{flex:1;min-width:0;padding:46px 48px 96px}
+.wrap{max-width:880px;margin:0 auto}
+.hero{background:linear-gradient(135deg,#fff 0%,var(--teal-soft) 100%);
+  border:1px solid #ccfbf1;border-radius:22px;padding:34px 36px 30px;box-shadow:var(--sh1);
+  margin-bottom:46px;scroll-margin-top:28px}
+.hero__eyebrow{font-size:.99rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--teal);margin-bottom:10px}
+.hero__title{font-size:2.3rem;font-weight:700;color:var(--teal-d);line-height:1.3;letter-spacing:-.01em}
+.hero__desc{margin-top:14px;font-size:1.2rem;color:#57534e;max-width:62ch}
+.hero__stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;align-items:center}
+.stat{display:inline-flex;align-items:center;gap:7px;font-size:1.07rem;color:#57534e;
+  background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 14px}
+.stat b{color:var(--teal);font-size:1.23rem;font-variant-numeric:tabular-nums}
+.stat.hint{background:var(--teal);border-color:var(--teal);color:#fff;font-weight:500}
+
+.chapter{margin-bottom:52px;scroll-margin-top:24px}
+.ch-title{display:flex;align-items:center;gap:12px;font-size:1.55rem;font-weight:700;
+  color:var(--teal-d);margin-bottom:18px;line-height:1.4}
+.ch-num{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
+  width:36px;height:36px;border-radius:11px;background:var(--teal);color:#fff;
+  font-size:1.11rem;font-weight:700;box-shadow:0 4px 10px -4px rgba(15,118,110,.55)}
+
+/* Prompt card */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;
+  padding:18px 20px 16px;margin-bottom:15px;box-shadow:var(--sh1);
+  transition:box-shadow .22s,transform .22s,border-color .22s}
+.card:hover{box-shadow:var(--sh2);transform:translateY(-2px);border-color:var(--line-2)}
+.card__head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:13px}
+.card__use{display:flex;gap:10px;align-items:baseline;min-width:0}
+.card__use h4{font-size:1.25rem;font-weight:600;color:var(--ink-strong);line-height:1.55}
+.badge{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
+  min-width:30px;height:30px;padding:0 9px;border-radius:8px;background:var(--teal-soft);
+  color:var(--teal);border:1px solid var(--teal-line);font-size:1.03rem;font-weight:700;
+  font-variant-numeric:tabular-nums;transform:translateY(-1px)}
+.card__desc{font-size:1.15rem;color:var(--muted);margin:-6px 0 12px}
+.card__desc strong{color:#57534e;font-weight:600}
+
+.copy{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;padding:5px 12px;
+  border-radius:10px;border:1px solid var(--teal);background:var(--teal);color:#fff;
+  font:inherit;font-size:.95rem;font-weight:600;cursor:pointer;white-space:nowrap;
+  transition:background .18s,box-shadow .18s,transform .12s}
+.copy:hover{background:var(--teal-d);border-color:var(--teal-d);
+  box-shadow:0 6px 14px -5px rgba(15,118,110,.55)}
+.copy:active{transform:scale(.96)}
+.copy:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.copy.done{background:var(--ok);border-color:var(--ok);box-shadow:none}
+.copy svg{width:13px;height:13px;flex:0 0 auto}
+
+.code{background:var(--code-bg);color:var(--code-ink);border-radius:12px;padding:16px 18px;
+  font-family:var(--mono);font-size:1.135rem;line-height:1.85;white-space:pre-wrap;
+  word-break:break-word;overflow-wrap:anywhere;border:1px solid #334155;letter-spacing:.01em}
+
+.card__foot{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+.tag{font-size:1rem;color:var(--muted);background:var(--surf-alt);border:1px solid var(--line);
+  border-radius:999px;padding:4px 12px;line-height:1.6}
+
+.note{display:flex;gap:12px;align-items:flex-start;background:var(--surf-alt);
+  border-left:4px solid var(--teal-line);border-radius:0 12px 12px 0;padding:14px 18px;
+  margin-top:14px;font-size:1.13rem;color:#57534e}
+.note__mark{flex:0 0 auto;font-size:.95rem;font-weight:700;letter-spacing:.08em;color:var(--teal);
+  background:#fff;border:1px solid var(--teal-line);border-radius:6px;padding:3px 8px;margin-top:4px}
+
+/* Table */
+.tbl-wrap{margin-top:16px;overflow-x:auto;border-radius:16px;border:1px solid var(--line);
+  box-shadow:var(--sh1);background:#fff}
+.tbl{width:100%;border-collapse:collapse;font-size:1.125rem;min-width:560px}
+.tbl th{background:var(--surf-alt);color:#44403c;font-weight:700;text-align:left;padding:14px 17px;
+  font-size:1.05rem;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl td{padding:14px 17px;border-bottom:1px solid #f5f5f4;color:#57534e;vertical-align:top;line-height:1.75}
+.tbl tbody tr:last-child td{border-bottom:none}
+.tbl tbody tr:hover{background:#fcfbf9}
+
+.totop{position:fixed;right:28px;bottom:28px;width:48px;height:48px;border-radius:15px;
+  border:1px solid var(--line);background:#fff;color:var(--teal);cursor:pointer;display:flex;
+  align-items:center;justify-content:center;box-shadow:var(--sh2);opacity:0;pointer-events:none;
+  transition:opacity .25s,transform .25s;z-index:40}
+.totop.show{opacity:1;pointer-events:auto}
+.totop:hover{background:var(--teal);color:#fff;border-color:var(--teal);transform:translateY(-2px)}
+.totop svg{width:18px;height:18px}
+
+.toast{position:fixed;left:50%;bottom:34px;transform:translate(-50%,16px);background:var(--ink-strong);
+  color:#fff;font-size:1.11rem;font-weight:500;padding:11px 20px;border-radius:12px;box-shadow:var(--sh2);
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:50}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media (max-width:900px){
+  .layout{flex-direction:column}
+  .sidebar{position:static;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line)}
+  .sb-head{padding:18px 18px 12px}
+  .sb-sub{display:inline-block;margin-top:0;margin-left:8px}
+  .sb-nav{flex-direction:row;overflow-x:auto;padding:10px 14px 14px;gap:8px;-webkit-overflow-scrolling:touch}
+  .sb-nav::-webkit-scrollbar{height:0}
+  .nav-item{width:auto;white-space:nowrap;padding:8px 14px;border:1px solid var(--line);background:#fff}
+  .nav-item .n-idx{display:none}
+  .sb-foot{display:none}
+  .main{padding:26px 18px 76px}
+  .hero{padding:26px 22px;border-radius:18px}
+  .hero__title{font-size:1.85rem}
+  .ch-title{font-size:1.35rem}
+  .card{padding:16px 16px 14px}
+  .card__head{gap:10px}
+  .card__use{flex:1 1 auto}
+  .copy{padding:5px 11px;font-size:.92rem}
+  .totop{right:16px;bottom:16px}
+}
+@media (max-width:520px){
+  body{font-size:20px}
+  .hero__title{font-size:1.67rem}
+  .code{font-size:1.07rem;padding:13px 14px}
+}
+@media print{
+  .sidebar,.totop,.copy,.toast{display:none!important}
+  .main{padding:0}
+  .card{break-inside:avoid;box-shadow:none}
+}
+</style>
+</head>
+<body>
+<div class="layout"><aside class="sidebar"><div class="sb-head"><h1>AI 求職實戰筆記<span class="sb-sub">&copy; 林 SIR · 2026</span></h1></div><nav class="sb-nav"><button class="nav-item active" data-target="top"><span class="n-idx">00</span><span>課程導覽</span></button><button class="nav-item" data-target="ch1"><span class="n-idx">01</span><span>一、求職信撰寫</span></button><button class="nav-item" data-target="ch2"><span class="n-idx">02</span><span>二、履歷表撰寫</span></button><button class="nav-item" data-target="ch3"><span class="n-idx">03</span><span>三、指令結構：四大核心要素</span></button><button class="nav-item" data-target="ch4"><span class="n-idx">04</span><span>四、語氣／風格指令設定對照</span></button><button class="nav-item" data-target="ch5"><span class="n-idx">05</span><span>五、模擬面試</span></button><button class="nav-item" data-target="ch6"><span class="n-idx">06</span><span>六、ATS 履歷篩選應用</span></button></nav><div class="sb-foot">教材配套 · 範例 Prompt 參考表</div></aside><main class="main"><div class="wrap"><header class="hero" id="top"><p class="hero__eyebrow">AI 求職教學工作坊 · 教材配套</p><h1 class="hero__title">範例 Prompt 參考表</h1><p class="hero__desc">本表摘錄《AI 求職教學工作坊_V4》簡報及職涯規劃核心單元筆記（P.68-80、P.89-97）中出現的示例提示語（Prompt），按教學環節分類。導師可依課堂節奏直接取用，各條目均標示來源頁碼，方便對照原教材。</p><div class="hero__stats"><span class="stat"><b>23</b> 條提示詞</span><span class="stat"><b>6</b> 個教學環節</span><span class="stat hint">點擊卡片右上方按鈕即可複製</span></div></header><section class="chapter" id="ch1"><h2 class="ch-title"><span class="ch-num">一</span>求職信撰寫（Kimi／Copilot）</h2><article class="card"><div class="card__head"><div class="card__use"><span class="badge">1</span><h4>生成求職信初稿</h4></div><button class="copy" type="button" data-copy="p1" aria-label="複製提示詞"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5.5 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5"/></svg><span>複製</span></button></div><pre class="code" id="p1">請按上述個人資料幫我撰寫一封求職信，職位是室內設計師，我有 3 年經驗，擅長空間規劃與施工圖繪製，擅長空間規劃與施工圖繪製，熟悉 AutoCAD 與 SketchUp，希望加入創意設計團隊。</pre><div class="card__foot"><span class="tag">來源 · 筆記 P.70</span><span class="tag">步驟 2</span></div></article><article class="card"><div class="card__head"><div class="card__use"><span class="badge">2</span><h4>語氣調整：正式專業（大型企業）</h4></div><button class="copy" type="button" data-copy="p2" aria-label="複製提示詞"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5.5 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5"/></svg><span>複製</span></button></div><pre class="code" id="p2">請將語氣改為正式專業的風格。</pre><div class="card__foot"><span class="tag">來源 · 筆記 P.71 ／ PPT 第 24 頁</span><span class="tag">步驟 3</span></div></article><article class="card"><div class="card__head"><div class="card__use"><span class="badge">3</span><h4>語氣調整：熱情創意（設計工作室、新創公司）</h4></div><button class="copy" type="button" data-copy="p3" aria-label="複製提示詞"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5.5 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5"/></svg><span>複製</span></button></div><pre class="code" id="p3">請用熱情創意的語氣重寫。</pre><div class="card__foot"><span class="tag">來源 · PPT 第 24 頁</span><span class="tag">步驟 3</span></div></article><article class="card"><div class="card__head"><div class="card__use"><span class="badge">4</span><h4>語氣調整：簡潔有力（快速應徵、自由工作）</h4></div><button class="copy" type="button" data-copy="p4" aria-label="複製提示詞"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5.5 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5"/></svg><span>複製</span></button></div><pre class="code" id="p4">請精簡為 300 字以內。</pre><div class="card__foot"><span class="tag">來源 · PPT 第 24 頁</span><span class="tag">步驟 3</span></div></article><article class="card"><div class="card__head"><div class="card__use"><span class="badge">5</span><h4>檢查與優化</h4></div><button class="copy" type="button" data-copy="p5" aria-label="複製提示詞"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5.5 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5"/></svg><span>複製</span></button></div><pre class="code" id="p5">檢查語法與語氣是否一致、確保內容不重複、加入結尾祝頌語。</pre><div class="card__foot"><span class="tag">來源 · 筆記 P.72</span><span class="tag">步驟 5</span></div></article><article class="card"><div class="card__head"><div class="card__use"><span class="badge">6</span><h4>附上 JD 檔生成求職信（課堂示範）</h4></div><button class="copy" type="button" data-copy="p6" aria-label="複製提示詞"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5.5 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5"/></svg><span>複製</span></button></div><pre class="code" id="p6">請按附上的 JD 資料幫我撰寫一封求職信：我有 3 年相關工作經驗，擅長空間規劃與施工圖繪製，熟悉 AutoCAD 與 SketchUp，希望加入創意設計團隊。</pre><div class="card__foot"><span class="tag">來源 · PPT 第 23 頁</span><span class="tag">步驟 2</span></div></article><article class="card"><div class="card__head"><div class="card__use"><span class="badge">7</span><h4>四大基石示範句（句中標示對應要素）</h4></div><button class="copy" type="button" data-copy="p7" aria-label="複製提示詞"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5.5 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5"/></svg><span>複製</span></button></div><pre class="code" id="p7">請幫我撰寫一封求職信，職位是室內設計師，具 3 年經驗，擅長空間規劃與施工圖繪製，熟悉 AutoCAD，請用專業的語氣撰寫。</pre><div class="card__foot"><span class="tag">來源 · PPT 第 18 頁</span><span class="tag">步驟 2</span></div></article><div class="note"><span class="note__mark">補充</span><p>步驟 4「加入個人化內容」在教材中未提供逐字提示語，只列出應手動加入的元素：對公司作品或理念的欣賞、自己的設計理念或風格、個人專長與成就。</p></div></section><section class="chapter" id="ch2"><h2 class="ch-title"><span class="ch-num">二</span>履歷表撰寫（Copilot／Gemini）</h2><article class="card"><div class="card__head"><div class="card__use"><span class="badge">1</span><h4>生成履歷表初稿（與求職信共用同一份資料）</h4></div><button class="copy" type="button" data-copy="p8" aria-label="複製提示詞"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5.5 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5"/></svg><span>複製</span></button></div><pre class="code" id="p8">請根據上述個人資料幫我撰寫一份履歷表，職位是室內設計師，我有 3 年經驗，擅長空間規劃與施工圖繪製，熟悉 AutoCAD 與 SketchUp。</pre><div class="card__foot"><span class="tag">來源 · 筆記 P.73 ／ PPT 第 25 頁</span><span class="tag">步驟 2</span></div></article><article class="card"><div class="card__head"><div class="card__use"><span class="badge">2</span><h4>指定履歷格式（時間軸型）</h4></div><button class="copy" type="button" data-copy="p9" aria-label="複製提示詞"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5.5 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5"/></svg><span>複製</span></button></div><pre class="code" id="p9">請用時間軸格式撰寫履歷，強調我在設計事務所的經歷。</pre><div class="card__foot"><span class="tag">來源 · 筆記 P.74 ／ PPT 第 26 頁</span><span class="tag">步驟 3</span></div></article><article class="card"><div class="card__head"><div class="card__use"><span class="badge">3</span><h4>優化語氣與排版（三項分開下達）</h4></div><button class="copy" type="button" data-copy="p10" aria-label="複製提示詞"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5.5 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5"/></svg><span>複製</span></button></div><pre class="code" id="p10">調整語氣（正式、簡潔、有創意）；建議排版（如：使用哪種字型、段落格式）；檢查語法與一致性。</pre><div class="card__foot"><span class="tag">來源 · 筆記 P.75</span><span class="tag">步驟 5</span></div></article><article class="card"><div class="card__head"><div class="card__use"><span class="badge">4</span><h4>優化語氣與排版（合併為一句）</h4></div><button class="copy" type="button" data-copy="p11" aria-label="複製提示詞"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5.5 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5"/></svg><span>複製</span></button></div><pre class="code" id="p11">請調整語氣為正式簡潔，建議排版格式，檢查語法與一致性。</pre><div class="card__foot"><span class="tag">來源 · PPT 第 26 頁</span><span class="tag">步驟 5</span></div></article><article class="card"><div class="card__head"><div class="card__use"><span class="badge">5</span><h4>匯出可編輯檔案</h4></div><button class="copy" type="button" data-copy="p12" aria-label="複製提示詞"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5.5 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5"/></svg><span>複製</span></button></div><pre class="code" id="p12">轉成 Word 檔（PPT 版本寫法：轉成 docx 檔）</pre><div class="card__foot"><span class="tag">來源 · 筆記 P.76 ／ PPT 第 26 頁</span><span class="tag">步驟 5</span></div></article><div class="note"><span class="note__mark">補充</span><p>步驟 4「加入關鍵字與量化成果」在教材中未提供逐字提示語，只提示應補充職位描述中的關鍵字（如：空間規劃）及量化成果（如：完成 10 個工作、客戶滿意度 95% 或以上），以通過 ATS 履歷篩選系統。</p></div></section><section class="chapter" id="ch3"><h2 class="ch-title"><span class="ch-num">三</span>指令結構：四大核心要素</h2><article class="card"><div class="card__head"><div class="card__use"><h4>Role ｜明確角色</h4></div><button class="copy" type="button" data-copy="p13" aria-label="複製提示詞"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5.5 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5"/></svg><span>複製</span></button></div><p class="card__desc">你是誰與應徵職位</p><pre class="code" id="p13">具備三年經驗的室內設計師</pre></article><article class="card"><div class="card__head"><div class="card__use"><h4>Action ｜定義動作</h4></div><button class="copy" type="button" data-copy="p14" aria-label="複製提示詞"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5.5 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5"/></svg><span>複製</span></button></div><p class="card__desc">清楚交代需要 AI 產出的具體內容</p><pre class="code" id="p14">撰寫一封求職信</pre></article><article class="card"><div class="card__head"><div class="card__use"><h4>Context ｜背景資料</h4></div><button class="copy" type="button" data-copy="p15" aria-label="複製提示詞"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5.5 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5"/></svg><span>複製</span></button></div><p class="card__desc">列出核心技能與經歷亮點</p><pre class="code" id="p15">熟悉 AutoCAD、專長極簡風格</pre></article><article class="card"><div class="card__head"><div class="card__use"><h4>Tone ｜語氣限制</h4></div><button class="copy" type="button" data-copy="p16" aria-label="複製提示詞"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5.5 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5"/></svg><span>複製</span></button></div><p class="card__desc">指明文件的調性與風格</p><pre class="code" id="p16">正式專業</pre></article></section><section class="chapter" id="ch4"><h2 class="ch-title"><span class="ch-num">四</span>語氣／風格指令設定對照</h2><article class="card"><div class="card__head"><div class="card__use"><h4>大型企業</h4></div><button class="copy" type="button" data-copy="p17" aria-label="複製提示詞"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5.5 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5"/></svg><span>複製</span></button></div><p class="card__desc">指令設定關鍵詞：<strong>正式、專業、嚴謹</strong></p><pre class="code" id="p17">請將語氣改為正式專業的風格。</pre></article><article class="card"><div class="card__head"><div class="card__use"><h4>設計工作室</h4></div><button class="copy" type="button" data-copy="p18" aria-label="複製提示詞"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5.5 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5"/></svg><span>複製</span></button></div><p class="card__desc">指令設定關鍵詞：<strong>熱情、創意、說故事</strong></p><pre class="code" id="p18">請用熱情創意的語氣重寫。</pre></article><article class="card"><div class="card__head"><div class="card__use"><h4>快速應徵</h4></div><button class="copy" type="button" data-copy="p19" aria-label="複製提示詞"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5.5 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5"/></svg><span>複製</span></button></div><p class="card__desc">指令設定關鍵詞：<strong>簡潔有力、條列式重點</strong></p><pre class="code" id="p19">請精簡為 300 字以內。</pre></article></section><section class="chapter" id="ch5"><h2 class="ch-title"><span class="ch-num">五</span>模擬面試（Gemini 語音對話）</h2><article class="card"><div class="card__head"><div class="card__use"><span class="badge">1</span><h4>設定角色扮演（本模組核心提示語，開場照讀）</h4></div><button class="copy" type="button" data-copy="p20" aria-label="複製提示詞"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5.5 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5"/></svg><span>複製</span></button></div><pre class="code" id="p20">你好，請你扮演一位香港｛行業｝公司的招聘主管，全程用粵語。我現在要應徵｛職位｝，有｛年資｝經驗，擅長｛技能｝。請你嚴格一點，像真實面試官一樣追問細節。每次只問一題，我回答之後你再問下一題，總共問六至八題。全部問完後，請用 1 至 5 分評價我的整體表現，並指出三個最需要改善的地方。</pre><div class="card__foot"><span class="tag">來源 · PPT 第 33 頁</span><span class="tag">步驟 3</span></div></article><article class="card"><div class="card__head"><div class="card__use"><span class="badge">2</span><h4>中途要求即時評語</h4></div><button class="copy" type="button" data-copy="p21" aria-label="複製提示詞"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5.5 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5"/></svg><span>複製</span></button></div><pre class="code" id="p21">暫停，請評價我剛才的回答</pre><div class="card__foot"><span class="tag">來源 · PPT 第 33 頁</span><span class="tag">步驟 4</span></div></article><article class="card"><div class="card__head"><div class="card__use"><span class="badge">3</span><h4>要求評分與改善建議（針對最弱一題重練）</h4></div><button class="copy" type="button" data-copy="p22" aria-label="複製提示詞"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5.5 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5"/></svg><span>複製</span></button></div><pre class="code" id="p22">請用 1 至 5 分評價並指出三個改善點</pre><div class="card__foot"><span class="tag">來源 · PPT 第 33 頁</span><span class="tag">步驟 5</span></div></article><div class="note"><span class="note__mark">補充</span><p>提示語中的｛行業｝、｛職位｝、｛年資｝、｛技能｝為課堂示範時即場替換的變項。「請你嚴格一點」一句務必保留，否則 AI 傾向給予過度寬鬆的評價。</p></div></section><section class="chapter" id="ch6"><h2 class="ch-title"><span class="ch-num">六</span>ATS 履歷篩選應用</h2><article class="card"><div class="card__head"><div class="card__use"><span class="badge">1</span><h4>對應職位描述找出關鍵字</h4></div><button class="copy" type="button" data-copy="p23" aria-label="複製提示詞"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5.5 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5"/></svg><span>複製</span></button></div><pre class="code" id="p23">分析職位描述，找出關鍵字，加入履歷中對應的技能與經驗，以通過ATS的篩選。</pre><div class="card__foot"><span class="tag">來源 · PPT 第 28 頁</span></div></article></section></div></main></div>
+<button class="totop" type="button" aria-label="回到頂部"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg></button>
+<script>
+(function(){
+  var CHECK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+
+  function legacyCopy(t){
+    var ta=document.createElement('textarea');
+    ta.value=t; ta.setAttribute('readonly','');
+    ta.style.cssText='position:fixed;top:-9999px;left:-9999px;opacity:0';
+    document.body.appendChild(ta);
+    ta.select(); ta.setSelectionRange(0,t.length);
+    var ok=false;
+    try{ ok=document.execCommand('copy'); }catch(e){ ok=false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+  function copyText(t){
+    if(navigator.clipboard && window.isSecureContext){
+      return navigator.clipboard.writeText(t).then(function(){return true;})
+             .catch(function(){return legacyCopy(t);});
+    }
+    return Promise.resolve(legacyCopy(t));
+  }
+
+  var toast=document.createElement('div');
+  toast.className='toast'; toast.setAttribute('role','status');
+  document.body.appendChild(toast);
+  var tTimer;
+  function say(m){ toast.textContent=m; toast.classList.add('show');
+    clearTimeout(tTimer); tTimer=setTimeout(function(){toast.classList.remove('show');},1600); }
+
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest('.copy');
+    if(!btn||btn.classList.contains('done')) return;
+    var src=document.getElementById(btn.getAttribute('data-copy'));
+    if(!src) return;
+    copyText(src.textContent).then(function(ok){
+      if(!ok){ say('複製失敗，請手動選取文字'); return; }
+      var label=btn.querySelector('span');
+      btn.classList.add('done');
+      btn.insertAdjacentHTML('afterbegin',CHECK);
+      if(label) label.textContent='已複製';
+      say('提示詞已複製到剪貼簿');
+      setTimeout(function(){
+        btn.classList.remove('done');
+        var sv=btn.querySelector('svg'); if(sv) sv.remove();
+        if(label) label.textContent='複製';
+      },1800);
+    });
+  });
+
+  var navs=[].slice.call(document.querySelectorAll('.nav-item'));
+  function setActive(id){
+    navs.forEach(function(n){ n.classList.toggle('active', n.getAttribute('data-target')===id); });
+  }
+  navs.forEach(function(n){
+    n.addEventListener('click',function(){
+      var id=n.getAttribute('data-target');
+      if(id==='top'){ window.scrollTo({top:0,behavior:'smooth'}); setActive('top'); return; }
+      var el=document.getElementById(id);
+      if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+      setActive(id);
+    });
+  });
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(en){
+        if(en.isIntersecting){
+          var id=en.target.id;
+          if(navs.some(function(n){return n.getAttribute('data-target')===id;})) setActive(id);
+        }
+      });
+    },{rootMargin:'-15% 0px -70% 0px',threshold:0});
+    [].slice.call(document.querySelectorAll('.chapter,.hero')).forEach(function(s){io.observe(s);});
+  }
+
+  var tt=document.querySelector('.totop');
+  window.addEventListener('scroll',function(){ tt.classList.toggle('show', window.scrollY>420); },{passive:true});
+  tt.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+})();
+</script>
+</body>
+</html>
