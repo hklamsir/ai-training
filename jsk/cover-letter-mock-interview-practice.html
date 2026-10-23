@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>求職信及語音模擬面試練習 — AI 求職教學 2 小時導師培訓方案</title>
+<style>
+  /* ============================================================
+     Design tokens
+     ============================================================ */
+  :root {
+    --color-teal-50:  #f0fdfa;
+    --color-teal-100: #ccfbf1;
+    --color-teal-600: #0d9488;
+    --color-teal-700: #0f766e;
+    --color-teal-800: #115e59;
+
+    --color-stone-50:  #fafaf9;
+    --color-stone-100: #f5f5f4;
+    --color-stone-200: #e7e5e4;
+    --color-stone-300: #d6d3d1;
+
+    --color-slate-400: #94a3b8;
+    --color-slate-500: #64748b;
+    --color-slate-600: #475569;
+    --color-slate-700: #334155;
+    --color-slate-800: #1e293b;
+    --color-slate-900: #0f172a;
+
+    --color-amber-50:  #fffbeb;
+    --color-amber-200: #fde68a;
+    --color-amber-700: #b45309;
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 12px -2px rgb(28 25 23 / 0.08);
+
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+
+    --font-sans: "Noto Sans TC", "Noto Sans CJK TC", "PingFang TC",
+                 "Microsoft JhengHei", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: "Cascadia Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+
+  /* ============================================================
+     Base
+     ============================================================ */
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background-color: var(--color-stone-50);
+    color: var(--color-slate-800);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 { margin: 0; line-height: 1.3; font-weight: 700; }
+  p { margin: 0; }
+  ol, ul { margin: 0; }
+
+  :focus-visible {
+    outline: 2px solid var(--color-teal-600);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* ============================================================
+     Layout
+     ============================================================ */
+  .header {
+    background-color: var(--color-stone-100);
+    border-bottom: 1px solid var(--color-stone-200);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .wrap {
+    max-width: 64rem;
+    margin: 0 auto;
+    padding-left: var(--space-6);
+    padding-right: var(--space-6);
+  }
+
+  .header .wrap { padding-top: var(--space-6); padding-bottom: var(--space-6); }
+
+  .eyebrow {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-teal-600);
+    margin-bottom: 0;
+  }
+
+  .copyright { font-size: 0.9375rem; color: var(--color-slate-400); margin-bottom: var(--space-1); }
+
+  .page-title {
+    font-size: clamp(2.05rem, 5vw, 3.25rem);
+    font-weight: 800;
+    color: var(--color-slate-800);
+    letter-spacing: -0.01em;
+  }
+
+  .page-sub {
+    font-size: 1.125rem;
+    color: var(--color-slate-500);
+    margin-top: var(--space-2);
+    max-width: 46rem;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+
+  .meta-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-slate-600);
+    background-color: #fff;
+    border: 1px solid var(--color-stone-200);
+    border-radius: 999px;
+    padding: 0.2rem 0.7rem;
+  }
+
+  main.wrap { padding-top: var(--space-8); padding-bottom: var(--space-12); }
+
+  /* ============================================================
+     Control card / nav
+     ============================================================ */
+  .control-card {
+    background-color: #fff;
+    border: 1px solid var(--color-stone-200);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-5);
+    margin-bottom: var(--space-6);
+  }
+
+  .control-title {
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-slate-500);
+    text-transform: uppercase;
+    margin-bottom: var(--space-3);
+  }
+
+  .nav-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-slate-600);
+    background-color: var(--color-stone-50);
+    border: 1px solid var(--color-stone-200);
+    border-radius: 999px;
+    padding: 0.45rem 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+  }
+
+  .nav-btn:hover {
+    background-color: var(--color-teal-50);
+    border-color: var(--color-teal-600);
+    color: var(--color-teal-700);
+  }
+
+  .hint {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+    padding-top: var(--space-4);
+    border-top: 1px dashed var(--color-stone-200);
+    font-size: 0.9375rem;
+    color: var(--color-slate-500);
+    line-height: 1.6;
+  }
+
+  /* ============================================================
+     Section
+     ============================================================ */
+  .section { margin-bottom: var(--space-12); }
+
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+    flex-wrap: wrap;
+  }
+
+  .section-icon { font-size: 1.875rem; line-height: 1; }
+
+  .section-title {
+    font-size: clamp(1.55rem, 3.4vw, 2.05rem);
+    font-weight: 800;
+    color: var(--color-slate-800);
+  }
+
+  .section-sub {
+    font-size: 1rem;
+    color: var(--color-slate-500);
+    margin-top: calc(var(--space-1) * -1);
+    margin-bottom: var(--space-4);
+  }
+
+  /* ============================================================
+     Card
+     ============================================================ */
+  .card {
+    background-color: #fff;
+    border: 1px solid var(--color-stone-200);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-bottom: var(--space-5);
+    transition: box-shadow .2s ease;
+  }
+
+  .card:hover { box-shadow: var(--shadow-md); }
+
+  .card-head {
+    padding: var(--space-5) var(--space-5) var(--space-3);
+  }
+
+  .card-head.solo { padding-bottom: var(--space-5); }
+
+  .card-title-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-1);
+  }
+
+  .num-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+    background-color: var(--color-teal-100);
+    color: var(--color-teal-800);
+    font-size: 1.0625rem;
+    font-weight: 700;
+    flex: 0 0 auto;
+  }
+
+  .card-title {
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: var(--color-slate-800);
+  }
+
+  .card-desc {
+    font-size: 1rem;
+    color: var(--color-slate-500);
+    line-height: 1.65;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    white-space: nowrap;
+  }
+
+  .badge-core    { background-color: var(--color-teal-100); color: var(--color-teal-800); border-color: #99f6e4; }
+  .badge-info    { background-color: #eef2ff; color: #3730a3; border-color: #c7d2fe; }
+  .badge-warn    { background-color: var(--color-amber-50); color: var(--color-amber-700); border-color: var(--color-amber-200); }
+
+  /* ============================================================
+     Table
+     ============================================================ */
+  .table-wrap {
+    position: relative;
+    padding: 0 var(--space-5) var(--space-5);
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+    border: 1px solid var(--color-stone-200);
+    border-radius: var(--radius-md);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+    background-color: #fff;
+  }
+
+  table.data-table th,
+  table.data-table td {
+    text-align: left;
+    vertical-align: top;
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--color-stone-200);
+    line-height: 1.65;
+  }
+
+  table.data-table thead th {
+    background-color: var(--color-teal-50);
+    color: var(--color-teal-800);
+    font-weight: 700;
+    font-size: 0.9375rem;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid #99f6e4;
+    white-space: nowrap;
+  }
+
+  table.data-table tbody th {
+    background-color: var(--color-stone-50);
+    color: var(--color-teal-700);
+    font-weight: 700;
+    width: 8.5rem;
+    white-space: nowrap;
+  }
+
+  table.data-table tbody tr:last-child th,
+  table.data-table tbody tr:last-child td { border-bottom: none; }
+
+  table.data-table tbody tr:hover td { background-color: #fcfcfb; }
+
+  table.data-table td .line { display: block; }
+  table.data-table td .line + .line { margin-top: 0.15rem; }
+
+  .cell-strong { font-weight: 700; color: var(--color-slate-800); }
+
+  /* ============================================================
+     Copy button
+     ============================================================ */
+  .copy-btn {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-5);
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--color-slate-600);
+    background-color: #fff;
+    border: 1px solid var(--color-stone-300);
+    border-radius: 999px;
+    padding: 0.45rem 0.8rem;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgb(28 25 23 / 0.10);
+    transition: background-color .15s ease, color .15s ease, border-color .15s ease, transform .12s ease;
+  }
+
+  .copy-btn:hover {
+    background-color: var(--color-teal-600);
+    border-color: var(--color-teal-600);
+    color: #fff;
+  }
+
+  .copy-btn:active { transform: scale(0.96); }
+
+  /* 內聯版本：放在卡片標題列右側，避免遮擋表格內容 */
+  .copy-btn--inline {
+    position: static;
+    margin-left: auto;
+    flex: 0 0 auto;
+  }
+
+  .copy-btn.copied {
+    background-color: var(--color-teal-600);
+    border-color: var(--color-teal-600);
+    color: #fff;
+  }
+
+  .copy-btn.copied .icon { animation: pop .3s ease; }
+
+  @keyframes pop {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.35); }
+    100% { transform: scale(1); }
+  }
+
+  /* ============================================================
+     Prompt card (dark block)
+     ============================================================ */
+  .prompt-block-wrap {
+    position: relative;
+    padding: 0 var(--space-5) var(--space-5);
+  }
+
+  .prompt-block {
+    background-color: var(--color-slate-900);
+    color: #e2e8f0;
+    border-radius: var(--radius-md);
+    padding: var(--space-4) 5.6rem var(--space-4) var(--space-4);
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    line-height: 1.85;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-x: auto;
+    margin: 0;
+  }
+
+  .prompt-block .lead { color: #fbbf24; font-weight: 700; }
+
+  /* ============================================================
+     Numbered list
+     ============================================================ */
+  .checklist { list-style: none; counter-reset: step; padding: 0; }
+
+  .checklist li {
+    counter-increment: step;
+    position: relative;
+    padding-left: 2.15rem;
+    margin-bottom: var(--space-2);
+    font-size: 1rem;
+    color: var(--color-slate-700);
+    line-height: 1.7;
+  }
+
+  .checklist li:last-child { margin-bottom: 0; }
+
+  .checklist li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0.15rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 999px;
+    background-color: var(--color-teal-50);
+    border: 1px solid #99f6e4;
+    color: var(--color-teal-700);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+
+  @media (min-width: 768px) {
+    .two-col { grid-template-columns: 1fr 1fr; }
+  }
+
+  .mini-card {
+    background-color: #fff;
+    border: 1px solid var(--color-stone-200);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-5);
+  }
+
+  .mini-card h4 {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 1.125rem;
+    color: var(--color-slate-800);
+    margin-bottom: var(--space-3);
+  }
+
+  .mini-card h4 .dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 999px;
+    background-color: var(--color-teal-600);
+    flex: 0 0 auto;
+  }
+
+  /* ============================================================
+     Note / footer
+     ============================================================ */
+  .note {
+    display: flex;
+    gap: var(--space-3);
+    background-color: var(--color-amber-50);
+    border: 1px solid var(--color-amber-200);
+    border-radius: var(--radius-md);
+    padding: var(--space-4) var(--space-5);
+    font-size: 1rem;
+    color: #78350f;
+    line-height: 1.7;
+    margin-bottom: var(--space-6);
+  }
+
+  .note .note-icon { font-size: 1.25rem; line-height: 1.5; }
+
+  .footer-note {
+    border-top: 1px solid var(--color-stone-200);
+    margin-top: var(--space-10);
+    padding-top: var(--space-5);
+    font-size: 0.875rem;
+    color: var(--color-slate-400);
+    line-height: 1.8;
+  }
+
+  /* ============================================================
+     Animation
+     ============================================================ */
+  .fade-in { animation: fadeIn .45s ease both; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* ============================================================
+     Mobile: stack two-column tables
+     ============================================================ */
+  @media (max-width: 639px) {
+    .wrap { padding-left: var(--space-4); padding-right: var(--space-4); }
+
+    .table-wrap, .prompt-block-wrap { padding: 0 var(--space-4) var(--space-4); }
+
+    .copy-btn { right: var(--space-4); }
+
+    .card-head { padding: var(--space-4) var(--space-4) var(--space-2); }
+
+    table.data-table thead { display: none; }
+
+    table.data-table,
+    table.data-table tbody,
+    table.data-table tr,
+    table.data-table th,
+    table.data-table td { display: block; width: 100%; }
+
+    table.data-table tr {
+      border-bottom: 1px solid var(--color-stone-200);
+      padding: var(--space-3) var(--space-4);
+    }
+
+    table.data-table tr:last-child { border-bottom: none; }
+
+    table.data-table th,
+    table.data-table td {
+      border-bottom: none;
+      padding: 0.1rem 0;
+      white-space: normal;
+    }
+
+    table.data-table tbody th {
+      background: transparent;
+      font-size: 0.875rem;
+      letter-spacing: 0.03em;
+      color: var(--color-teal-700);
+    }
+
+    .prompt-block { padding-right: var(--space-4); padding-top: 3.1rem; font-size: 0.9375rem; line-height: 1.8; }
+
+    .nav-btn { font-size: 0.875rem; padding: 0.35rem 0.7rem; gap: 0.25rem; }
+
+    .hint { font-size: 0.875rem; }
+  }
+
+  /* ============================================================
+     Print
+     ============================================================ */
+  @media print {
+    body { background: #fff; font-size: 12pt; }
+    .copy-btn, .control-card { display: none !important; }
+    .card, .mini-card { box-shadow: none; break-inside: avoid; }
+    .prompt-block { background: #f5f5f4 !important; color: #1e293b !important; }
+    .header { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="wrap">
+    <p class="eyebrow">AI 求職教學 · 2 小時導師培訓方案</p>
+    <p class="copyright">&copy; 林 SIR, 2026</p>
+    <h1 class="page-title">求職信及語音模擬面試練習</h1>
+    <p class="page-sub">附錄 A 個案資料 ＋ 附錄 B 兩張可直接照讀的 Prompt 卡，供導師示範及學員即場練習。</p>
+    <div class="meta-row">
+      <span class="meta-chip">🕒 時數：2 小時</span>
+      <span class="meta-chip">👥 對象：求職者／準畢業生</span>
+      <span class="meta-chip">🎯 工具：生成式 AI（文字 ＋ 語音模式）</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ===== 導覽 + 使用說明 ===== -->
+  <div class="control-card">
+    <p class="control-title">快速跳至</p>
+    <nav class="nav-bar">
+      <a class="nav-btn" href="#sec-a1">📋 A1 申請人資料</a>
+      <a class="nav-btn" href="#sec-a3">🏫 A3 職位空缺詳情</a>
+      <a class="nav-btn" href="#sec-b">🃏 附錄 B · Prompt 卡</a>
+    </nav>
+    <p class="hint">
+      <span>💡</span>
+      <span>全頁 <strong>2 個表格／Prompt 卡</strong>均設「複製」按鈕，可直接貼入 Deepseek 或 Google Gemini 使用。</span>
+    </p>
+  </div>
+
+  <!-- ===== A1 ===== -->
+  <section class="section fade-in" id="sec-a1">
+    <div class="section-head">
+      <span class="section-icon">📋</span>
+      <h2 class="section-title">A1　申請人資料</h2>
+      <span class="badge badge-info">個案設定</span>
+    </div>
+    <p class="section-sub">全部資料均為虛構，用於課堂示範；學員練習時可換成自己的真實資料。</p>
+
+    <div class="card" data-copy-root>
+      <div class="card-head">
+        <div class="card-title-row">
+          <span class="num-badge">1</span>
+          <h3 class="card-title">候選人背景</h3>
+          <span class="badge badge-core">表格 1</span>
+          <button class="copy-btn copy-btn--inline" type="button" onclick="copyTable(this)" aria-label="複製候選人背景表格">
+            <span class="icon" aria-hidden="true">📋</span><span class="label">複製</span>
+          </button>
+        </div>
+        <p class="card-desc">求職信中「具體例子」與「數字」的素材來源，練習時先讀熟此表。</p>
+      </div>
+      <div class="table-wrap">
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col" style="width:8.5rem;">欄位</th><th scope="col">內容</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">姓名</th><td>陳大文（虛構）｜42 歲｜居於深水埗，可跨區上班</td></tr>
+              <tr><th scope="row">聯絡</th><td>9123 4567｜tmchan@example.com</td></tr>
+              <tr><th scope="row">現況</th><td>2026 年 8 月被裁員，已求職 2 個月；可即時到職</td></tr>
+              <tr><th scope="row">申請職位</th><td>學校行政助理（全職）</td></tr>
+              <tr>
+                <th scope="row">工作經歷</th>
+                <td>
+                  <span class="line"><span class="cell-strong">2014–2026　新苗教育中心｜行政主任（12 年）</span></span>
+                  <span class="line">管理 3 人行政小組；每年統籌 40+ 課程開班；每月處理約 300 份報名及收費</span>
+                  <span class="line"><span class="cell-strong">2008–2014　恆安物業管理｜客戶服務助理 → 主任（6 年）</span></span>
+                  <span class="line">處理住戶投訴、協調維修及法團文件</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">代表成果</th>
+                <td>
+                  <span class="line">2023 年把紙本報名流程數位化，處理時間由 3 日縮短至 1 日；</span>
+                  <span class="line">投訴個案平均 2 個工作天內結案（部門指標為 5 天）</span>
+                </td>
+              </tr>
+              <tr><th scope="row">離職原因</th><td>機構 2026 年 8 月縮減人手，行政組由 5 人減至 2 人（非因工作表現）</td></tr>
+              <tr><th scope="row">學歷</th><td>香島大學｜工商行政學士（兼讀制）｜2008 年畢業</td></tr>
+              <tr>
+                <th scope="row">技能</th>
+                <td>
+                  <span class="line">MS Word／Excel（樞紐分析表、公式）、Google Workspace、</span>
+                  <span class="line">eClass 及 WebSAMS 基礎操作、中文輸入 60 字／分鐘</span>
+                </td>
+              </tr>
+              <tr><th scope="row">語言</th><td>廣東話（母語）、英語（可處理英文書信）、普通話（良好）</td></tr>
+              <tr><th scope="row">專長</th><td>文件檔案管理、活動統籌、採購報價、家長溝通、小隊管理</td></tr>
+              <tr><th scope="row">求職動機</th><td>由培訓機構轉到學校環境，工作穩定並與學生直接相關；12 年行政經驗可直接轉移</td></tr>
+              <tr><th scope="row">期望薪酬</th><td>港幣 $18,000–$20,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== A3 ===== -->
+  <section class="section fade-in" id="sec-a3">
+    <div class="section-head">
+      <span class="section-icon">🏫</span>
+      <h2 class="section-title">A3　職位空缺詳情</h2>
+      <span class="badge badge-info">參考一般招聘廣告格式</span>
+    </div>
+    <p class="section-sub">連同「主要職責」及「入職要求」，是撰寫求職信與回答面試題的對照基準。</p>
+
+    <div class="card" data-copy-root>
+      <div class="card-head">
+        <div class="card-title-row">
+          <span class="num-badge">2</span>
+          <h3 class="card-title">招聘廣告內容</h3>
+          <span class="badge badge-core">表格 2</span>
+          <button class="copy-btn copy-btn--inline" type="button" onclick="copyTable(this)" aria-label="複製職位空缺詳情表格">
+            <span class="icon" aria-hidden="true">📋</span><span class="label">複製</span>
+          </button>
+        </div>
+        <p class="card-desc">職位條件、待遇及申請方法。</p>
+      </div>
+      <div class="table-wrap">
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col" style="width:8.5rem;">項目</th><th scope="col">內容</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">職位名稱</th><td>學校行政助理（全職）</td></tr>
+              <tr><th scope="row">僱主</th><td>明德書院（虛構）</td></tr>
+              <tr><th scope="row">月薪</th><td>港幣 $17,500–$20,000（視乎經驗及學歷）</td></tr>
+              <tr><th scope="row">工作地點</th><td>九龍何文田（近港鐵站，步行約 8 分鐘）</td></tr>
+              <tr><th scope="row">工作時間</th><td>星期一至五 08:00–17:00；星期六 09:00–12:00（長短週）；每週 45 小時</td></tr>
+              <tr><th scope="row">用膳時間</th><td>12:00–13:00（1 小時，有薪）</td></tr>
+              <tr><th scope="row">假期及福利</th><td>年假 14 天、法定假期、強積金、醫療保險、在職培訓；試用期 3 個月</td></tr>
+              <tr><th scope="row">到職日期</th><td>2026 年 11 月；可即時到職者優先</td></tr>
+              <tr><th scope="row">申請方法</th><td>電郵履歷及求職信至 hr@mingtak.edu.hk（虛構），註明「申請學校行政助理」</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="mini-card">
+        <h4><span class="dot" aria-hidden="true"></span>主要職責</h4>
+        <ol class="checklist">
+          <li>處理學生考勤、點名及請假紀錄，每日更新 WebSAMS 系統</li>
+          <li>接聽及回覆家長電話、電郵及前台查詢，處理投訴並轉介相關部門跟進</li>
+          <li>統籌課外活動及家長講座的報名、收費、點名及場地安排</li>
+          <li>負責校務處日常運作、文件收發、檔案管理及影印</li>
+          <li>協助招標、報價及採購文件準備，跟進供應商交貨及驗收</li>
+          <li>支援考試行政：印卷、考場佈置、成績表處理及考生特別安排</li>
+          <li>協助新生註冊、學生證製作及學生資料更新</li>
+          <li>執行校長及行政主任指派的其他職務</li>
+        </ol>
+      </div>
+
+      <div class="mini-card">
+        <h4><span class="dot" aria-hidden="true"></span>入職要求</h4>
+        <ol class="checklist">
+          <li>中五／DSE 五科及格（包括中文及英文），或以上學歷</li>
+          <li>3 年或以上行政或客戶服務經驗；具學校行政經驗優先</li>
+          <li>熟悉 MS Word、Excel（懂樞紐分析表及公式更佳）</li>
+          <li>中文輸入每分鐘 30 字或以上</li>
+          <li>良好廣東話；基本英語及普通話</li>
+          <li>細心、有責任感，能同時處理多項工作並在期限前完成</li>
+          <li>可即時到職優先</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 附錄 B ===== -->
+  <section class="section fade-in" id="sec-b">
+    <div class="section-head">
+      <span class="section-icon">🃏</span>
+      <h2 class="section-title">附錄 B　兩張 Prompt 卡（可直接照讀）</h2>
+      <span class="badge badge-warn">導師示範用</span>
+    </div>
+
+    <div class="note">
+      <span class="note-icon" aria-hidden="true">⚠️</span>
+      <span><strong>使用前先核對：</strong>卡內的【候選人資料 表格1】及【A3 JD】需對應附錄 A 的 A1、A3 兩張表。貼上 Prompt 後，記得把整段資料一併貼入對話框。</span>
+    </div>
+
+    <!-- B1 -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title-row">
+          <span class="num-badge">B</span>
+          <h3 class="card-title">B1　求職信</h3>
+          <span class="badge badge-core">Prompt 卡 3</span>
+        </div>
+        <p class="card-desc">複製以下整段，把【】換成附錄 A 的內容。</p>
+      </div>
+      <div class="prompt-block-wrap" data-copy-root>
+        <button class="copy-btn" type="button" onclick="copyBlock(this)" aria-label="複製 B1 求職信 Prompt">
+          <span class="icon" aria-hidden="true">📋</span><span class="label">複製</span>
+        </button>
+        <pre class="prompt-block"><span class="lead">複製以下整段，把【】換成附錄 A 的內容</span>
+你是一位有 10 年學校行政招聘經驗的 HR。以下是我的資料：【候選人資料 表格1】
+以下是職位空缺詳情：【A3 JD】
+請寫一封 350 字以內的求職信，申請學校行政助理。
+要求：一、開頭一句講明申請職位；二、中段用 2 個具體例子證明我勝任，其中一個要有數字，並對應 JD 的職責；三、結尾引用一項該校的背景資料，說明我為何想加入；四、離職原因用一句如實交代（機構縮減人手），不道歉、不評論前僱主；五、全文不提年齡、不提失業多久；六、語氣正式誠懇；七、不要用「賦能」「旅程」「協同」「畫下句點」這類字。</pre>
+      </div>
+    </div>
+
+    <!-- B2 -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title-row">
+          <span class="num-badge">B</span>
+          <h3 class="card-title">B2　語音模擬面試</h3>
+          <span class="badge badge-core">Prompt 卡 4</span>
+        </div>
+        <p class="card-desc">先開啟語音模式，再讀出以下設定。</p>
+      </div>
+      <div class="prompt-block-wrap" data-copy-root>
+        <button class="copy-btn" type="button" onclick="copyBlock(this)" aria-label="複製 B2 語音模擬面試 Prompt">
+          <span class="icon" aria-hidden="true">📋</span><span class="label">複製</span>
+        </button>
+        <pre class="prompt-block"><span class="lead">先開啟語音模式，再讀出以下設定</span>
+你現在是明德書院的行政主任，正在面試學校行政助理。
+以下是職位空缺詳情：【A3 JD】
+請逐條問我問題：一次只問一條，等我答完先問下一條，總共問 5 條。
+其中必須包括「為何離開上一份工作」及「為何轉到學校工作」，另加 2 條行為面試題（例如如何處理家長投訴、如何同時應付考試行政與日常查詢）。
+全部問完之後，用 STAR 四項（情境、任務、行動、結果）逐項評分 1–5 分，指出我最弱的一條，並示範一次較好的答法。
+另外請指出：我有沒有在答案中流露道歉、抱怨前僱主或自我貶低的語氣。全程用廣東話。</pre>
+      </div>
+    </div>
+  </section>
+
+
+
+</main>
+
+<script>
+  /* ---------- 共用：寫入剪貼簿（含舊瀏覽器 fallback） ---------- */
+  function writeClipboard(text, onOk) {
+    text = text.replace(/\r\n?/g, '\n');
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(onOk).catch(function () {
+        fallbackCopy(text); onOk();
+      });
+    } else {
+      fallbackCopy(text); onOk();
+    }
+  }
+
+  function fallbackCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.top = '-1000px';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    ta.setSelectionRange(0, ta.value.length);
+    try { document.execCommand('copy'); } catch (e) { /* 忽略 */ }
+    document.body.removeChild(ta);
+  }
+
+  /* ---------- 按鈕狀態回饋 ---------- */
+  function flash(btn) {
+    var label = btn.querySelector('.label');
+    var icon = btn.querySelector('.icon');
+    if (!btn.dataset.original) { btn.dataset.original = label.textContent; }
+    label.textContent = '已複製';
+    icon.textContent = '✅';
+    btn.classList.add('copied');
+    clearTimeout(btn._timer);
+    btn._timer = setTimeout(function () {
+      label.textContent = btn.dataset.original || '複製';
+      icon.textContent = '📋';
+      btn.classList.remove('copied');
+    }, 1600);
+  }
+
+  /* ---------- 複製表格：Tab 分隔（可直接貼 Excel / Sheets） ---------- */
+  function copyTable(btn) {
+    var root = btn.closest('[data-copy-root]');
+    var table = root.querySelector('table');
+    var lines = [];
+
+    table.querySelectorAll('tr').forEach(function (tr) {
+      var cells = [];
+      tr.querySelectorAll('th, td').forEach(function (cell) {
+        cells.push(cell.innerText.replace(/\r/g, '').replace(/\s*\n+\s*/g, ' ').replace(/\t/g, ' ').trim());
+      });
+      if (cells.join('').trim() !== '') { lines.push(cells.join('\t')); }
+    });
+
+    writeClipboard(lines.join('\n'), function () { flash(btn); });
+  }
+
+  /* ---------- 複製 Prompt 卡：原文 ---------- */
+  function copyBlock(btn) {
+    var root = btn.closest('[data-copy-root]');
+    var pre = root.querySelector('pre');
+    var raw = pre.innerText.replace(/\u00a0/g, ' ').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+    writeClipboard(raw.replace(/\n{3,}/g, '\n\n').trim(), function () { flash(btn); });
+  }
+</script>
+
+</body>
+</html>
